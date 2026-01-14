@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Histórico de Orçamentos - LARtech Automation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #00A6FB 0%, #0582CA 100%);
+      color: white;
+      padding: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header h1 {
+      font-size: 2.2em;
+      font-weight: 700;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 15px;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: white;
+      color: #00A6FB;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .content {
+      padding: 30px;
+    }
+
+    .filters {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .filter-group label {
+      font-weight: 500;
+      color: #374151;
+      font-size: 14px;
+    }
+
+    .filter-input {
+      padding: 8px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 2em;
+      font-weight: 700;
+      color: #00A6FB;
+      margin-bottom: 5px;
+    }
+
+    .stat-label {
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    .table-container {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .table th {
+      background: #f8f9fa;
+      padding: 15px;
+      text-align: left;
+      font-weight: 600;
+      color: #374151;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .table td {
+      padding: 15px;
+      border-bottom: 1px solid #f3f4f6;
+    }
+
+    .table tr:hover {
+      background: #f9fafb;
+    }
+
+    .status-badge {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .status-enviado {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    .status-negociacao {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .status-fechado {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    .status-perdido {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .actions-cell {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-small {
+      padding: 6px 12px;
+      font-size: 12px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .btn-view {
+      background: #e0f2fe;
+      color: #0277bd;
+    }
+
+    .btn-edit {
+      background: #f3e8ff;
+      color: #7c2d12;
+    }
+
+    .btn-delete {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #6b7280;
+    }
+
+    .empty-state img {
+      max-width: 200px;
+      margin-bottom: 20px;
+      opacity: 0.5;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: white;
+      margin: 5% auto;
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 600px;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #6b7280;
+    }
+
+    @media (max-width: 768px) {
+      .filters {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .header {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+      }
+
+      .table-container {
+        overflow-x: auto;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>📊 Histórico de Orçamentos</h1>
+      <div class="header-actions">
+        <a href="orcamento-interno.html" class="btn btn-primary">➕ Novo Orçamento</a>
+        <a href="gerador-contratos.html" class="btn btn-secondary">📄 Gerar Contrato</a>
+        <button class="btn btn-secondary" onclick="exportarDados()">📥 Exportar</button>
+      </div>
+    </div>
+
+    <div class="content">
+      <!-- Filtros -->
+      <div class="filters">
+        <div class="filter-group">
+          <label>Buscar Cliente</label>
+          <input type="text" id="filtro-cliente" class="filter-input" placeholder="Nome da empresa ou contato">
+        </div>
+        <div class="filter-group">
+          <label>Status</label>
+          <select id="filtro-status" class="filter-input">
+            <option value="">Todos</option>
+            <option value="Enviado">Enviado</option>
+            <option value="Em negociação">Em negociação</option>
+            <option value="Fechado">Fechado</option>
+            <option value="Perdido">Perdido</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Plano</label>
+          <select id="filtro-plano" class="filter-input">
+            <option value="">Todos</option>
+            <option value="bronze">Bronze</option>
+            <option value="prata">Prata</option>
+            <option value="ouro">Ouro</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Período</label>
+          <input type="date" id="filtro-data-inicio" class="filter-input">
+        </div>
+        <div class="filter-group">
+          <label>até</label>
+          <input type="date" id="filtro-data-fim" class="filter-input">
+        </div>
+        <button class="btn btn-primary" onclick="aplicarFiltros()" style="margin-top: 20px;">🔍 Filtrar</button>
+        <button class="btn btn-secondary" onclick="limparFiltros()" style="margin-top: 20px;">🗑️ Limpar</button>
+      </div>
+
+      <!-- Estatísticas -->
+      <div class="stats">
+        <div class="stat-card">
+          <div class="stat-value" id="total-orcamentos">0</div>
+          <div class="stat-label">Total de Orçamentos</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="total-fechados">0</div>
+          <div class="stat-label">Fechados</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="taxa-conversao">0%</div>
+          <div class="stat-label">Taxa de Conversão</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="valor-total">R$ 0</div>
+          <div class="stat-label">Valor Total Fechado</div>
+        </div>
+      </div>
+
+      <!-- Tabela -->
+      <div class="table-container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Cliente</th>
+              <th>Empresa</th>
+              <th>Plano</th>
+              <th>Valor Inicial</th>
+              <th>Mensalidade</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tabela-orcamentos">
+            <!-- Conteúdo será carregado via JavaScript -->
+          </tbody>
+        </table>
+
+        <div id="empty-state" class="empty-state" style="display: none;">
+          <h3>📋 Nenhum orçamento encontrado</h3>
+          <p>Crie seu primeiro orçamento para começar a acompanhar o histórico.</p>
+          <a href="orcamento-interno.html" class="btn btn-primary" style="margin-top: 20px;">➕ Criar Primeiro Orçamento</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Detalhes -->
+  <div id="modal-detalhes" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>📋 Detalhes do Orçamento</h3>
+        <button class="modal-close" onclick="fecharModal()">&times;</button>
+      </div>
+      <div id="modal-body">
+        <!-- Conteúdo será carregado via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let orcamentosData = [];
+    let orcamentosFiltrados = [];
+
+    // Carregar dados do localStorage
+    function carregarDados() {
+      const dados = localStorage.getItem('historico_orcamentos');
+      if (dados) {
+        orcamentosData = JSON.parse(dados);
+      } else {
+        // Dados de exemplo para demonstração
+        orcamentosData = [
+          {
+            id: 1,
+            data: new Date().toISOString(),
+            empresa: "Empresa Exemplo Ltda",
+            contato: "João Silva",
+            telefone: "(11) 99999-9999",
+            plano_recomendado: "prata",
+            valor_inicial: 7900,
+            valor_mensal: 790,
+            status: "Enviado",
+            dados_completos: {}
+          }
+        ];
+        localStorage.setItem('historico_orcamentos', JSON.stringify(orcamentosData));
+      }
+      orcamentosFiltrados = [...orcamentosData];
+      atualizarInterface();
+    }
+
+    // Atualizar interface
+    function atualizarInterface() {
+      atualizarEstatisticas();
+      atualizarTabela();
+    }
+
+    // Atualizar estatísticas
+    function atualizarEstatisticas() {
+      const total = orcamentosFiltrados.length;
+      const fechados = orcamentosFiltrados.filter(o => o.status === 'Fechado').length;
+      const taxaConversao = total > 0 ? (fechados / total * 100).toFixed(1) : 0;
+      const valorTotal = orcamentosFiltrados
+        .filter(o => o.status === 'Fechado')
+        .reduce((sum, o) => sum + o.valor_inicial, 0);
+
+      document.getElementById('total-orcamentos').textContent = total;
+      document.getElementById('total-fechados').textContent = fechados;
+      document.getElementById('taxa-conversao').textContent = `${taxaConversao}%`;
+      document.getElementById('valor-total').textContent = `R$ ${valorTotal.toLocaleString('pt-BR')}`;
+    }
+
+    // Atualizar tabela
+    function atualizarTabela() {
+      const tbody = document.getElementById('tabela-orcamentos');
+      const emptyState = document.getElementById('empty-state');
+
+      if (orcamentosFiltrados.length === 0) {
+        tbody.innerHTML = '';
+        emptyState.style.display = 'block';
+        return;
+      }
+
+      emptyState.style.display = 'none';
+
+      tbody.innerHTML = orcamentosFiltrados.map(orcamento => `
+        <tr>
+          <td>${new Date(orcamento.data).toLocaleDateString('pt-BR')}</td>
+          <td>${orcamento.contato}</td>
+          <td>${orcamento.empresa}</td>
+          <td><span class="status-badge status-${orcamento.plano_recomendado}">${orcamento.plano_recomendado.toUpperCase()}</span></td>
+          <td>R$ ${orcamento.valor_inicial.toLocaleString('pt-BR')}</td>
+          <td>R$ ${orcamento.valor_mensal.toLocaleString('pt-BR')}</td>
+          <td><span class="status-badge status-${orcamento.status.toLowerCase().replace(' ', '-')}">${orcamento.status}</span></td>
+          <td class="actions-cell">
+            <button class="btn-small btn-view" onclick="verDetalhes(${orcamento.id})">👁️</button>
+            <button class="btn-small btn-edit" onclick="editarStatus(${orcamento.id})">✏️</button>
+            <button class="btn-small btn-delete" onclick="excluirOrcamento(${orcamento.id})">🗑️</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // Aplicar filtros
+    function aplicarFiltros() {
+      const cliente = document.getElementById('filtro-cliente').value.toLowerCase();
+      const status = document.getElementById('filtro-status').value;
+      const plano = document.getElementById('filtro-plano').value;
+      const dataInicio = document.getElementById('filtro-data-inicio').value;
+      const dataFim = document.getElementById('filtro-data-fim').value;
+
+      orcamentosFiltrados = orcamentosData.filter(orcamento => {
+        // Filtro de cliente
+        if (cliente && !orcamento.empresa.toLowerCase().includes(cliente) && 
+            !orcamento.contato.toLowerCase().includes(cliente)) {
+          return false;
+        }
+
+        // Filtro de status
+        if (status && orcamento.status !== status) {
+          return false;
+        }
+
+        // Filtro de plano
+        if (plano && orcamento.plano_recomendado !== plano) {
+          return false;
+        }
+
+        // Filtro de data
+        const dataOrcamento = new Date(orcamento.data).toISOString().split('T')[0];
+        if (dataInicio && dataOrcamento < dataInicio) {
+          return false;
+        }
+        if (dataFim && dataOrcamento > dataFim) {
+          return false;
+        }
+
+        return true;
+      });
+
+      atualizarInterface();
+    }
+
+    // Limpar filtros
+    function limparFiltros() {
+      document.getElementById('filtro-cliente').value = '';
+      document.getElementById('filtro-status').value = '';
+      document.getElementById('filtro-plano').value = '';
+      document.getElementById('filtro-data-inicio').value = '';
+      document.getElementById('filtro-data-fim').value = '';
+
+      orcamentosFiltrados = [...orcamentosData];
+      atualizarInterface();
+    }
+
+    // Ver detalhes
+    function verDetalhes(id) {
+      const orcamento = orcamentosData.find(o => o.id === id);
+      if (!orcamento) return;
+
+      const modalBody = document.getElementById('modal-body');
+      modalBody.innerHTML = `
+        <div style="display: grid; gap: 15px;">
+          <div><strong>Empresa:</strong> ${orcamento.empresa}</div>
+          <div><strong>Contato:</strong> ${orcamento.contato}</div>
+          <div><strong>Telefone:</strong> ${orcamento.telefone}</div>
+          <div><strong>Data:</strong> ${new Date(orcamento.data).toLocaleDateString('pt-BR')}</div>
+          <div><strong>Plano:</strong> ${orcamento.plano_recomendado.toUpperCase()}</div>
+          <div><strong>Valor Inicial:</strong> R$ ${orcamento.valor_inicial.toLocaleString('pt-BR')}</div>
+          <div><strong>Mensalidade:</strong> R$ ${orcamento.valor_mensal.toLocaleString('pt-BR')}</div>
+          <div><strong>Status:</strong> ${orcamento.status}</div>
+          <div style="margin-top: 20px;">
+            <button class="btn btn-primary" onclick="gerarPropostaExistente(${id})">📄 Ver Proposta</button>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('modal-detalhes').style.display = 'block';
+    }
+
+    // Editar status
+    function editarStatus(id) {
+      const orcamento = orcamentosData.find(o => o.id === id);
+      if (!orcamento) return;
+
+      const novoStatus = prompt('Novo status:', orcamento.status);
+      if (novoStatus && novoStatus !== orcamento.status) {
+        orcamento.status = novoStatus;
+        localStorage.setItem('historico_orcamentos', JSON.stringify(orcamentosData));
+        aplicarFiltros();
+      }
+    }
+
+    // Excluir orçamento
+    function excluirOrcamento(id) {
+      if (confirm('Tem certeza que deseja excluir este orçamento?')) {
+        orcamentosData = orcamentosData.filter(o => o.id !== id);
+        localStorage.setItem('historico_orcamentos', JSON.stringify(orcamentosData));
+        aplicarFiltros();
+      }
+    }
+
+    // Gerar proposta existente
+    function gerarPropostaExistente(id) {
+      const orcamento = orcamentosData.find(o => o.id === id);
+      if (!orcamento) return;
+
+      const params = new URLSearchParams({
+        empresa: orcamento.empresa,
+        contato: orcamento.contato,
+        telefone: orcamento.telefone,
+        email: orcamento.dados_completos.email || '',
+        volume: orcamento.dados_completos.volume_atendimentos || '0',
+        plano_recomendado: orcamento.plano_recomendado,
+        canais: orcamento.dados_completos.canais?.join(', ') || '',
+        data_atendimento: orcamento.data.split('T')[0],
+        numero_proposta: `LA-${orcamento.id.toString().padStart(6, '0')}`
+      });
+
+      window.open(`proposta-personalizada.html?${params.toString()}`, '_blank');
+    }
+
+    // Fechar modal
+    function fecharModal() {
+      document.getElementById('modal-detalhes').style.display = 'none';
+    }
+
+    // Exportar dados
+    function exportarDados() {
+      const csv = [
+        ['Data', 'Empresa', 'Contato', 'Telefone', 'Plano', 'Valor Inicial', 'Mensalidade', 'Status'].join(','),
+        ...orcamentosFiltrados.map(o => [
+          new Date(o.data).toLocaleDateString('pt-BR'),
+          o.empresa,
+          o.contato,
+          o.telefone,
+          o.plano_recomendado.toUpperCase(),
+          o.valor_inicial,
+          o.valor_mensal,
+          o.status
+        ].join(','))
+      ].join('\n');
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `historico_orcamentos_${new Date().toISOString().split('T')[0]}.csv`;
+      link.click();
+    }
+
+    // Event listeners
+    document.getElementById('filtro-cliente').addEventListener('input', aplicarFiltros);
+    document.getElementById('filtro-status').addEventListener('change', aplicarFiltros);
+    document.getElementById('filtro-plano').addEventListener('change', aplicarFiltros);
+
+    // Fechar modal ao clicar fora
+    window.onclick = function(event) {
+      const modal = document.getElementById('modal-detalhes');
+      if (event.target === modal) {
+        fecharModal();
+      }
+    }
+
+    // Carregar dados ao iniciar
+    window.addEventListener('load', carregarDados);
+  </script>
+</body>
+</html>

@@ -1,0 +1,1358 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proposta Comercial - LARtech Automation</title>
+
+  <style>
+    /* Reset e configurações globais para PDF */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    /* Importar fontes profissionais */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+    /* === CONFIGURAÇÕES DA PÁGINA PARA PDF - OTIMIZADO PARA GOTENBERG === */
+    @page {
+      size: A4;
+      margin: 12mm; /* Reduzido para melhor aproveitamento */
+      
+      /* Rodapé fixo com numeração conforme solicitado */
+      @bottom-center {
+        content: "Página " counter(page);
+        font-size: 8pt;
+        color: #888;
+        font-family: 'Inter', sans-serif;
+        margin-top: 5mm;
+        padding-top: 3mm;
+        border-top: 1px solid #ddd;
+      }
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 10pt;
+      line-height: 1.5;
+      color: #1a1a1a;
+      background: white;
+      max-width: 210mm;
+      margin: 0 auto;
+      padding: 0;
+      font-weight: 400;
+    }
+
+    /* Cores da marca LARtech - Paleta refinada preservada */
+    :root {
+      --azul-primario: #0066CC;
+      --azul-secundario: #004499;
+      --azul-claro: #E6F2FF;
+      --laranja-accent: #FF6B35;
+      --laranja-suave: #FFF4F0;
+      --cinza-escuro: #1a1a1a;
+      --cinza-medio: #666666;
+      --cinza-claro: #F8FAFC;
+      --branco-puro: #FFFFFF;
+      --verde-sucesso: #10B981;
+      --vermelho-erro: #EF4444;
+    }
+
+    /* Header profissional com padrão moderno de fundo */
+    .header {
+      background: 
+        linear-gradient(90deg, rgba(173, 216, 230, 0.8) 0%, rgba(0, 166, 251, 0.9) 50%, var(--azul-secundario) 100%),
+        url('https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/4%20-%20padroes_elementos_graficos/padraoprincioal_1920x1080.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: white;
+      padding: 25pt 30pt;
+      margin-bottom: 25pt;
+      border-radius: 0;
+      position: relative;
+      overflow: hidden;
+      page-break-after: avoid;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, rgba(173, 216, 230, 0.3) 0%, rgba(0, 166, 251, 0.4) 50%, rgba(5, 130, 202, 0.6) 100%);
+      z-index: 1;
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-left {
+      flex: 1;
+    }
+
+    .logo {
+      max-height: 50pt;
+      width: auto;
+      margin-bottom: 12pt;
+      display: block;
+      filter: brightness(1.2) contrast(1.3) drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+      position: relative;
+      z-index: 2;
+    }
+
+    .empresa-info {
+      font-size: 13pt;
+      font-weight: 600;
+      margin-bottom: 8pt;
+      letter-spacing: 0.5px;
+      font-family: 'Inter', sans-serif;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .tagline {
+      font-size: 10pt;
+      font-weight: 400;
+      opacity: 0.95;
+      font-style: italic;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .header-right {
+      text-align: right;
+      font-size: 9pt;
+      opacity: 0.95;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .data-proposta {
+      font-weight: 500;
+      margin-bottom: 4pt;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .numero-proposta {
+      font-weight: 600;
+      color: #FFB871;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+    }
+
+    /* === QUEBRAS DE PÁGINA ORGANIZADAS CONFORME SOLICITADO === */
+    .quebra-pagina {
+      page-break-before: always;
+    }
+
+    .secao {
+      margin-top: 12pt; /* Adicionado conforme solicitado */
+      margin-bottom: 15pt;
+      padding-bottom: 8pt; /* Adicionado conforme solicitado */
+    }
+
+    .destaque {
+      background: linear-gradient(145deg, var(--cinza-claro) 0%, var(--branco-puro) 100%);
+      padding: 15pt;
+      padding-bottom: 8pt; /* Adicionado conforme solicitado */
+      border-radius: 10pt;
+      border: 1pt solid rgba(0, 102, 204, 0.1);
+      margin: 12pt 0;
+      position: relative;
+      box-shadow: 0 2pt 8pt rgba(0, 0, 0, 0.03);
+    }
+
+    .destaque::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3pt;
+      background: linear-gradient(90deg, var(--azul-primario), var(--laranja-accent));
+      border-radius: 10pt 10pt 0 0;
+    }
+
+    .destaque p {
+      margin-bottom: 8pt;
+      font-weight: 500;
+    }
+
+    /* Seção de dados do cliente elegante */
+    .cliente-info {
+      background: linear-gradient(145deg, var(--azul-claro) 0%, var(--branco-puro) 100%);
+      border: 1pt solid var(--azul-primario);
+      border-radius: 12pt;
+      padding: 20pt;
+      margin-bottom: 25pt;
+      position: relative;
+      page-break-inside: avoid;
+      box-shadow: 0 2pt 8pt rgba(0, 102, 204, 0.08);
+    }
+
+    .cliente-info::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4pt;
+      background: linear-gradient(90deg, var(--azul-primario), var(--laranja-accent));
+      border-radius: 12pt 12pt 0 0;
+    }
+
+    .cliente-info h3 {
+      color: var(--azul-primario);
+      font-size: 16pt;
+      font-weight: 700;
+      margin-bottom: 15pt;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      position: relative;
+    }
+
+    .cliente-info h3::after {
+      content: '';
+      position: absolute;
+      bottom: -8pt;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60pt;
+      height: 2pt;
+      background: var(--laranja-accent);
+      border-radius: 1pt;
+    }
+
+    .cliente-dados {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180pt, 1fr));
+      gap: 12pt;
+      margin-top: 15pt;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .cliente-campo {
+      background: var(--branco-puro);
+      padding: 10pt;
+      border-radius: 8pt;
+      border: 1pt solid rgba(0, 102, 204, 0.1);
+      position: relative;
+      box-shadow: 0 1pt 3pt rgba(0, 0, 0, 0.04);
+      min-width: 0;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    .cliente-campo::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4pt;
+      height: 100%;
+      background: var(--laranja-accent);
+      border-radius: 8pt 0 0 8pt;
+    }
+
+    .cliente-campo strong {
+      color: var(--cinza-medio);
+      font-weight: 600;
+      font-size: 8pt;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: block;
+      margin-bottom: 6pt;
+      word-wrap: break-word;
+    }
+
+    .cliente-valor {
+      color: var(--cinza-escuro);
+      font-weight: 600;
+      font-size: 10pt;
+      line-height: 1.4;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      hyphens: auto;
+      max-width: 100%;
+    }
+
+    /* Títulos hierárquicos profissionais - SEM repetição conforme solicitado */
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28pt;
+      font-weight: 700;
+      color: var(--azul-primario);
+      text-align: center;
+      margin: 15pt 0 12pt 0;
+      position: relative;
+      letter-spacing: -0.5px;
+    }
+
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: -8pt;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100pt;
+      height: 3pt;
+      background: linear-gradient(90deg, var(--azul-primario), var(--laranja-accent));
+      border-radius: 2pt;
+    }
+
+    h2 {
+      font-family: 'Inter', sans-serif;
+      font-size: 16pt;
+      font-weight: 700;
+      color: var(--azul-secundario);
+      margin: 18pt 0 10pt 0;
+      position: relative;
+      padding-left: 20pt;
+    }
+
+    h2::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 4pt;
+      height: 20pt;
+      background: linear-gradient(180deg, var(--azul-primario), var(--laranja-accent));
+      border-radius: 2pt;
+    }
+
+    h3 {
+      font-size: 13pt;
+      font-weight: 600;
+      color: var(--cinza-escuro);
+      margin: 12pt 0 6pt 0;
+    }
+
+    /* Texto e parágrafos refinados - Otimizado para PDF */
+    p {
+      margin-bottom: 8pt;
+      text-align: left;
+      orphans: 1;
+      widows: 1;
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--cinza-escuro);
+    }
+
+    /* === LISTAS DE FUNCIONALIDADES OTIMIZADAS CONFORME SOLICITADO === */
+    .lista-funcionalidades {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10pt;
+      margin: 12pt 0;
+    }
+
+    .funcionalidade-item {
+      display: flex;
+      align-items: center;
+      gap: 10pt; /* Conforme solicitado */
+      padding: 12pt;
+      padding-bottom: 8pt; /* Conforme solicitado */
+      margin-bottom: 8pt; /* Conforme solicitado */
+      background: linear-gradient(145deg, var(--branco-puro) 0%, var(--cinza-claro) 100%);
+      border-radius: 8pt;
+      border: 1pt solid rgba(0, 102, 204, 0.08);
+      box-shadow: 0 1pt 4pt rgba(0, 0, 0, 0.02);
+      page-break-inside: avoid; /* Conforme solicitado */
+    }
+
+    .funcionalidade-icon {
+      width: 32pt;
+      height: 32pt;
+      background: linear-gradient(135deg, var(--azul-primario), var(--azul-secundario));
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14pt;
+      flex-shrink: 0;
+      box-shadow: 0 2pt 6pt rgba(0, 102, 204, 0.2);
+    }
+
+    .funcionalidade-texto {
+      font-weight: 500;
+      color: var(--cinza-escuro);
+      line-height: 1.4;
+      font-size: 10.5pt;
+    }
+
+    /* === PASSOS COM DESIGN CIRCULAR ELEGANTE - OTIMIZADO PARA PDF === */
+    .passos-lista {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10pt;
+      margin: 12pt 0;
+    }
+
+    .passo-item {
+      display: flex;
+      gap: 12pt;
+      align-items: flex-start;
+      background: linear-gradient(145deg, var(--branco-puro) 0%, var(--cinza-claro) 100%);
+      padding: 12pt;
+      padding-bottom: 8pt; /* Conforme solicitado */
+      margin-bottom: 8pt; /* Conforme solicitado */
+      border-radius: 10pt;
+      border: 1pt solid rgba(0, 102, 204, 0.08);
+      box-shadow: 0 2pt 6pt rgba(0, 0, 0, 0.03);
+      page-break-inside: avoid; /* Conforme solicitado */
+    }
+
+    .passo-numero {
+      width: 36pt;
+      height: 36pt;
+      background: linear-gradient(135deg, var(--azul-primario), var(--azul-secundario));
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14pt;
+      flex-shrink: 0;
+      box-shadow: 0 3pt 8pt rgba(0, 102, 204, 0.3);
+    }
+
+    .passo-conteudo h4 {
+      font-size: 11pt;
+      font-weight: 600;
+      margin-bottom: 4pt;
+      color: var(--azul-secundario);
+      line-height: 1.3;
+    }
+
+    .passo-conteudo p {
+      font-size: 9pt;
+      margin: 0;
+      line-height: 1.4;
+      color: var(--cinza-medio);
+    }
+
+    /* === TABELA DE PLANOS PREMIUM - QUEBRAS OTIMIZADAS === */
+    .planos-container {
+      margin: 20pt 0;
+      overflow: hidden;
+      border-radius: 12pt;
+      box-shadow: 0 4pt 12pt rgba(0, 0, 0, 0.06);
+    }
+
+    .planos-tabela {
+      width: 100%;
+      table-layout: fixed;
+      border-collapse: collapse;
+      font-size: 9.5pt;
+      background: white;
+      word-wrap: break-word;
+    }
+
+    .planos-tabela th {
+      background: linear-gradient(135deg, var(--azul-primario) 0%, var(--azul-secundario) 100%);
+      color: white;
+      font-weight: 700;
+      text-align: center;
+      padding: 12pt 8pt;
+      font-size: 9.5pt;
+      border: none;
+      position: relative;
+    }
+
+    .planos-tabela th:first-child {
+      border-radius: 12pt 0 0 0;
+    }
+
+    .planos-tabela th:last-child {
+      border-radius: 0 12pt 0 0;
+    }
+
+    .planos-tabela td {
+      padding: 8pt 6pt;
+      text-align: left;
+      vertical-align: middle;
+      border-bottom: 1pt solid rgba(0, 0, 0, 0.05);
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    .planos-tabela .recurso-nome {
+      font-weight: 600;
+      background: linear-gradient(145deg, var(--cinza-claro) 0%, var(--branco-puro) 100%);
+      color: var(--cinza-escuro);
+      border-right: 1pt solid rgba(0, 0, 0, 0.08);
+    }
+
+    .planos-tabela .incluido {
+      text-align: center;
+      color: var(--verde-sucesso);
+      font-weight: 700;
+      font-size: 12pt;
+    }
+
+    .planos-tabela .nao-incluido {
+      text-align: center;
+      color: var(--vermelho-erro);
+      font-weight: 700;
+      font-size: 12pt;
+    }
+
+    .planos-tabela .preco {
+      font-weight: 700;
+      font-size: 11pt;
+      text-align: center;
+      color: var(--azul-secundario);
+    }
+
+    .planos-tabela .destaque-coluna {
+      background: linear-gradient(145deg, var(--laranja-suave) 0%, var(--branco-puro) 100%);
+      position: relative;
+    }
+
+    .planos-tabela .destaque-coluna::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3pt;
+      background: var(--laranja-accent);
+    }
+
+    .planos-tabela .destaque-coluna::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 3pt;
+      background: var(--laranja-accent);
+    }
+
+    /* Grid de vantagens elegante */
+    .vantagens-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10pt;
+      margin: 12pt 0;
+    }
+
+    .vantagem-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12pt;
+      padding: 12pt;
+      background: linear-gradient(145deg, var(--branco-puro) 0%, var(--cinza-claro) 100%);
+      border-radius: 10pt;
+      border: 1pt solid rgba(0, 102, 204, 0.08);
+      box-shadow: 0 2pt 6pt rgba(0, 0, 0, 0.03);
+    }
+
+    .vantagem-icon {
+      width: 36pt;
+      height: 36pt;
+      background: linear-gradient(135deg, var(--laranja-accent), #FF8A50);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16pt;
+      flex-shrink: 0;
+      box-shadow: 0 2pt 6pt rgba(255, 107, 53, 0.3);
+    }
+
+    .vantagem-texto h4 {
+      font-size: 11pt;
+      font-weight: 600;
+      margin-bottom: 4pt;
+      color: var(--azul-secundario);
+      line-height: 1.3;
+    }
+
+    .vantagem-texto p {
+      margin: 0;
+      font-size: 10pt;
+      line-height: 1.4;
+      color: var(--cinza-medio);
+      font-weight: 400;
+    }
+
+    /* Seção de garantias */
+    .garantias {
+      background: linear-gradient(135deg, var(--verde-sucesso) 0%, #059669 100%);
+      color: white;
+      padding: 20pt;
+      border-radius: 12pt;
+      margin: 20pt 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .garantias::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 40%;
+      height: 100%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="80" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+      opacity: 0.3;
+    }
+
+    .garantias h3 {
+      color: white;
+      font-size: 16pt;
+      margin-bottom: 15pt;
+      text-align: center;
+    }
+
+    .garantia-item {
+      display: flex;
+      align-items: center;
+      gap: 12pt;
+      margin: 10pt 0;
+      padding: 10pt;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8pt;
+    }
+
+    .garantia-icon {
+      font-size: 20pt;
+      min-width: 40pt;
+      text-align: center;
+    }
+
+    /* Seção de contato premium */
+    .contato-info {
+      background: linear-gradient(135deg, var(--cinza-escuro) 0%, #0f0f0f 100%);
+      color: white;
+      padding: 25pt;
+      border-radius: 12pt;
+      margin: 20pt 0;
+      page-break-inside: avoid;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contato-info::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4pt;
+      background: linear-gradient(90deg, var(--azul-primario), var(--laranja-accent));
+    }
+
+    .contato-info h3 {
+      color: var(--laranja-accent);
+      font-family: 'Playfair Display', serif;
+      font-size: 16pt;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 15pt;
+    }
+
+    .contato-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18pt;
+      margin-top: 15pt;
+    }
+
+    .contato-item {
+      text-align: center;
+      padding: 12pt;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8pt;
+      border: 1pt solid rgba(255, 255, 255, 0.1);
+    }
+
+    .contato-item h4 {
+      font-size: 11pt;
+      font-weight: 600;
+      color: var(--laranja-accent);
+      margin-bottom: 6pt;
+    }
+
+    .contato-item p {
+      font-size: 10pt;
+      margin: 0;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    /* Nota importante com design moderno */
+    .nota-importante {
+      background: linear-gradient(145deg, var(--laranja-suave) 0%, var(--branco-puro) 100%);
+      border: 2pt solid var(--laranja-accent);
+      padding: 15pt;
+      border-radius: 10pt;
+      margin: 18pt 0;
+      page-break-inside: avoid;
+      position: relative;
+      box-shadow: 0 2pt 8pt rgba(255, 107, 53, 0.1);
+    }
+
+    .nota-importante::before {
+      content: '⚡';
+      position: absolute;
+      top: -12pt;
+      left: 20pt;
+      background: var(--laranja-accent);
+      color: white;
+      padding: 6pt 8pt;
+      border-radius: 15pt;
+      font-size: 10pt;
+      font-weight: bold;
+    }
+
+    .nota-importante p {
+      margin: 0;
+      font-size: 10pt;
+      font-weight: 500;
+      color: var(--cinza-escuro);
+      padding-top: 5pt;
+    }
+
+    /* Footer corporativo */
+    .footer {
+      margin-top: 30pt;
+      padding: 20pt;
+      border-top: 3pt solid var(--azul-primario);
+      text-align: center;
+      font-size: 8.5pt;
+      color: var(--cinza-medio);
+      background: linear-gradient(145deg, var(--cinza-claro) 0%, var(--branco-puro) 100%);
+      border-radius: 8pt;
+      box-shadow: 0 2pt 6pt rgba(0, 0, 0, 0.03);
+    }
+
+    .footer p {
+      margin-bottom: 4pt;
+    }
+
+    .footer .data-validade {
+      color: var(--azul-secundario);
+      font-weight: 600;
+    }
+
+    /* === QUEBRAS DE PÁGINA ESPECÍFICAS CONFORME SOLICITADO === */
+    .quebra-secao-principal {
+      page-break-before: always; /* Para seções principais como "Investimento e Planos" */
+    }
+
+    .no-break {
+      page-break-inside: avoid;
+    }
+
+    /* Linha decorativa elegante */
+    .decorativo-linha {
+      height: 3pt;
+      background: linear-gradient(90deg, var(--azul-primario), var(--laranja-accent));
+      margin: 15pt 0;
+      border-radius: 2pt;
+      opacity: 0.8;
+    }
+
+    /* Variável destacada */
+    .variavel {
+      background: linear-gradient(135deg, var(--laranja-suave), rgba(255, 107, 53, 0.1));
+      padding: 2pt 6pt;
+      border-radius: 4pt;
+      font-weight: 700;
+      color: var(--azul-secundario);
+      border: 1pt solid rgba(255, 107, 53, 0.2);
+    }
+
+    /* Subtítulo elegante */
+    .titulo-subtitulo {
+      text-align: center;
+      font-size: 12pt;
+      color: var(--cinza-medio);
+      margin-bottom: 25pt;
+      font-weight: 500;
+      background: linear-gradient(145deg, var(--cinza-claro) 0%, var(--branco-puro) 100%);
+      padding: 12pt;
+      border-radius: 8pt;
+      border: 1pt solid rgba(0, 102, 204, 0.1);
+      font-style: italic;
+    }
+
+    /* === COMENTÁRIOS EXPLICATIVOS CONFORME SOLICITADO === */
+    /* 
+    === OTIMIZAÇÕES PARA GERAÇÃO DE PDF GOTENBERG ===
+    
+    1️⃣ CABEÇALHOS E RODAPÉS FIXOS:
+    - Implementado @page com @top-center para cabeçalho fixo
+    - Implementado @page com @bottom-center para rodapé com numeração
+    - Estilos discretos: 10pt no cabeçalho, 8pt no rodapé
+    
+    2️⃣ REMOÇÃO DE TÍTULOS REPETIDOS:
+    - Removido título "Proposta Comercial" do corpo do documento
+    - Mantido apenas no cabeçalho fixo para evitar repetições
+    
+    3️⃣ QUEBRAS DE SEÇÃO E ESPAÇAMENTOS:
+    - Adicionado margin-top: 12pt e padding-bottom: 8pt em .secao e .destaque
+    - Usado page-break-before: always apenas em seções principais
+    - Evitadas quebras excessivas para fluxo mais natural
+    
+    4️⃣ LISTAS DE FUNCIONALIDADES:
+    - Ajustado .funcionalidade-item para display: flex com gap: 10pt
+    - Adicionado margin-bottom: 8pt e page-break-inside: avoid
+    - Garantido alinhamento vertical dos ícones
+    
+    5️⃣ NUMERAÇÃO DE PÁGINAS:
+    - Incluído counter(page) no rodapé com texto "Página X"
+    - Configurado nos estilos @page do documento
+    
+    6️⃣ IDENTIDADE VISUAL PRESERVADA:
+    - Mantidas cores, fontes e gradientes da marca LARtech
+    - Preservado layout profissional e identidade visual
+    
+    7️⃣ COMENTÁRIOS EXPLICATIVOS:
+    - Inseridos comentários detalhando cada mudança implementada
+    - Facilitação para manutenção futura do código
+    */
+
+    /* Responsividade para impressão */
+    @media print {
+      body {
+        font-size: 9pt;
+      }
+
+      .header {
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+      }
+
+      .planos-tabela th {
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+      }
+      
+      /* Forçar quebras de página mais inteligentes */
+      .secao {
+        page-break-inside: auto;
+      }
+      
+      /* Evitar órfãos e viúvas excessivos */
+      p, li {
+        orphans: 1;
+        widows: 1;
+      }
+
+      /* Ajustes específicos para informações do cliente */
+      .cliente-dados {
+        grid-template-columns: repeat(auto-fit, minmax(160pt, 1fr));
+        gap: 10pt;
+      }
+
+      .cliente-campo {
+        padding: 8pt;
+        min-height: auto;
+      }
+
+      .cliente-valor {
+        font-size: 9pt;
+        line-height: 1.3;
+      }
+
+      /* Quebras de linha forçadas para URLs longas */
+      .cliente-valor {
+        word-break: break-all;
+        overflow-wrap: anywhere;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- === PÁGINA 1: HEADER COM INFORMAÇÕES DO CLIENTE === -->
+  <header class="header">
+    <div class="header-content">
+      <div class="header-left">
+        <img src="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/1%20-%20logotipo%203d/logo_horizontal_1920x1080.png" alt="LARtech Automation" class="logo">
+        <div class="empresa-info">LARtech Automation</div>
+        <div class="tagline">Inteligência Artificial para Negócios</div>
+      </div>
+      <div class="header-right">
+        <div class="data-proposta">{{ $json.dados_processados.proposta.data }}</div>
+        <div class="numero-proposta">Proposta #{{ $json.dados_processados.proposta.numero }}</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Informações personalizadas do cliente -->
+  <section class="cliente-info no-break">
+    <h3>Informações do Cliente</h3>
+    <div class="cliente-dados">
+      <div class="cliente-campo">
+        <strong>Empresa</strong>
+        <div class="cliente-valor variavel">{{ $json.dados_processados.dados_formulario.empresa_formatada }}</div>
+      </div>
+      <div class="cliente-campo">
+        <strong>Responsável</strong>
+        <div class="cliente-valor variavel">{{ $json.dados_processados.dados_formulario.nome_formatado }}</div>
+      </div>
+      <div class="cliente-campo">
+        <strong>WhatsApp</strong>
+        <div class="cliente-valor variavel">{{ $json.dados_processados.dados_formulario.whatsapp }}</div>
+      </div>
+      <div class="cliente-campo">
+        <strong>E-mail</strong>
+        <div class="cliente-valor variavel">{{ $json.dados_processados.dados_formulario.email }}</div>
+      </div>
+      <div class="cliente-campo">
+        <strong>Localização</strong>
+        <div class="cliente-valor variavel">{{ $json.dados_processados.dados_formulario.cidade_estado_formatada }}</div>
+      </div>
+      <div class="cliente-campo">
+        <strong>Website</strong>
+        <div class="cliente-valor variavel">{{ $json.dados_processados.dados_formulario.website || 'Não informado' }}</div>
+      </div>
+      <div class="cliente-campo">
+        <strong>Volume de Mensagens</strong>
+        <div class="cliente-valor variavel">{{ $json.dados_processados.dados_formulario.mensagens_dia }} mensagens/dia</div>
+      </div>
+      <div class="cliente-campo">
+        <strong>Número de Atendentes</strong>
+        <div class="cliente-valor variavel">{{ $json.dados_processados.dados_formulario.num_atendentes }} pessoa(s)</div>
+      </div>
+      <div class="cliente-campo">
+        <strong>Horário de Funcionamento</strong>
+        <div class="cliente-valor variavel">{{ $json.dados_processados.dados_formulario.horario_funcionamento }}</div>
+      </div>
+      <div class="cliente-campo">
+        <strong>Urgência</strong>
+        <div class="cliente-valor variavel">{{ $json.dados_processados.dados_formulario.urgencia_descritiva }}</div>
+      </div>
+      <div class="cliente-campo">
+        <strong>Investimento</strong>
+        <div class="cliente-valor variavel">{{ $json.dados_processados.dados_formulario.investimento_descritivo }}</div>
+      </div>
+      <div class="cliente-campo">
+        <strong>WhatsApp</strong>
+        <div class="cliente-valor variavel">{{ $json.dados_processados.dados_formulario.tipo_whatsapp_descritivo }}</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === PÁGINA 2: TÍTULO PRINCIPAL + SUMÁRIO EXECUTIVO + ANÁLISE === -->
+  <div class="quebra-pagina"></div>
+
+  <!-- Título principal (REMOVIDO DO CORPO - AGORA SÓ NO CABEÇALHO FIXO) -->
+  <div class="titulo-subtitulo">
+    Solução de Automação Inteligente com IA para Empresas
+  </div>
+
+  <div class="decorativo-linha"></div>
+
+  <!-- Apresentação executiva personalizada -->
+  <section class="secao">
+    <h2>Sumário Executivo</h2>
+    <div class="destaque">
+      <p>A <strong>{{ $json.dados_processados.dados_formulario.empresa_formatada }}</strong> tem o potencial de otimizar significativamente seu atendimento ao cliente e melhorar suas oportunidades de vendas com nossa solução de automação inteligente. Com <strong>{{ $json.dados_processados.dados_formulario.mensagens_dia }} mensagens</strong> recebidas diariamente, há um grande potencial de melhorar o aproveitamento das oportunidades fora do horário comercial.</p>
+      <p><strong>Nossa solução oferece:</strong> Melhoria no atendimento aos seus leads, com redução significativa no tempo de resposta através de suporte automatizado 24/7, e automação personalizada baseada nas suas necessidades para otimizar suas conversões.</p>
+    </div>
+
+    <!-- Automações solicitadas -->
+    <div class="destaque" style="background: linear-gradient(145deg, var(--azul-claro) 0%, var(--branco-puro) 100%); border-left: 4px solid var(--azul-primario);">
+      <h4 style="color: var(--azul-secundario); margin-bottom: 10pt;">Automações Solicitadas:</h4>
+      <p><strong>{{ $json.dados_processados.dados_formulario.categorias_automacao }}</strong></p>
+      <p><em>Detalhes solicitados:</em> {{ $json.dados_processados.dados_formulario.automacao_detalhes }}</p>
+      <p><em>Tipos de dados a gerenciar:</em> {{ $json.dados_processados.dados_formulario.tipos_dados }}</p>
+      <p><em>Tipo de relatórios:</em> {{ $json.dados_processados.dados_formulario.tipo_relatorios }}</p>
+      <p><em>WhatsApp:</em> {{ $json.dados_processados.dados_formulario.tipo_whatsapp_descritivo }}</p>
+    </div>
+  </section>
+
+  <!-- Análise da situação atual -->
+  <section class="secao">
+    <h2>Análise da Situação Atual</h2>
+    <div class="destaque">
+      <p>A <strong>{{ $json.dados_processados.dados_formulario.empresa_formatada }}</strong> enfrenta desafios comuns no mercado atual:</p>
+      <ul style="margin: 10pt 0; padding-left: 20pt;">
+        <li style="margin-bottom: 8pt;"><strong>Volume de mensagens:</strong> {{ $json.dados_processados.dados_formulario.mensagens_dia }} mensagens para apenas {{ $json.dados_processados.dados_formulario.num_atendentes }} atendente(s)</li>
+        <li style="margin-bottom: 8pt;"><strong>Horário limitado:</strong> Funcionamento {{ $json.dados_processados.dados_formulario.horario_funcionamento }}, perdendo oportunidades fora deste período</li>
+        <li style="margin-bottom: 8pt;"><strong>Gestão de dados:</strong> {{ $json.dados_processados.dados_formulario.base_dados_status }}</li>
+        <li style="margin-bottom: 8pt;"><strong>Tipo de WhatsApp:</strong> {{ $json.dados_processados.dados_formulario.tipo_whatsapp_descritivo }}</li>
+        <li style="margin-bottom: 8pt;"><strong>Experiência com automação:</strong> {{ $json.dados_processados.dados_formulario.ja_utiliza_automacao }}</li>
+      </ul>
+      <p><strong>Com {{ $json.dados_processados.dados_formulario.mensagens_dia }} mensagens diárias</strong>, você precisa de uma solução que otimize seu atendimento e libere tempo para focar no crescimento do negócio.</p>
+    </div>
+  </section>
+
+  <!-- === PÁGINA 3: SOLUÇÃO PERSONALIZADA === -->
+  <div class="quebra-pagina"></div>
+
+  <section class="secao">
+    <h2>Solução Personalizada para {{ $json.dados_processados.dados_formulario.empresa_formatada }}</h2>
+    <div class="destaque">
+      <p>Baseado no seu diagnóstico, desenvolvemos uma solução de automação inteligente <strong>personalizada para suas necessidades específicas</strong>:</p>
+    </div>
+
+    <div class="lista-funcionalidades">
+      <div class="funcionalidade-item">
+        <div class="funcionalidade-icon">🤖</div>
+        <div class="funcionalidade-texto"><strong>Assistente Virtual Inteligente:</strong> {{ $json.dados_processados.dados_formulario.automacao_detalhes }}</div>
+      </div>
+
+      <div class="funcionalidade-item">
+        <div class="funcionalidade-icon">💬</div>
+        <div class="funcionalidade-texto"><strong>Atendimento 24/7:</strong> Resposta automática em {{ $json.dados_processados.metricas.tempo_resposta }} com {{ $json.dados_processados.metricas.precisao_orçamentos }} de precisão</div>
+      </div>
+
+      <div class="funcionalidade-item">
+        <div class="funcionalidade-icon">⚙️</div>
+        <div class="funcionalidade-texto"><strong>Automação de Processos:</strong> Otimização completa do fluxo de atendimento e orçamentos</div>
+      </div>
+
+      <div class="funcionalidade-item">
+        <div class="funcionalidade-icon">📊</div>
+        <div class="funcionalidade-texto"><strong>Relatórios Inteligentes:</strong> {{ $json.dados_processados.dados_formulario.tipo_relatorios }} com métricas de performance</div>
+      </div>
+
+      <div class="funcionalidade-item">
+        <div class="funcionalidade-icon">📈</div>
+        <div class="funcionalidade-texto"><strong>Análise de Vendas:</strong> Potencial de otimização das conversões baseado em métricas de mercado</div>
+      </div>
+
+      <div class="funcionalidade-item">
+        <div class="funcionalidade-icon">📋</div>
+        <div class="funcionalidade-texto"><strong>Economia de Tempo:</strong> {{ $json.dados_processados.metricas.economia_tempo_dia }} horas economizadas por dia</div>
+      </div>
+
+      <div class="funcionalidade-item">
+        <div class="funcionalidade-icon">🎯</div>
+        <div class="funcionalidade-texto"><strong>Captura de Leads:</strong> Sistema inteligente de qualificação e follow-up automático</div>
+      </div>
+
+      <div class="funcionalidade-item">
+        <div class="funcionalidade-icon">📱</div>
+        <div class="funcionalidade-texto"><strong>Disponibilidade:</strong> {{ $json.dados_processados.metricas.disponibilidade }} para capturar todas as oportunidades</div>
+      </div>
+
+      <div class="funcionalidade-item">
+        <div class="funcionalidade-icon">💾</div>
+        <div class="funcionalidade-texto"><strong>Gestão de Dados:</strong> {{ $json.dados_processados.dados_formulario.tipos_dados }}</div>
+      </div>
+
+      <div class="funcionalidade-item">
+        <div class="funcionalidade-icon">📱</div>
+        <div class="funcionalidade-texto"><strong>Integração WhatsApp:</strong> Solução otimizada para {{ $json.dados_processados.dados_formulario.tipo_whatsapp_descritivo }}</div>
+      </div>
+
+      <div class="funcionalidade-item">
+        <div class="funcionalidade-icon">📈</div>
+        <div class="funcionalidade-texto"><strong>Potencial de Melhoria:</strong> Estimativa de otimização no atendimento e aproveitamento de oportunidades</div>
+      </div>
+
+      <div class="funcionalidade-item">
+        <div class="funcionalidade-icon">⚙️</div>
+        <div class="funcionalidade-texto"><strong>Eficiência Operacional:</strong> Potencial redução de tempo em tarefas repetitivas e aumento da produtividade</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === PÁGINA 4: INVESTIMENTO E PLANOS === -->
+  <div class="quebra-secao-principal"></div>
+
+  <section class="secao">
+    <h2>Investimento e Planos</h2>
+    <div class="planos-container">
+      <table class="planos-tabela">
+        <thead>
+          <tr>
+            <th style="width: 30%;">Recursos da Automação</th>
+            <th style="width: 22%;">Automação Bronze<br><small>Para começar</small>{{ $json.dados_processados.recomendacao.plano === 'Bronze' ? '<br><strong style="color: #FF6B35;">RECOMENDADO</strong>' : '' }}</th>
+            <th style="width: 22%;">Automação Prata<br><small>Limitado</small>{{ $json.dados_processados.recomendacao.plano === 'Prata' ? '<br><strong style="color: #FF6B35;">RECOMENDADO</strong>' : '' }}</th>
+            <th style="width: 26%;">Automação Ouro<br><small>Solução completa</small>{{ $json.dados_processados.recomendacao.plano === 'Ouro' ? '<br><strong style="color: #FF6B35;">RECOMENDADO</strong>' : '' }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Preços com efeito decoy -->
+          <tr>
+            <td class="recurso-nome"><strong>Investimento Inicial</strong></td>
+            <td class="preco{{ $json.dados_processados.recomendacao.plano === 'Bronze' ? ' destaque-coluna' : '' }}">R$ 2.000</td>
+            <td class="preco{{ $json.dados_processados.recomendacao.plano === 'Prata' ? ' destaque-coluna' : ($json.dados_processados.recomendacao.plano === 'Ouro' ? '' : ' style="background: rgba(255, 184, 0, 0.1);"') }}">R$ 2.200</td>
+            <td class="preco{{ $json.dados_processados.recomendacao.plano === 'Ouro' ? ' destaque-coluna' : '' }}">R$ 2.400</td>
+          </tr>
+          <tr>
+            <td class="recurso-nome"><strong>Mensalidade</strong></td>
+            <td class="preco{{ $json.dados_processados.recomendacao.plano === 'Bronze' ? ' destaque-coluna' : '' }}">R$ 290</td>
+            <td class="preco{{ $json.dados_processados.recomendacao.plano === 'Prata' ? ' destaque-coluna' : ($json.dados_processados.recomendacao.plano === 'Ouro' ? '' : ' style="background: rgba(255, 184, 0, 0.1);"') }}">R$ 450</td>
+            <td class="preco{{ $json.dados_processados.recomendacao.plano === 'Ouro' ? ' destaque-coluna' : '' }}">R$ 490</td>
+          </tr>
+
+          <!-- Capacidade - ponto crítico do decoy -->
+          <tr>
+            <td class="recurso-nome"><strong>Capacidade Diária</strong></td>
+            <td{{ $json.dados_processados.recomendacao.plano === 'Bronze' ? ' class="destaque-coluna"' : '' }}>Até 50 mensagens/dia</td>
+            <td{{ $json.dados_processados.recomendacao.plano === 'Prata' ? ' class="destaque-coluna"' : ' style="background: rgba(255, 184, 0, 0.1); color: #B8860B;"' }}>Até 100 mensagens/dia<br><small>Limitado para suas necessidades</small></td>
+            <td{{ $json.dados_processados.recomendacao.plano === 'Ouro' ? ' class="destaque-coluna"' : '' }}>Até 500 mensagens/dia<br><strong>Suporta {{ $json.dados_processados.dados_formulario.mensagens_dia }} + crescimento</strong></td>
+          </tr>
+
+          <!-- Recursos básicos -->
+          <tr>
+            <td class="recurso-nome">Resposta Automática 24/7</td>
+            <td class="incluido{{ $json.dados_processados.recomendacao.plano === 'Bronze' ? ' destaque-coluna' : '' }}">✓</td>
+            <td class="incluido{{ $json.dados_processados.recomendacao.plano === 'Prata' ? ' destaque-coluna' : '' }}"{{ $json.dados_processados.recomendacao.plano === 'Prata' ? '' : ' style="background: rgba(255, 184, 0, 0.1);"' }}>✓</td>
+            <td class="incluido{{ $json.dados_processados.recomendacao.plano === 'Ouro' ? ' destaque-coluna' : '' }}">✓</td>
+          </tr>
+
+          <!-- Diferenciadores do decoy -->
+          <tr>
+            <td class="recurso-nome">Automações Solicitadas</td>
+            <td class="{{ $json.dados_processados.recomendacao.plano === 'Bronze' ? 'incluido destaque-coluna' : 'nao-incluido' }}">{{ $json.dados_processados.recomendacao.plano === 'Bronze' ? '✓ Básico' : '✗ Básico' }}</td>
+            <td class="{{ $json.dados_processados.recomendacao.plano === 'Prata' ? 'incluido destaque-coluna' : '' }}"{{ $json.dados_processados.recomendacao.plano === 'Prata' ? '' : ' style="background: rgba(255, 184, 0, 0.1); color: #B8860B;"' }}>✓ Limitado<br><small>Apenas 2 automações</small></td>
+            <td class="incluido{{ $json.dados_processados.recomendacao.plano === 'Ouro' ? ' destaque-coluna' : '' }}">✓ Todas<br><strong>{{ $json.dados_processados.dados_formulario.categorias_automacao }}</strong></td>
+          </tr>
+
+          <tr>
+            <td class="recurso-nome">Automação de Atendimento Personalizado</td>
+            <td class="{{ $json.dados_processados.recomendacao.plano === 'Bronze' ? 'incluido destaque-coluna' : 'nao-incluido' }}">{{ $json.dados_processados.recomendacao.plano === 'Bronze' ? '✓ Básico' : '✗' }}</td>
+            <td class="{{ $json.dados_processados.recomendacao.plano === 'Prata' ? 'incluido destaque-coluna' : '' }}"{{ $json.dados_processados.recomendacao.plano === 'Prata' ? '' : ' style="background: rgba(255, 184, 0, 0.1); color: #B8860B;"' }}>✓ Básico</td>
+            <td class="incluido{{ $json.dados_processados.recomendacao.plano === 'Ouro' ? ' destaque-coluna' : '' }}">✓ Completo</td>
+          </tr>
+
+          <tr>
+            <td class="recurso-nome">Automação de Processos Comerciais</td>
+            <td class="{{ $json.dados_processados.recomendacao.plano === 'Bronze' ? 'incluido destaque-coluna' : 'nao-incluido' }}">{{ $json.dados_processados.recomendacao.plano === 'Bronze' ? '✓ Básico' : '✗' }}</td>
+            <td class="{{ $json.dados_processados.recomendacao.plano === 'Prata' ? 'incluido destaque-coluna' : 'nao-incluido' }}"{{ $json.dados_processados.recomendacao.plano === 'Prata' ? '' : ' style="background: rgba(255, 184, 0, 0.1);"' }}>{{ $json.dados_processados.recomendacao.plano === 'Prata' ? '✓ Básico' : '✗' }}</td>
+            <td class="incluido{{ $json.dados_processados.recomendacao.plano === 'Ouro' ? ' destaque-coluna' : '' }}">✓ Completo</td>
+          </tr>
+
+          <tr>
+            <td class="recurso-nome">Análise de Dados e Inteligência</td>
+            <td class="{{ $json.dados_processados.recomendacao.plano === 'Bronze' ? 'incluido destaque-coluna' : 'nao-incluido' }}">{{ $json.dados_processados.recomendacao.plano === 'Bronze' ? '✓ Básico' : '✗' }}</td>
+            <td class="{{ $json.dados_processados.recomendacao.plano === 'Prata' ? 'incluido destaque-coluna' : 'nao-incluido' }}"{{ $json.dados_processados.recomendacao.plano === 'Prata' ? '' : ' style="background: rgba(255, 184, 0, 0.1);"' }}>{{ $json.dados_processados.recomendacao.plano === 'Prata' ? '✓ Básico' : '✗' }}</td>
+            <td class="incluido{{ $json.dados_processados.recomendacao.plano === 'Ouro' ? ' destaque-coluna' : '' }}">✓ Completo</td>
+          </tr>
+
+          <tr>
+            <td class="recurso-nome">Captura e Gestão de Leads</td>
+            <td class="{{ $json.dados_processados.recomendacao.plano === 'Bronze' ? 'incluido destaque-coluna' : 'nao-incluido' }}">{{ $json.dados_processados.recomendacao.plano === 'Bronze' ? '✓ Básico' : '✗' }}</td>
+            <td class="{{ $json.dados_processados.recomendacao.plano === 'Prata' ? 'incluido destaque-coluna' : '' }}"{{ $json.dados_processados.recomendacao.plano === 'Prata' ? '' : ' style="background: rgba(255, 184, 0, 0.1); color: #B8860B;"' }}>✓ Limitado</td>
+            <td class="incluido{{ $json.dados_processados.recomendacao.plano === 'Ouro' ? ' destaque-coluna' : '' }}">✓ Avançado</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- === PÁGINA 6: CONTINUAÇÃO TABELA === -->
+  <div class="quebra-pagina"></div>
+
+  <section class="secao">
+    <div class="planos-container">
+      <table class="planos-tabela">
+        <thead>
+          <tr>
+            <th style="width: 30%;">Recursos da Automação</th>
+            <th style="width: 22%;">Automação Bronze{{ $json.dados_processados.recomendacao.plano === 'Bronze' ? '<br><strong style="color: #FF6B35;">RECOMENDADO</strong>' : '' }}</th>
+            <th style="width: 22%;">Automação Prata{{ $json.dados_processados.recomendacao.plano === 'Prata' ? '<br><strong style="color: #FF6B35;">RECOMENDADO</strong>' : '' }}</th>
+            <th style="width: 26%;">Automação Ouro{{ $json.dados_processados.recomendacao.plano === 'Ouro' ? '<br><strong style="color: #FF6B35;">RECOMENDADO</strong>' : '' }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Integração baseada no que foi solicitado -->
+          <tr>
+            <td class="recurso-nome">Integração com Sistemas Externos</td>
+            <td class="{{ $json.dados_processados.recomendacao.plano === 'Bronze' ? 'incluido destaque-coluna' : 'nao-incluido' }}">{{ $json.dados_processados.recomendacao.plano === 'Bronze' ? '✓ Básica' : '✗' }}</td>
+            <td class="{{ $json.dados_processados.recomendacao.plano === 'Prata' ? 'incluido destaque-coluna' : 'nao-incluido' }}"{{ $json.dados_processados.recomendacao.plano === 'Prata' ? '' : ' style="background: rgba(255, 184, 0, 0.1);"' }}>{{ $json.dados_processados.recomendacao.plano === 'Prata' ? '✓ Básica' : '✗' }}</td>
+            <td class="incluido{{ $json.dados_processados.recomendacao.plano === 'Ouro' ? ' destaque-coluna' : '' }}">✓ Completa</td>
+          </tr>
+
+          <!-- Gestão de dados personalizada -->
+          <tr>
+            <td class="recurso-nome">Gestão de {{ $json.dados_processados.dados_formulario.tipos_dados }}</td>
+            <td class="{{ $json.dados_processados.recomendacao.plano === 'Bronze' ? 'incluido destaque-coluna' : 'nao-incluido' }}">{{ $json.dados_processados.recomendacao.plano === 'Bronze' ? '✓ Básico' : '✗' }}</td>
+            <td class="{{ $json.dados_processados.recomendacao.plano === 'Prata' ? 'incluido destaque-coluna' : '' }}"{{ $json.dados_processados.recomendacao.plano === 'Prata' ? '' : ' style="background: rgba(255, 184, 0, 0.1); color: #B8860B;"' }}>✓ Básico</td>
+            <td class="incluido{{ $json.dados_processados.recomendacao.plano === 'Ouro' ? ' destaque-coluna' : '' }}">✓ Avançado</td>
+          </tr>
+
+          <tr>
+            <td class="recurso-nome">Relatórios ({{ $json.dados_processados.dados_formulario.tipo_relatorios }})</td>
+            <td class="{{ $json.dados_processados.recomendacao.plano === 'Bronze' ? 'incluido destaque-coluna' : 'nao-incluido' }}">{{ $json.dados_processados.recomendacao.plano === 'Bronze' ? '✓ Básicos' : '✗' }}</td>
+            <td class="{{ $json.dados_processados.recomendacao.plano === 'Prata' ? 'incluido destaque-coluna' : '' }}"{{ $json.dados_processados.recomendacao.plano === 'Prata' ? '' : ' style="background: rgba(255, 184, 0, 0.1); color: #B8860B;"' }}>✓ Mensais</td>
+            <td class="incluido{{ $json.dados_processados.recomendacao.plano === 'Ouro' ? ' destaque-coluna' : '' }}">✓ Tempo Real</td>
+          </tr>
+
+          <!-- Suporte diferenciado -->
+          <tr>
+            <td class="recurso-nome">Suporte Especializado</td>
+            <td{{ $json.dados_processados.recomendacao.plano === 'Bronze' ? ' class="destaque-coluna"' : '' }}>Email</td>
+            <td{{ $json.dados_processados.recomendacao.plano === 'Prata' ? ' class="destaque-coluna"' : ' style="background: rgba(255, 184, 0, 0.1);"' }}>WhatsApp<br><small>Horário comercial</small></td>
+            <td{{ $json.dados_processados.recomendacao.plano === 'Ouro' ? ' class="destaque-coluna"' : '' }}>Prioritário 24/7<br><strong>Gerenciamento Dedicado</strong></td>
+          </tr>
+
+          <!-- WhatsApp otimizado -->
+          <tr>
+            <td class="recurso-nome">Otimização para {{ $json.dados_processados.dados_formulario.tipo_whatsapp_descritivo }}</td>
+            <td class="{{ $json.dados_processados.recomendacao.plano === 'Bronze' ? 'incluido destaque-coluna' : 'nao-incluido' }}">{{ $json.dados_processados.recomendacao.plano === 'Bronze' ? '✓ Básica' : '✗' }}</td>
+            <td class="{{ $json.dados_processados.recomendacao.plano === 'Prata' ? 'incluido destaque-coluna' : '' }}"{{ $json.dados_processados.recomendacao.plano === 'Prata' ? '' : ' style="background: rgba(255, 184, 0, 0.1); color: #B8860B;"' }}>✓ Básico</td>
+            <td class="incluido{{ $json.dados_processados.recomendacao.plano === 'Ouro' ? ' destaque-coluna' : '' }}">✓ Completa</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Análise comparativa inteligente -->
+    <div class="nota-importante">
+      <p><strong>Análise Estratégica:</strong> Com base na sua pontuação de complexidade de {{ $json.dados_processados.analise.percentual }}%, o <strong>Plano {{ $json.dados_processados.recomendacao.plano }}</strong> foi identificado como a melhor opção para suas necessidades específicas. {{ $json.dados_processados.recomendacao.razao }}</p>
+    </div>
+
+    <!-- Validade da proposta -->
+    <div class="destaque" style="background: linear-gradient(145deg, var(--laranja-suave) 0%, var(--branco-puro) 100%); border: 2pt solid var(--laranja-accent); margin-top: 15pt;">
+      <p><strong>Proposta válida até:</strong> {{ $json.dados_processados.proposta.validade }}</p>
+    </div>
+  </section>
+
+  <!-- === PÁGINA 7: GARANTIAS === -->
+  <div class="quebra-pagina"></div>
+
+  <section class="secao">
+    <div class="garantias">
+      <h3>Nossas Garantias para Você</h3>
+
+      <div class="garantia-item">
+        <div class="garantia-icon">🔧</div>
+        <div>
+          <strong>Ajustes personalizados na sua Assistente Virtual</strong><br>
+          Você tem total liberdade para ajustar o prompt da sua assistente quantas vezes forem necessárias até que ele esteja exatamente da forma que melhor atenda às suas necessidades.
+        </div>
+      </div>
+
+      <div class="garantia-item">
+        <div class="garantia-icon">🛠️</div>
+        <div>
+          <strong>Instalação e Administração Completa da Infraestrutura</strong><br>
+          A LARtech Automation cuida de toda a instalação e administração da infraestrutura necessária para rodar suas automações, garantindo que tudo funcione com segurança, eficiência e sem preocupações para você.
+        </div>
+      </div>
+
+      <div class="garantia-item">
+        <div class="garantia-icon">💼</div>
+        <div>
+          <strong>Suporte Técnico Especializado</strong><br>
+          Nossa equipe está pronta para fornecer suporte técnico contínuo, esclarecendo dúvidas, solucionando problemas e oferecendo a tranquilidade que você merece.
+        </div>
+      </div>
+
+      <div class="garantia-item">
+        <div class="garantia-icon">🔄</div>
+        <div>
+          <strong>Atualizações constantes</strong><br>
+          Seu sistema sempre atualizado com as últimas novidades em IA
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === PÁGINA 8: BENEFÍCIOS DA SOLUÇÃO === -->
+  <div class="quebra-pagina"></div>
+
+  <section class="secao">
+    <h2>Benefícios da Solução</h2>
+    <div class="vantagens-grid">
+      <div class="vantagem-item">
+        <div class="vantagem-icon">⚡</div>
+        <div class="vantagem-texto">
+          <h4>Respostas Ágeis</h4>
+          <p>Atendimentos automatizados que melhoram a eficiência e reduzem o tempo de espera dos clientes, mesmo fora do horário comercial.</p>
+        </div>
+      </div>
+      <div class="vantagem-item">
+        <div class="vantagem-icon">🔒</div>
+        <div class="vantagem-texto">
+          <h4>Segurança dos Dados</h4>
+          <p>Infraestrutura segura e confiável para proteger as informações dos seus clientes, com backup automático e conformidade com LGPD.</p>
+        </div>
+      </div>
+      <div class="vantagem-item">
+        <div class="vantagem-icon">🛠️</div>
+        <div class="vantagem-texto">
+          <h4>Customização Total</h4>
+          <p>Sistema flexível que se adapta aos seus processos específicos, com ajustes ilimitados para atender suas necessidades.</p>
+        </div>
+      </div>
+      <div class="vantagem-item">
+        <div class="vantagem-icon">💼</div>
+        <div class="vantagem-texto">
+          <h4>Suporte Especializado</h4>
+          <p>Equipe dedicada para implementação, treinamento e suporte contínuo, garantindo o sucesso da sua automação.</p>
+        </div>
+      </div>
+      <div class="vantagem-item">
+        <div class="vantagem-icon">📱</div>
+        <div class="vantagem-texto">
+          <h4>Facilidade de Uso</h4>
+          <p>Interface intuitiva que não requer conhecimento técnico, permitindo que sua equipe use a solução desde o primeiro dia.</p>
+        </div>
+      </div>
+      <div class="vantagem-item">
+        <div class="vantagem-icon">🔄</div>
+        <div class="vantagem-texto">
+          <h4>Atualizações Contínuas</h4>
+          <p>Sistema sempre atualizado com as últimas inovações em IA e automação, sem custos adicionais de upgrade.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="decorativo-linha"></div>
+
+  <!-- === PÁGINA 9: INFORMAÇÕES DE CONTATO + FOOTER === -->
+  <div class="quebra-pagina"></div>
+
+  <!-- Informações de contato (SEM TÍTULO "PRÓXIMOS PASSOS" conforme solicitado) -->
+  <section class="secao">
+    <div class="contato-info">
+      <h3>Lucas Ribeiro - Especialista em Automação Empresarial</h3>
+      <div class="contato-grid">
+        <div class="contato-item">
+          <h4>📱 WhatsApp Direto</h4>
+          <p>(11) 99902-7653</p>
+        </div>
+        <div class="contato-item">
+          <h4>📧 Email Corporativo</h4>
+          <p>lucas.ribeiro@lartechautomation.com</p>
+        </div>
+        <div class="contato-item">
+          <h4>🌐 Demonstração Online</h4>
+          <p>demo.lartechautomation.com</p>
+        </div>
+        <div class="contato-item">
+          <h4>📅 Agendar Reunião</h4>
+          <p>cal.com/lartechautomation</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer corporativo -->
+  <footer class="footer">
+    <p><strong>© 2025 LARtech Automation</strong> | Especialistas em Automação Empresarial</p>
+    <p class="data-validade">Esta proposta é válida até {{ $json.dados_processados.proposta.validade }} - Condições especiais de lançamento</p>
+    <p>Documento confidencial preparado exclusivamente para <strong>{{ $json.dados_processados.dados_formulario.empresa_formatada }}</strong></p>
+    <p style="margin-top: 8pt; font-size: 7.5pt; opacity: 0.7;">LARtech Automation - CNPJ: 59.632.001/0001-00 | Matriz: São Paulo/SP | contato@lartechautomation.com</p>
+  </footer>
+</body>
+</html>

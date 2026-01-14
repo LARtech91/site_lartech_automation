@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proposta Comercial - LARtech Automation</title>
+  <style>
+    /* Reset e configurações globais para PDF */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    @page {
+      size: A4;
+      margin: 15mm;
+      @top-center {
+        content: "LARtech Automation - Proposta Comercial";
+        font-size: 10pt;
+        color: #666;
+        font-family: Arial, sans-serif;
+        padding-bottom: 5mm;
+        border-bottom: 1px solid #ddd;
+      }
+      @bottom-center {
+        content: "Página " counter(page) " | WhatsApp: (11) 99902-7653 | lucas.ribeiro@lartechautomation.com";
+        font-size: 8pt;
+        color: #888;
+        font-family: Arial, sans-serif;
+        margin-top: 5mm;
+        padding-top: 3mm;
+        border-top: 1px solid #ddd;
+      }
+    }
+
+    body {
+      font-family: 'Arial', 'Helvetica', sans-serif;
+      font-size: 11pt;
+      line-height: 1.4;
+      color: #1a1a1a;
+      background: white;
+      max-width: 190mm;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    :root {
+      --azul-primario: #00A6FB;
+      --azul-secundario: #0582CA;
+      --laranja-accent: #FF6B35;
+      --cinza-escuro: #1a1a1a;
+      --cinza-medio: #666666;
+      --cinza-claro: #f8f9fa;
+      --verde-sucesso: #28a745;
+      --gradient-primary: linear-gradient(135deg, #00A6FB 0%, #0582CA 100%);
+      --gradient-accent: linear-gradient(135deg, #FF6B35 0%, #ff8a57 100%);
+    }
+
+    .page-break-before {
+      page-break-before: always;
+    }
+
+    .no-page-break {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    /* Header */
+    .header {
+      background: var(--gradient-primary);
+      color: white;
+      padding: 20pt;
+      margin-bottom: 15pt;
+      position: relative;
+      overflow: hidden;
+      page-break-inside: avoid;
+      display: table;
+      width: 100%;
+      table-layout: fixed;
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 2;
+      display: table-row;
+    }
+
+    .logo-section {
+      display: table-cell;
+      vertical-align: middle;
+      width: 70%;
+    }
+
+    .company-logo {
+      width: 50pt;
+      height: 50pt;
+      background: white;
+      border-radius: 8pt;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 15pt;
+      text-align: center;
+      line-height: 50pt;
+    }
+
+    .logo-img {
+      max-height: 40pt;
+      max-width: 40pt;
+      vertical-align: middle;
+    }
+
+    .header-text {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .header-text h1 {
+      font-size: 18pt;
+      font-weight: bold;
+      margin-bottom: 4pt;
+      color: white;
+    }
+
+    .header-text p {
+      font-size: 11pt;
+      opacity: 0.9;
+      color: white;
+    }
+
+    .container {
+      padding: 0 10pt;
+    }
+
+    /* Seções */
+    .section {
+      margin-bottom: 15pt;
+      page-break-inside: avoid;
+    }
+
+    .section.break-before {
+      page-break-before: always;
+    }
+
+    .client-info {
+      background: #f8f9fa;
+      padding: 15pt;
+      border-radius: 8pt;
+      margin-bottom: 15pt;
+      border-left: 4pt solid var(--azul-primario);
+      page-break-inside: avoid;
+    }
+
+    .client-info h2 {
+      color: var(--azul-primario);
+      margin-bottom: 12pt;
+      font-size: 14pt;
+      font-weight: bold;
+    }
+
+    .info-grid {
+      display: table;
+      width: 100%;
+      table-layout: fixed;
+    }
+
+    .info-row {
+      display: table-row;
+    }
+
+    .info-item {
+      display: table-cell;
+      padding: 8pt;
+      background: white;
+      border: 1pt solid #e5e7eb;
+      vertical-align: top;
+      width: 50%;
+    }
+
+    .info-label {
+      font-weight: bold;
+      color: var(--cinza-escuro);
+      font-size: 9pt;
+      margin-bottom: 3pt;
+      text-transform: uppercase;
+    }
+
+    .info-value {
+      color: var(--cinza-medio);
+      font-size: 10pt;
+    }
+
+    .diagnostico-section {
+      margin-bottom: 15pt;
+      page-break-inside: avoid;
+    }
+
+    .section-title {
+      color: var(--azul-primario);
+      font-size: 14pt;
+      font-weight: bold;
+      margin-bottom: 12pt;
+      padding-left: 15pt;
+      position: relative;
+    }
+
+    .section-title::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3pt;
+      background: var(--laranja-accent);
+    }
+
+    .diagnostico-grid {
+      display: table;
+      width: 100%;
+      table-layout: fixed;
+    }
+
+    .diagnostico-row {
+      display: table-row;
+    }
+
+    .diagnostico-item {
+      display: table-cell;
+      background: white;
+      border: 1pt solid #e5e7eb;
+      padding: 12pt;
+      vertical-align: top;
+      width: 25%;
+    }
+
+    .diagnostico-item h4 {
+      color: var(--azul-secundario);
+      margin-bottom: 6pt;
+      font-weight: bold;
+      font-size: 10pt;
+    }
+
+    /* Seção de explicação */
+    .explicacao-section {
+      background: #f8f9fa;
+      padding: 20pt;
+      border-radius: 10pt;
+      margin-bottom: 15pt;
+      border-top: 3pt solid var(--laranja-accent);
+      page-break-before: always;
+    }
+
+    .explicacao-intro {
+      text-align: center;
+      margin-bottom: 15pt;
+    }
+
+    .explicacao-intro h3 {
+      font-size: 14pt;
+      font-weight: bold;
+      color: var(--azul-secundario);
+      margin-bottom: 8pt;
+    }
+
+    .funcionalidades-explicadas {
+      display: block;
+    }
+
+    .funcionalidade-explicada {
+      background: white;
+      border-radius: 8pt;
+      padding: 15pt;
+      border: 1pt solid #e5e7eb;
+      margin-bottom: 12pt;
+      border-left: 3pt solid var(--azul-primario);
+      page-break-inside: avoid;
+    }
+
+    .func-header {
+      margin-bottom: 10pt;
+      display: flex;
+      align-items: center;
+    }
+
+    .func-icon {
+      width: 30pt;
+      height: 30pt;
+      display: inline-block;
+      text-align: center;
+      line-height: 30pt;
+      margin-right: 12pt;
+      vertical-align: middle;
+    }
+
+    .func-icon img {
+      width: 30pt;
+      height: 30pt;
+      object-fit: contain;
+    }
+
+    .func-title {
+      font-size: 12pt;
+      font-weight: bold;
+      color: var(--azul-secundario);
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .func-subtitle {
+      font-size: 9pt;
+      color: var(--cinza-medio);
+      font-style: italic;
+      margin: 2pt 0 0 0;
+      line-height: 1.2;
+    }
+
+    .func-text-content {
+      flex: 1;
+    }
+
+    .func-explicacao {
+      font-size: 10pt;
+      line-height: 1.4;
+      color: var(--cinza-escuro);
+      margin-bottom: 10pt;
+    }
+
+    .func-beneficios {
+      background: #e8f5e8;
+      padding: 10pt;
+      border-radius: 6pt;
+      border-left: 3pt solid var(--verde-sucesso);
+    }
+
+    .func-beneficios h5 {
+      color: var(--verde-sucesso);
+      font-weight: bold;
+      margin-bottom: 6pt;
+      font-size: 10pt;
+    }
+
+    .beneficios-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .beneficios-list li {
+      padding: 2pt 0;
+      font-size: 9pt;
+      color: var(--cinza-escuro);
+      position: relative;
+      padding-left: 15pt;
+    }
+
+    .beneficios-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 6pt;
+      width: 8pt;
+      height: 8pt;
+      background: var(--verde-sucesso);
+      border-radius: 50%;
+    }
+
+    /* Planos */
+    .plans-section {
+      margin-bottom: 15pt;
+      page-break-before: always;
+    }
+
+    .plans-comparison {
+      background: white;
+      border: 1pt solid #e5e7eb;
+      border-radius: 10pt;
+      overflow: hidden;
+      page-break-inside: avoid;
+    }
+
+    .comparison-header {
+      background: var(--gradient-primary);
+      color: white;
+      padding: 15pt;
+      text-align: center;
+    }
+
+    .comparison-header h3 {
+      font-size: 14pt;
+      font-weight: bold;
+      margin-bottom: 4pt;
+    }
+
+    .plan-choice-notice {
+      background: #fff3cd;
+      padding: 12pt;
+      margin-bottom: 15pt;
+      border: 1pt solid #ffc107;
+      text-align: center;
+    }
+
+    .plan-choice-notice h4 {
+      color: #856404;
+      font-weight: bold;
+      margin-bottom: 4pt;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .table-header {
+      background: #f8f9fa;
+      padding: 12pt 8pt;
+      font-weight: bold;
+      text-align: center;
+      border-bottom: 2pt solid #e5e7eb;
+      vertical-align: middle;
+    }
+
+    .table-header.feature-col {
+      text-align: left;
+      background: #f8f9fa;
+      color: var(--azul-secundario);
+      width: 40%;
+    }
+
+    .plan-name {
+      font-size: 12pt;
+      color: var(--azul-primario);
+      margin-bottom: 6pt;
+      font-weight: bold;
+    }
+
+    .plan-price {
+      font-size: 9pt;
+      color: var(--cinza-medio);
+    }
+
+    .price-inicial {
+      font-size: 11pt;
+      font-weight: bold;
+      color: var(--cinza-escuro);
+      display: block;
+      margin-bottom: 2pt;
+    }
+
+    .recommended-badge {
+      background: var(--laranja-accent);
+      color: white;
+      padding: 3pt 8pt;
+      border-radius: 10pt;
+      font-size: 8pt;
+      font-weight: bold;
+      margin-top: 4pt;
+      display: inline-block;
+    }
+
+    .feature-name {
+      padding: 10pt;
+      border-bottom: 1pt solid #f0f0f0;
+      background: #f8f9fa;
+      font-weight: bold;
+      font-size: 10pt;
+    }
+
+    .feature-description {
+      font-size: 8pt;
+      color: var(--cinza-medio);
+      font-weight: normal;
+      margin-top: 3pt;
+      font-style: italic;
+    }
+
+    .feature-value {
+      padding: 10pt;
+      text-align: center;
+      border-bottom: 1pt solid #f0f0f0;
+      font-weight: bold;
+      font-size: 9pt;
+      vertical-align: middle;
+    }
+
+    .feature-included {
+      color: var(--verde-sucesso);
+    }
+
+    .feature-not-included {
+      color: #dc3545;
+    }
+
+    .feature-partial {
+      color: #ffc107;
+    }
+
+    .feature-highlight {
+      background: #fff3cd;
+      border-left: 3pt solid var(--laranja-accent);
+    }
+
+    /* SVG Icons inline */
+    .icon-svg {
+      width: 12pt;
+      height: 12pt;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 3pt;
+    }
+
+    .icon-check {
+      fill: var(--verde-sucesso);
+    }
+
+    .icon-times {
+      fill: #dc3545;
+    }
+
+    .icon-warning {
+      fill: #ffc107;
+    }
+
+    /* Investimento */
+    .investment-section {
+      background: #f8f9fa;
+      padding: 15pt;
+      border-radius: 8pt;
+      margin-bottom: 15pt;
+      border-left: 3pt solid var(--azul-primario);
+      page-break-inside: avoid;
+    }
+
+    .investment-grid {
+      display: table;
+      width: 100%;
+      table-layout: fixed;
+    }
+
+    .investment-row {
+      display: table-row;
+    }
+
+    .investment-item {
+      display: table-cell;
+      text-align: center;
+      padding: 12pt;
+      background: white;
+      border: 1pt solid #e5e7eb;
+      vertical-align: middle;
+      width: 33.33%;
+    }
+
+    .investment-item h4 {
+      color: var(--azul-primario);
+      margin-bottom: 6pt;
+      font-weight: bold;
+      font-size: 10pt;
+    }
+
+    .investment-value {
+      font-size: 12pt;
+      font-weight: bold;
+      color: var(--cinza-escuro);
+    }
+
+    /* Próximos passos */
+    .next-steps {
+      margin-bottom: 15pt;
+      page-break-inside: avoid;
+    }
+
+    .steps-list {
+      list-style: none;
+      counter-reset: step-counter;
+    }
+
+    .steps-list li {
+      counter-increment: step-counter;
+      padding: 10pt 15pt 10pt 40pt;
+      margin-bottom: 8pt;
+      background: white;
+      border: 1pt solid #e5e7eb;
+      border-radius: 6pt;
+      position: relative;
+      page-break-inside: avoid;
+    }
+
+    .steps-list li::before {
+      content: counter(step-counter);
+      position: absolute;
+      left: 10pt;
+      top: 10pt;
+      background: var(--azul-primario);
+      color: white;
+      width: 20pt;
+      height: 20pt;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 10pt;
+      line-height: 20pt;
+      text-align: center;
+    }
+
+    /* Contato */
+    .contact-section {
+      background: var(--gradient-primary);
+      color: white;
+      padding: 20pt;
+      border-radius: 8pt;
+      text-align: center;
+      margin-bottom: 15pt;
+      page-break-inside: avoid;
+    }
+
+    .contact-section h3 {
+      margin-bottom: 8pt;
+      font-size: 14pt;
+      font-weight: bold;
+    }
+
+    .contact-info {
+      display: table;
+      width: 100%;
+      margin-top: 10pt;
+    }
+
+    .contact-row {
+      display: table-row;
+    }
+
+    .contact-item {
+      display: table-cell;
+      text-align: center;
+      padding: 8pt;
+      width: 50%;
+    }
+
+    .validity {
+      text-align: center;
+      background: #fff3cd;
+      border: 1pt solid #ffc107;
+      color: #856404;
+      padding: 12pt;
+      border-radius: 6pt;
+      font-weight: bold;
+      margin-bottom: 15pt;
+    }
+
+    .actions {
+      position: fixed;
+      top: 15pt;
+      right: 15pt;
+      z-index: 1000;
+    }
+
+    .action-btn {
+      padding: 8pt 12pt;
+      border: none;
+      border-radius: 4pt;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 10pt;
+      margin-left: 5pt;
+      color: white;
+    }
+
+    .btn-pdf {
+      background: #dc3545;
+    }
+
+    .btn-email {
+      background: #28a745;
+    }
+
+    @media print {
+      .actions {
+        display: none !important;
+      }
+
+      body {
+        font-size: 10pt;
+      }
+
+      .section {
+        margin-bottom: 10pt;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .info-grid,
+      .diagnostico-grid,
+      .investment-grid {
+        display: block;
+      }
+
+      .info-item,
+      .diagnostico-item,
+      .investment-item {
+        display: block;
+        width: 100%;
+        margin-bottom: 8pt;
+      }
+
+      .comparison-table {
+        display: block;
+      }
+
+      .table-header,
+      .feature-name,
+      .feature-value {
+        display: block;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="actions">
+    <button class="action-btn btn-pdf" onclick="gerarPDF()">📄 Gerar PDF</button>
+    <button class="action-btn btn-email" onclick="enviarPorEmail()">✉️ Enviar Email</button>
+  </div>
+
+  <div class="header no-page-break">
+    <div class="header-content">
+      <div class="logo-section">
+        <div class="company-logo">
+          <img src="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/1%20-%20logotipo%203d/logotipo_vt_1200x1200.png" alt="LARtech Automation" class="logo-img">
+        </div>
+        <div class="header-text">
+          <h1>Proposta Comercial</h1>
+          <p>Soluções de Automação Inteligente com IA</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Informações do Cliente -->
+    <div class="section client-info">
+      <h2>Informações do Cliente</h2>
+      <div class="info-grid">
+        <div class="info-row">
+          <div class="info-item">
+            <span class="info-label">Empresa:</span>
+            <span class="info-value" id="cliente-empresa">-</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Contato:</span>
+            <span class="info-value" id="cliente-contato">-</span>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-item">
+            <span class="info-label">Telefone:</span>
+            <span class="info-value" id="cliente-telefone">-</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Email:</span>
+            <span class="info-value" id="cliente-email">-</span>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-item" style="width: 100%;" colspan="2">
+            <span class="info-label">Data da Proposta:</span>
+            <span class="info-value" id="data-proposta">-</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Resumo do Diagnóstico -->
+    <div class="section diagnostico-section">
+      <h2 class="section-title">Resumo do Diagnóstico Realizado</h2>
+      <div class="diagnostico-grid">
+        <div class="diagnostico-row">
+          <div class="diagnostico-item">
+            <h4>Volume de Atendimentos</h4>
+            <p id="diagnostico-volume">-</p>
+          </div>
+          <div class="diagnostico-item">
+            <h4>Canais Utilizados</h4>
+            <p id="diagnostico-canais">-</p>
+          </div>
+          <div class="diagnostico-item">
+            <h4>Plano Recomendado</h4>
+            <p id="diagnostico-recomendado">-</p>
+          </div>
+          <div class="diagnostico-item">
+            <h4>Número da Proposta</h4>
+            <p id="numero-proposta">-</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seção de Explicação das Funcionalidades -->
+    <div class="section explicacao-section">
+      <div class="explicacao-intro">
+        <h3>Entenda exatamente o que vamos fazer pela sua empresa</h3>
+        <p>Cada funcionalidade foi pensada para resolver problemas reais do seu dia a dia</p>
+      </div>
+
+      <div class="funcionalidades-explicadas">
+        <div class="funcionalidade-explicada">
+          <div class="func-header">
+            <div class="func-icon">
+              <img src="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/5%20-%20icones_3d/seguranca_pequeno.png" alt="Infraestrutura Personalizada" style="width: 24pt; height: 24pt;">
+            </div>
+            <div class="func-text-content">
+              <h4 class="func-title">Infraestrutura Personalizada</h4>
+              <p class="func-subtitle">Infraestrutura própria e segura para rodar todas as automações</p>
+            </div>
+          </div>
+          <div class="func-explicacao">
+            Para garantir estabilidade, segurança e performance, todas as automações que instalaremos (como a assistente virtual, central de atendimento e dashboards) serão hospedadas em um servidor virtual privado (VPS) de uso exclusivo da sua empresa.
+
+            <strong>O que é uma VPS e por que ela é importante?</strong><br>
+            Uma VPS (Servidor Virtual Privado) é um ambiente digital exclusivo onde suas aplicações funcionam com maior velocidade, controle e segurança.
+
+            Diferente de sistemas compartilhados, uma VPS garante que somente sua empresa tenha acesso à estrutura, com total liberdade para ajustes, escalabilidade e proteção dos dados. É como ter um computador superpotente na nuvem, 100% dedicado à sua automação.
+          </div>
+          <div class="func-beneficios">
+            <h5>
+              <svg class="icon-svg icon-check" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+              Benefícios para seu negócio:
+            </h5>
+            <ul class="beneficios-list">
+              <li>Ambiente exclusivo e protegido para suas automações</li>
+              <li>Maior estabilidade e velocidade no funcionamento dos sistemas</li>
+              <li>Atualizações e personalizações sob medida</li>
+              <li>Menor risco de falhas, quedas ou travamentos</li>
+              <li>Dados da sua empresa armazenados com segurança e privacidade</li>
+              <li>Suporte técnico direto para monitoramento e manutenção do servidor</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="funcionalidade-explicada">
+          <div class="func-header">
+            <div class="func-icon">
+              <img src="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/5%20-%20icones_3d/assistente_virtual_pequeno.png" alt="Assistente Virtual" style="width: 24pt; height: 24pt;">
+            </div>
+            <div class="func-text-content">
+              <h4 class="func-title">Assistente Virtual Inteligente</h4>
+              <p class="func-subtitle">Seu atendente virtual que nunca dorme</p>
+            </div>
+          </div>
+          <div class="func-explicacao">
+            É uma automação que simula uma conversa real via WhatsApp com seus clientes, funcionando como um atendente digital totalmente customizável para o perfil de atendimento da sua empresa. Com a capacidade de consultar uma base de conhecimento previamente elaborada, ela tira dúvidas técnicas de clientes, responde sobre a disponibilidade de produtos em estoque, coleta dados para agilizar atendimento e muito mais — E tudo de forma automática, humanizada.
+          </div>
+          <div class="func-beneficios">
+            <h5>
+              <svg class="icon-svg icon-check" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+              Benefícios para seu negócio:
+            </h5>
+            <ul class="beneficios-list">
+              <li>Nunca mais perca um cliente por falta de resposta rápida</li>
+              <li>Atendimento 24/7, mesmo nos finais de semana e feriados</li>
+              <li>Reduz a carga de trabalho da sua equipe</li>
+              <li>Respostas padronizadas, consistentes e profissionais</li>
+              <li>Atendimentos registrados: você acompanha tudo o que foi respondido</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="funcionalidade-explicada">
+          <div class="func-header">
+            <div class="func-icon">
+              <img src="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/5%20-%20icones_3d/integracaosistema_pequeno.png" alt="Central de Atendimento" style="width: 24pt; height: 24pt;">
+            </div>
+            <div class="func-text-content">
+              <h4 class="func-title">Central de Atendimento Unificada</h4>
+              <p class="func-subtitle">Todos os canais centralizados em uma única plataforma</p>
+            </div>
+          </div>
+          <div class="func-explicacao">
+            Vamos realizar a configuração de uma central de atendimento inteligente, onde você e sua equipe poderão responder todos os canais (WhatsApp, redes sociais e email) em um só lugar.
+
+            Além disso, todas as conversas ficam registradas e são da empresa, não do celular do vendedor. Isso traz segurança, organização e controle total sobre o atendimento da sua equipe.
+          </div>
+          <div class="func-beneficios">
+            <h5>
+              <svg class="icon-svg icon-check" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+              Benefícios para seu negócio:
+            </h5>
+            <ul class="beneficios-list">
+              <li>Organização total: todas as mensagens em um só lugar</li>
+              <li>Não perca mais mensagens importantes</li>
+              <li>Conversas pertencem à empresa, não ao vendedor</li>
+              <li>Controle total sobre o histórico de atendimentos</li>
+              <li>Equipe mais produtiva e com visão centralizada dos clientes</li>
+              <li>Interface moderna e fácil de usar</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="funcionalidade-explicada">
+          <div class="func-header">
+            <div class="func-icon">
+              <img src="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/5%20-%20icones_3d/engrenagem_pequena.png" alt="Base de Conhecimento" style="width: 24pt; height: 24pt;">
+            </div>
+            <div class="func-text-content">
+              <h4 class="func-title">Base de Conhecimento Personalizada</h4>
+              <p class="func-subtitle">Sua assistente virtual com informações específicas da sua empresa</p>
+            </div>
+          </div>
+          <div class="func-explicacao">
+            Criaremos uma base de conhecimento completa e personalizada para sua empresa, onde estruturaremos todas as informações técnicas dos seus produtos, políticas de atendimento, informações de estoque, preços, promoções e procedimentos internos. Sua assistente virtual poderá consultar essa base em tempo real para responder perguntas específicas dos clientes com precisão e agilidade.
+          </div>
+          <div class="func-beneficios">
+            <h5>
+              <svg class="icon-svg icon-check" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+              O que sua assistente poderá consultar:
+            </h5>
+            <ul class="beneficios-list">
+              <li>Informações técnicas completas dos produtos/serviços</li>
+              <li>Status de estoque atualizado em tempo real</li>
+              <li>Tabelas de preços e promoções vigentes</li>
+              <li>Políticas de garantia, troca e devolução</li>
+              <li>Procedimentos de entrega e prazos</li>
+              <li>Perguntas frequentes específicas do seu negócio</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="funcionalidade-explicada">
+          <div class="func-header">
+            <div class="func-icon">
+              <img src="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/5%20-%20icones_3d/analisedados_pequeno.png" alt="Dashboard de Métricas" style="width: 24pt; height: 24pt;">
+            </div>
+            <div class="func-text-content">
+              <h4 class="func-title">Dashboard Inteligente de Métricas</h4>
+              <p class="func-subtitle">Veja exatamente o que está acontecendo no seu negócio</p>
+            </div>
+          </div>
+          <div class="func-explicacao">
+            Você terá acesso a um painel completo onde poderá visualizar: quantos clientes foram atendidos hoje, quantos se tornaram vendas, qual horário tem mais movimento, quais produtos/serviços são mais procurados, qual atendente está convertendo mais, tempo médio de resposta, satisfação dos clientes e muito mais.
+          </div>
+          <div class="func-beneficios">
+            <h5>
+              <svg class="icon-svg icon-check" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+              O que você consegue visualizar:
+            </h5>
+            <ul class="beneficios-list">
+              <li>Número de conversas por dia/semana/mês</li>
+              <li>Taxa de conversão de leads em vendas</li>
+              <li>Horários de pico de atendimento</li>
+              <li>Performance individual de cada atendente</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comparação de Planos -->
+    <div class="section plans-section">
+      <h2 class="section-title">Conheça os Planos que Preparamos para Você</h2>
+
+      <div class="plan-choice-notice">
+        <h4>
+          <svg class="icon-svg" viewBox="0 0 24 24" fill="#856404" style="margin-right: 5pt;">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+          </svg>
+          Escolha o Plano Ideal para Sua Empresa
+        </h4>
+        <p>Elaboramos 3 propostas personalizadas com base no diagnóstico realizado. Cada plano oferece um nível diferente de recursos e automações para atender sua realidade atual e futura.</p>
+      </div>
+
+      <div class="plans-comparison">
+        <div class="comparison-header">
+          <h3>Compare nossos planos lado a lado</h3>
+          <p>Escolha o que melhor se adapta às necessidades da sua empresa</p>
+        </div>
+
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th class="table-header feature-col"><strong>Funcionalidades</strong></th>
+              <th class="table-header" id="bronze-header">
+                <div class="plan-name">BRONZE</div>
+                <div class="plan-price">
+                  <span class="price-inicial">R$ 4.900</span>
+                  <span>+ R$ 490/mês</span>
+                </div>
+              </th>
+              <th class="table-header" id="prata-header">
+                <div class="plan-name">PRATA</div>
+                <div class="plan-price">
+                  <span class="price-inicial">R$ 7.900</span>
+                  <span>+ R$ 790/mês</span>
+                </div>
+              </th>
+              <th class="table-header" id="ouro-header">
+                <div class="plan-name">OURO</div>
+                <div class="plan-price">
+                  <span class="price-inicial">R$ 11.900</span>
+                  <span>+ R$ 990/mês</span>
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="feature-name">
+                <strong>Assistente Virtual Inteligente</strong>
+                <div class="feature-description">Atendimento automatizado 24/7 no WhatsApp</div>
+              </td>
+              <td class="feature-value feature-included">
+                <svg class="icon-svg icon-check" viewBox="0 0 24 24">
+                  <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                </svg>
+                Básico
+              </td>
+              <td class="feature-value feature-included">
+                <svg class="icon-svg icon-check" viewBox="0 0 24 24">
+                  <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                </svg>
+                Avançado
+              </td>
+              <td class="feature-value feature-included">
+                <svg class="icon-svg icon-check" viewBox="0 0 24 24">
+                  <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                </svg>
+                Premium com IA
+              </td>
+            </tr>
+
+            <tr>
+              <td class="feature-name">
+                <strong>Central de Atendimento Unificada</strong>
+                <div class="feature-description">Todos os canais centralizados - conversas da empresa, não do vendedor</div>
+              </td>
+              <td class="feature-value feature-not-included">
+                <svg class="icon-svg icon-times" viewBox="0 0 24 24">
+                  <path d="M18.3 5.71L16.89 4.3L12 9.19L7.11 4.3L5.7 5.71L10.59 10.6L5.7 15.49L7.11 16.9L12 12.01L16.89 16.9L18.3 15.49L13.41 10.6L18.3 5.71Z"/>
+                </svg>
+                Não incluído
+              </td>
+              <td class="feature-value feature-included">
+                <svg class="icon-svg icon-check" viewBox="0 0 24 24">
+                  <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                </svg>
+                Básico
+              </td>
+              <td class="feature-value feature-included">
+                <svg class="icon-svg icon-check" viewBox="0 0 24 24">
+                  <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                </svg>
+                Completo
+              </td>
+            </tr>
+
+            <tr>
+              <td class="feature-name">
+                <strong>Dashboard de Métricas</strong>
+                <div class="feature-description">Relatórios detalhados de performance e conversões</div>
+              </td>
+              <td class="feature-value feature-not-included">
+                <svg class="icon-svg icon-times" viewBox="0 0 24 24">
+                  <path d="M18.3 5.71L16.89 4.3L12 9.19L7.11 4.3L5.7 5.71L10.59 10.6L5.7 15.49L7.11 16.9L12 12.01L16.89 16.9L18.3 15.49L13.41 10.6L18.3 5.71Z"/>
+                </svg>
+                Não incluído
+              </td>
+              <td class="feature-value feature-included">
+                <svg class="icon-svg icon-check" viewBox="0 0 24 24">
+                  <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                </svg>
+                Básico
+              </td>
+              <td class="feature-value feature-included">
+                <svg class="icon-svg icon-check" viewBox="0 0 24 24">
+                  <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                </svg>
+                Avançado
+              </td>
+            </tr>
+
+            <tr>
+              <td class="feature-name">
+                <strong>Captura de Leads</strong>
+                <div class="feature-description">Identificação e qualificação automática de potenciais clientes</div>
+              </td>
+              <td class="feature-value feature-partial">
+                <svg class="icon-svg icon-warning" viewBox="0 0 24 24">
+                  <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+                </svg>
+                Manual
+              </td>
+              <td class="feature-value feature-included">
+                <svg class="icon-svg icon-check" viewBox="0 0 24 24">
+                  <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                </svg>
+                Automático
+              </td>
+              <td class="feature-value feature-included">
+                <svg class="icon-svg icon-check" viewBox="0 0 24 24">
+                  <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                </svg>
+                IA Avançada
+              </td>
+            </tr>
+
+            <tr>
+              <td class="feature-name">
+                <strong>Follow-ups Automáticos</strong>
+                <div class="feature-description">Acompanhamento inteligente de clientes potenciais</div>
+              </td>
+              <td class="feature-value feature-not-included">
+                <svg class="icon-svg icon-times" viewBox="0 0 24 24">
+                  <path d="M18.3 5.71L16.89 4.3L12 9.19L7.11 4.3L5.7 5.71L10.59 10.6L5.7 15.49L7.11 16.9L12 12.01L16.89 16.9L18.3 15.49L13.41 10.6L18.3 5.71Z"/>
+                </svg>
+                Não incluído
+              </td>
+              <td class="feature-value feature-included">
+                <svg class="icon-svg icon-check" viewBox="0 0 24 24">
+                  <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                </svg>
+                Básico
+              </td>
+              <td class="feature-value feature-included">
+                <svg class="icon-svg icon-check" viewBox="0 0 24 24">
+                  <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                </svg>
+                Avançado
+              </td>
+            </tr>
+
+            <tr>
+              <td class="feature-name">
+                <strong>Suporte Técnico</strong>
+                <div class="feature-description">Atendimento e manutenção do sistema</div>
+              </td>
+              <td class="feature-value feature-included">WhatsApp</td>
+              <td class="feature-value feature-included">Prioritário</td>
+              <td class="feature-value feature-included">Dedicado</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Formas de Pagamento -->
+    <div class="section investment-section">
+      <h2 class="section-title">Formas de Pagamento</h2>
+      <div class="payment-intro" style="text-align: center; margin-bottom: 15pt; padding: 12pt; background: #f8f9fa; border-radius: 8pt; border-left: 3pt solid var(--azul-primario);">
+        <p style="margin: 0; font-size: 11pt; color: var(--cinza-escuro);">
+          <strong>Facilitamos o pagamento da implementação para você!</strong><br>
+          Escolha a opção que melhor se adapta ao seu fluxo de caixa.
+        </p>
+      </div>
+
+      <div class="investment-grid">
+        <div class="investment-row">
+          <div class="investment-item" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; border: 2pt solid #28a745;">
+            <h4 style="color: white;">
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="white" style="margin-right: 3pt;">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+              PIX À Vista
+            </h4>
+            <div class="investment-value" style="font-size: 14pt; color: white; margin-bottom: 6pt;" id="valor-pix-desconto">-</div>
+            <div style="background: rgba(255,255,255,0.2); padding: 6pt; border-radius: 4pt; margin-bottom: 8pt;">
+              <strong>5% de desconto</strong>
+            </div>
+            <p style="color: rgba(255,255,255,0.9); font-size: 9pt; margin: 0;">Pagamento único com desconto</p>
+          </div>
+
+          <div class="investment-item">
+            <h4>
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 3pt;">
+                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8h16v10zm-10-7h2v2h-2v-2zm4 0h2v2h-2v-2z"/>
+              </svg>
+              Cartão de Crédito
+            </h4>
+            <div class="investment-value" id="valor-cartao-parcelado">-</div>
+            <div style="background: #e8f5e8; padding: 6pt; border-radius: 4pt; margin-bottom: 8pt; color: var(--verde-sucesso); font-weight: bold; font-size: 9pt;">
+              Até 3x sem juros
+            </div>
+            <p>Flexibilidade no pagamento</p>
+          </div>
+
+          <div class="investment-item">
+            <h4>
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 3pt;">
+                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+              </svg>
+              Mensalidade
+            </h4>
+            <div class="investment-value" id="valor-mensalidade">-</div>
+            <p>Cobrança recorrente</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="background: #fff3cd; border: 1pt solid #ffc107; border-radius: 8pt; padding: 15pt; margin-top: 15pt; text-align: center;">
+        <h4 style="color: #856404; margin-bottom: 8pt; font-size: 11pt;">
+          <svg class="icon-svg" viewBox="0 0 24 24" fill="#856404" style="margin-right: 5pt;">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+          </svg>
+          Informações Importantes
+        </h4>
+        <div style="text-align: left; font-size: 10pt; color: #856404; line-height: 1.4;">
+          <p style="margin: 0 0 8pt 0;">
+            <svg class="icon-svg icon-check" viewBox="0 0 24 24" style="margin-right: 3pt;">
+              <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+            </svg>
+            <strong>Treinamento da equipe incluído</strong> no valor da implementação
+          </p>
+          <p style="margin: 0 0 8pt 0;">
+            <svg class="icon-svg icon-check" viewBox="0 0 24 24" style="margin-right: 3pt;">
+              <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+            </svg>
+            <strong>Suporte completo durante a implementação</strong> (Prazo negociável)
+          </p>
+          <p style="margin: 0;">
+            <svg class="icon-svg icon-check" viewBox="0 0 24 24" style="margin-right: 3pt;">
+              <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+            </svg>
+            <strong>Garantia de funcionamento</strong> conforme especificações acordadas
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Próximos Passos -->
+    <div class="section next-steps">
+      <h2 class="section-title">Próximos Passos</h2>
+      <ol class="steps-list">
+        <li><strong>Aprovação da Proposta:</strong> Análise e confirmação do plano escolhido</li>
+        <li><strong>Assinatura do Contrato:</strong> Formalização do acordo e condições</li>
+        <li><strong>Kickoff do Projeto:</strong> Reunião inicial para alinhamento técnico</li>
+        <li><strong>Desenvolvimento:</strong> Criação e configuração das automações</li>
+        <li><strong>Testes e Homologação:</strong> Validação com a equipe do cliente</li>
+        <li><strong>Go Live:</strong> Ativação das automações em produção</li>
+        <li><strong>Treinamento:</strong> Capacitação da equipe para uso da plataforma</li>
+      </ol>
+    </div>
+
+    <!-- Validade da Proposta -->
+    <div class="validity">
+      <svg class="icon-svg" viewBox="0 0 24 24" fill="#856404" style="margin-right: 5pt;">
+        <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
+        <path d="m12.5 7-1 0 0 6 4 0 0-1-3 0z"/>
+      </svg>
+      <strong>Proposta válida por 30 dias</strong> - Data limite: <span id="data-validade">-</span></div>
+
+    <!-- Contato -->
+    <div class="contact-section">
+      <h3>
+        <img src="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/1%20-%20logotipo%203d/logo_icone_512x512.png" alt="LARtech" style="width: 20pt; height: 20pt; margin-right: 5pt; vertical-align: middle;">
+        Entre em Contato
+      </h3>
+      <p>Estamos prontos para transformar o atendimento da sua empresa!</p>
+      <div class="contact-info">
+        <div class="contact-row">
+          <div class="contact-item">
+            <strong>
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="white" style="margin-right: 3pt;">
+                <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
+              </svg>
+              WhatsApp:
+            </strong><br>
+            (11) 99902-7653
+          </div>
+          <div class="contact-item">
+            <strong>
+              <svg class="icon-svg" viewBox="0 0 24 24" fill="white" style="margin-right: 3pt;">
+                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+              Email:
+            </strong><br>
+            lucas.ribeiro@lartechautomation.com
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Configuração dos planos (valores padrão)
+    let planosConfig = {
+      bronze: { inicial: 4900, mensal: 490 },
+      prata: { inicial: 7900, mensal: 790 },
+      ouro: { inicial: 11900, mensal: 990 }
+    };
+
+    // Carregar dados da URL
+    function carregarDadosDaURL() {
+      const params = new URLSearchParams(window.location.search);
+
+      // Preencher informações do cliente
+      document.getElementById('cliente-empresa').textContent = params.get('empresa') || '-';
+      document.getElementById('cliente-contato').textContent = params.get('contato') || '-';
+      document.getElementById('cliente-telefone').textContent = params.get('telefone') || '-';
+      document.getElementById('cliente-email').textContent = params.get('email') || '-';
+
+      // Data da proposta
+      const dataAtendimento = params.get('data_atendimento') || new Date().toISOString().split('T')[0];
+      document.getElementById('data-proposta').textContent = new Date(dataAtendimento).toLocaleDateString('pt-BR');
+
+      // Data de validade (30 dias a partir da data da proposta)
+      const dataValidade = new Date(dataAtendimento);
+      dataValidade.setDate(dataValidade.getDate() + 30);
+      document.getElementById('data-validade').textContent = dataValidade.toLocaleDateString('pt-BR');
+
+      // Diagnóstico
+      document.getElementById('diagnostico-volume').textContent = `${params.get('volume') || 0} atendimentos/dia`;
+      document.getElementById('diagnostico-canais').textContent = params.get('canais') || '-';
+
+      // Atualizar configuração dos planos com valores personalizados se disponíveis
+      const valoresPersonalizados = {
+        bronze: {
+          inicial: parseInt(params.get('bronze_implementacao')) || planosConfig.bronze.inicial,
+          mensal: parseInt(params.get('bronze_mensalidade')) || planosConfig.bronze.mensal
+        },
+        prata: {
+          inicial: parseInt(params.get('prata_implementacao')) || planosConfig.prata.inicial,
+          mensal: parseInt(params.get('prata_mensalidade')) || planosConfig.prata.mensal
+        },
+        ouro: {
+          inicial: parseInt(params.get('ouro_implementacao')) || planosConfig.ouro.inicial,
+          mensal: parseInt(params.get('ouro_mensalidade')) || planosConfig.ouro.mensal
+        }
+      };
+
+      // Atualizar configuração global
+      planosConfig = valoresPersonalizados;
+
+      // Atualizar valores na tabela de comparação
+      document.getElementById('bronze-header').innerHTML = `
+        <div class="plan-name">BRONZE</div>
+        <div class="plan-price">
+          <span class="price-inicial">R$ ${valoresPersonalizados.bronze.inicial.toLocaleString('pt-BR')}</span>
+          <span>+ R$ ${valoresPersonalizados.bronze.mensal.toLocaleString('pt-BR')}/mês</span>
+        </div>
+      `;
+
+      document.getElementById('prata-header').innerHTML = `
+        <div class="plan-name">PRATA</div>
+        <div class="plan-price">
+          <span class="price-inicial">R$ ${valoresPersonalizados.prata.inicial.toLocaleString('pt-BR')}</span>
+          <span>+ R$ ${valoresPersonalizados.prata.mensal.toLocaleString('pt-BR')}/mês</span>
+        </div>
+      `;
+
+      document.getElementById('ouro-header').innerHTML = `
+        <div class="plan-name">OURO</div>
+        <div class="plan-price">
+          <span class="price-inicial">R$ ${valoresPersonalizados.ouro.inicial.toLocaleString('pt-BR')}</span>
+          <span>+ R$ ${valoresPersonalizados.ouro.mensal.toLocaleString('pt-BR')}/mês</span>
+        </div>
+      `;
+
+      // Plano recomendado
+      const planoRecomendado = params.get('plano_recomendado') || 'prata';
+      document.getElementById('diagnostico-recomendado').textContent = planoRecomendado.toUpperCase();
+
+      // Número da proposta
+      document.getElementById('numero-proposta').textContent = params.get('numero_proposta') || `LA-${Date.now().toString().slice(-6)}`;
+
+      // Prazo de implementação baseado nos dados do orçamento
+      const prazoImplementacao = params.get('prazo_implementacao') || '15-30 dias';
+      if (document.getElementById('prazo-implementacao')) {
+        document.getElementById('prazo-implementacao').textContent = prazoImplementacao;
+      }
+
+      // Destacar plano recomendado na tabela de comparação
+      const headerRecomendado = document.getElementById(`${planoRecomendado}-header`);
+      if (headerRecomendado) {
+        headerRecomendado.innerHTML += '<div class="recommended-badge">⭐ RECOMENDADO</div>';
+        headerRecomendado.style.borderTop = '3pt solid var(--laranja-accent)';
+      }
+
+      // Atualizar valores do investimento com base no plano recomendado
+      const planoDados = planosConfig[planoRecomendado];
+      const valorOriginal = planoDados.inicial;
+      const valorComDesconto = Math.round(valorOriginal * 0.95); // 5% de desconto
+      const valorParcelado = Math.round(valorOriginal / 3); // 3x sem juros
+
+      document.getElementById('valor-pix-desconto').textContent = `R$ ${valorComDesconto.toLocaleString('pt-BR')}`;
+      document.getElementById('valor-cartao-parcelado').textContent = `3x R$ ${valorParcelado.toLocaleString('pt-BR')}`;
+      document.getElementById('valor-mensalidade').textContent = `R$ ${planoDados.mensal.toLocaleString('pt-BR')}`;
+
+      // Salvar dados globalmente para uso nas funções
+      window.dadosProposta = {
+        empresa: params.get('empresa'),
+        contato: params.get('contato'),
+        telefone: params.get('telefone'),
+        email: params.get('email'),
+        plano: planoRecomendado,
+        valor_inicial: planoDados.inicial,
+        valor_mensal: planoDados.mensal,
+        numero: params.get('numero_proposta')
+      };
+    }
+
+    function gerarPDF() {
+      // Ocultar botões para o PDF
+      document.querySelector('.actions').style.display = 'none';
+
+      // Definir nome do arquivo PDF automaticamente
+      const numeroProposta = document.getElementById('numero-proposta').textContent || 'LA-000000';
+      const nomeArquivo = `Proposta Comercial - LARtechAutomation - ${numeroProposta}`;
+
+      // Configurar o título do documento para o nome do arquivo
+      const tituloOriginal = document.title;
+      document.title = nomeArquivo;
+
+      // Usar window.print() que funciona bem no Replit
+      window.print();
+
+      // Restaurar título original e botões após impressão
+      setTimeout(() => {
+        document.title = tituloOriginal;
+        document.querySelector('.actions').style.display = 'block';
+      }, 1000);
+    }
+
+    function enviarPorEmail() {
+      const dados = window.dadosProposta;
+      if (!dados || !dados.email) {
+        alert('Email do cliente não encontrado. Verifique os dados.');
+      }
+
+      const assunto = `Proposta Comercial ${dados.numero} - ${dados.empresa}`;
+      const corpo = `Olá ${dados.contato},
+
+Conforme nossa conversa, segue nossa proposta comercial personalizada para ${dados.empresa}.
+
+RESUMO DA PROPOSTA:
+• Plano Recomendado: ${dados.plano.toUpperCase()}
+• Investimento Inicial: R$ ${dados.valor_inicial.toLocaleString('pt-BR')}
+• Mensalidade: R$ ${dados.valor_mensal.toLocaleString('pt-BR')}
+• Proposta: ${dados.numero}
+
+Para visualizar a proposta completa, acesse: ${window.location.href}
+
+Explicamos detalhadamente cada funcionalidade para que você compreenda exatamente como nossa automação irá beneficiar seu negócio.
+
+Estou à disposição para esclarecer qualquer dúvida e agendar uma reunião para apresentação detalhada.
+
+Atenciosamente,
+LARtech Automation
+📱 WhatsApp: (11) 99902-7653
+✉️ lucas.ribeiro@lartechautomation.com`;
+
+      // Abrir cliente de email
+      const mailtoLink = `mailto:${dados.email}?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpo)}`;
+      window.location.href = mailtoLink;
+    }
+
+    // Carregar dados quando a página carrega
+    window.addEventListener('load', function() {
+        carregarDadosDaURL();
+
+        // Adiciona os campos de qualificação das partes ao window.dadosOrcamento
+        if (window.dadosOrcamento) {
+            const params = new URLSearchParams(window.location.search);
+            window.dadosOrcamento.cnpj_cpf = params.get('cnpj_cpf') || '';
+            window.dadosOrcamento.endereco = params.get('endereco') || '';
+            window.dadosOrcamento.representante_legal = params.get('representante_legal') || '';
+        }
+    });
+
+    // Listen for messages from the parent window (where the form is)
+    window.addEventListener('message', function(event) {
+        // Check the origin to prevent cross-site scripting attacks
+        if (event.origin !== window.location.origin) return;
+
+        if (event.data.type === 'dadosOrcamento') {
+            window.dadosOrcamento = event.data.payload;
+
+            // Update URL parameters with form data for proposal generation
+            const url = new URL(window.location.href);
+            url.searchParams.set('empresa', window.dadosOrcamento.empresa);
+            url.searchParams.set('contato', window.dadosOrcamento.contato);
+            url.searchParams.set('telefone', window.dadosOrcamento.telefone);
+            url.searchParams.set('email', window.dadosOrcamento.email || '');
+            url.searchParams.set('cnpj_cpf', window.dadosOrcamento.cnpj_cpf || '');
+            url.searchParams.set('endereco', window.dadosOrcamento.endereco || '');
+            url.searchParams.set('representante_legal', window.dadosOrcamento.representante_legal || '');
+            url.searchParams.set('volume', window.dadosOrcamento.volume);
+            url.searchParams.set('canais', window.dadosOrcamento.canais);
+            url.searchParams.set('plano_recomendado', window.dadosOrcamento.plano_recomendado);
+            url.searchParams.set('numero_proposta', window.dadosOrcamento.numero_proposta);
+            url.searchParams.set('prazo_implementacao', window.dadosOrcamento.prazo_implementacao);
+
+            // Update implementation and monthly values based on selected plan
+            url.searchParams.set('bronze_implementacao', window.dadosOrcamento.bronze_implementacao);
+            url.searchParams.set('bronze_mensalidade', window.dadosOrcamento.bronze_mensalidade);
+            url.searchParams.set('prata_implementacao', window.dadosOrcamento.prata_implementacao);
+            url.searchParams.set('prata_mensalidade', window.dadosOrcamento.prata_mensalidade);
+            url.searchParams.set('ouro_implementacao', window.dadosOrcamento.ouro_implementacao);
+            url.searchParams.set('ouro_mensalidade', window.dadosOrcamento.ouro_mensalidade);
+
+            window.location.href = url.href; // Reload the page with updated parameters
+        }
+    });
+  </script>
+</body>
+</html>

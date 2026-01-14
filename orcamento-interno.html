@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Orçamentos - LARtech Automation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #00A6FB 0%, #0582CA 100%);
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .header p {
+      font-size: 1.1em;
+      opacity: 0.9;
+    }
+
+    .form-container {
+      padding: 40px;
+    }
+
+    .section {
+      margin-bottom: 40px;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 30px;
+      background: #fafafa;
+    }
+
+    .section-title {
+      font-size: 1.5em;
+      color: #1f2937;
+      margin-bottom: 20px;
+      font-weight: 600;
+      border-bottom: 2px solid #00A6FB;
+      padding-bottom: 10px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      font-weight: 500;
+      color: #374151;
+      margin-bottom: 8px;
+    }
+
+    .form-input, .form-select, .form-textarea {
+      padding: 12px;
+      border: 2px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border-color 0.2s;
+    }
+
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      outline: none;
+      border-color: #00A6FB;
+    }
+
+    .form-textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .checkbox-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .checkbox-item input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: #00A6FB;
+    }
+
+    .auto-suggest {
+      background: #e1f5fe;
+      border: 1px solid #00A6FB;
+      border-radius: 8px;
+      padding: 15px;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .generate-btn {
+      background: linear-gradient(135deg, #00A6FB 0%, #0582CA 100%);
+      color: white;
+      border: none;
+      padding: 20px 40px;
+      font-size: 1.2em;
+      border-radius: 12px;
+      cursor: pointer;
+      width: 100%;
+      font-weight: 600;
+      transition: transform 0.2s;
+    }
+
+    .generate-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .plans-preview {
+      display: none;
+      margin-top: 40px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .plan-card {
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 25px;
+      text-align: center;
+      position: relative;
+      background: white;
+    }
+
+    .plan-card.recommended {
+      border-color: #FF6B35;
+      transform: scale(1.05);
+    }
+
+    .plan-card.recommended::before {
+      content: "⭐ RECOMENDADO";
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #FF6B35;
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .plan-title {
+      font-size: 1.5em;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 15px;
+    }
+
+    .plan-price {
+      font-size: 1.3em;
+      color: #00A6FB;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .plan-features {
+      text-align: left;
+      list-style: none;
+    }
+
+    .plan-features li {
+      padding: 8px 0;
+      border-bottom: 1px solid #f3f4f6;
+    }
+
+    .plan-features li:before {
+      content: "✅ ";
+      margin-right: 8px;
+    }
+
+    .actions {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+
+    .action-btn {
+      padding: 15px 25px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      font-size: 16px;
+    }
+
+    .btn-primary {
+      background: #00A6FB;
+      color: white;
+    }
+
+    .btn-secondary {
+      background: #6b7280;
+      color: white;
+    }
+
+    .btn-success {
+      background: #10b981;
+      color: white;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .plans-customization {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+
+    .plan-customization-card {
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 25px;
+      background: white;
+      transition: all 0.3s ease;
+    }
+
+    .plan-customization-card:hover {
+      border-color: #00A6FB;
+      box-shadow: 0 8px 25px rgba(0, 166, 251, 0.1);
+    }
+
+    .plan-header {
+      text-align: center;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #f3f4f6;
+    }
+
+    .plan-header h3 {
+      color: #00A6FB;
+      font-size: 1.4em;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .plan-subtitle {
+      color: #6b7280;
+      font-size: 0.9em;
+      font-style: italic;
+    }
+
+    .resources-section h4 {
+      color: #374151;
+      font-size: 1.1em;
+      margin: 20px 0 12px 0;
+      font-weight: 600;
+      border-left: 4px solid #00A6FB;
+      padding-left: 12px;
+    }
+
+    .vps-info {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 10px 0;
+    }
+
+    .vps-info .checkbox-item label {
+      font-size: 0.9em;
+      color: #374151;
+    }
+
+    .customization-actions {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 30px;
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 12px;
+    }
+
+    .resource-count {
+      display: inline-block;
+      background: #00A6FB;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 0.8em;
+      font-weight: 600;
+      margin-left: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .plans-preview {
+        grid-template-columns: 1fr;
+      }
+
+      .plan-card.recommended {
+        transform: none;
+      }
+
+      .plans-customization {
+        grid-template-columns: 1fr;
+      }
+
+      .customization-actions {
+        flex-direction: column;
+      }
+    }
+
+    .company-logo {
+      height: 80px;
+      background: white;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      position: relative;
+      overflow: hidden;
+      padding: 12px;
+    }
+
+    .company-logo::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--gradient-primary);
+      opacity: 0.05;
+    }
+
+    .company-logo .logo-img {
+      height: 100%;
+      width: auto;
+      max-width: 200px;
+      object-fit: contain;
+      position: relative;
+      z-index: 2;
+    }
+
+    .company-logo .logo-text {
+      font-family: 'Outfit', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--azul-primario);
+      position: relative;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="header-content">
+        <div class="company-logo">
+          <img src="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/1%20-%20logotipo%203d/logo_horizontal_1920x1080.png" alt="LARtech Automation" class="logo-img">
+        </div>
+        <div class="header-text">
+          <h1>Sistema de Orçamento Interno</h1>
+          <p>Ferramenta para geração de propostas personalizadas</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-container">
+      <form id="orcamento-form">
+        <!-- Seção 1: Dados do Cliente -->
+        <div class="section">
+          <h2 class="section-title">📋 Dados do Cliente</h2>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="empresa">Nome da Empresa *</label>
+              <input type="text" id="empresa" name="empresa" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label for="contato">Nome do Contato *</label>
+              <input type="text" id="contato" name="contato" class="form-input" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="telefone">Telefone *</label>
+              <input type="tel" id="telefone" name="telefone" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" class="form-input" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="cnpj_cpf">CNPJ/CPF *</label>
+              <input type="text" id="cnpj_cpf" name="cnpj_cpf" class="form-input" required placeholder="XX.XXX.XXX/0001-XX ou XXX.XXX.XXX-XX">
+            </div>
+            <div class="form-group">
+              <label for="segmento">Segmento de Atuação</label>
+              <input type="text" id="segmento" name="segmento" class="form-input">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="endereco">Endereço Completo *</label>
+              <input type="text" id="endereco" name="endereco" class="form-input" required placeholder="Rua, número, bairro, cidade - UF, CEP">
+            </div>
+            <div class="form-group">
+              <label for="representante_legal">Representante Legal</label>
+              <input type="text" id="representante_legal" name="representante_legal" class="form-input" placeholder="Nome completo do responsável legal">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="data_atendimento">Data do Atendimento</label>
+              <input type="date" id="data_atendimento" name="data_atendimento" class="form-input">
+            </div>
+          </div></div>
+          <div class="form-group">
+            <label for="observacoes_atendimento">Observações do Atendimento</label>
+            <textarea id="observacoes_atendimento" name="observacoes_atendimento" class="form-textarea" placeholder="Principais pontos discutidos durante o atendimento..."></textarea>
+          </div>
+        </div>
+
+        <!-- Seção 2: Diagnóstico Atual -->
+        <div class="section">
+          <h2 class="section-title">📊 Diagnóstico Atual do Cliente</h2>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="volume_atendimentos">Volume médio de atendimentos/dia *</label>
+              <input type="number" id="volume_atendimentos" name="volume_atendimentos" class="form-input" min="1" required>
+              <div id="sugestao_volume" class="auto-suggest" style="display: none;"></div>
+            </div>
+            <div class="form-group">
+              <label for="equipe_quantidade">Quantas pessoas na equipe de atendimento</label>
+              <input type="number" id="equipe_quantidade" name="equipe_quantidade" class="form-input" min="1">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Canais de atendimento atuais</label>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <input type="checkbox" id="canal_whatsapp" name="canais" value="WhatsApp">
+                <label for="canal_whatsapp">WhatsApp</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="canal_instagram" name="canais" value="Instagram">
+                <label for="canal_instagram">Instagram</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="canal_facebook" name="canais" value="Facebook">
+                <label for="canal_facebook">Facebook</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="canal_email" name="canais" value="Email">
+                <label for="canal_email">Email</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="canal_site" name="canais" value="Site">
+                <label for="canal_site">Site</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="canal_telefone" name="canais" value="Telefone">
+                <label for="canal_telefone">Telefone</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="horario_funcionamento">Horário de funcionamento</label>
+              <select id="horario_funcionamento" name="horario_funcionamento" class="form-select">
+                <option value="">Selecione...</option>
+                <option value="comercial">Horário comercial (8h-18h)</option>
+                <option value="estendido">Horário estendido (8h-22h)</option>
+                <option value="24h">24 horas</option>
+                <option value="personalizado">Personalizado</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="crm_atual">CRM atual (se houver)</label>
+              <input type="text" id="crm_atual" name="crm_atual" class="form-input" placeholder="Ex: RD Station, HubSpot, etc.">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="automacoes_atuais">Ferramentas de automação atuais</label>
+            <textarea id="automacoes_atuais" name="automacoes_atuais" class="form-textarea" placeholder="Descreva as automações que já utilizam..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="integracoes_necessarias">Integrações necessárias</label>
+            <textarea id="integracoes_necessarias" name="integracoes_necessarias" class="form-textarea" placeholder="Sistemas que precisam ser integrados..."></textarea>
+          </div>
+        </div>
+
+        <!-- Seção 3: Necessidades Identificadas -->
+        <div class="section">
+          <h2 class="section-title">🎯 Necessidades Identificadas</h2>
+
+          <div class="form-group">
+            <label>Principais dores relatadas</label>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <input type="checkbox" id="dor_demora" name="dores" value="Demora no atendimento">
+                <label for="dor_demora">Demora no atendimento</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="dor_leads" name="dores" value="Perda de leads">
+                <label for="dor_leads">Perda de leads</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="dor_historico" name="dores" value="Falta de histórico">
+                <label for="dor_historico">Falta de histórico</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="dor_sobrecarga" name="dores" value="Equipe sobrecarregada">
+                <label for="dor_sobrecarga">Equipe sobrecarregada</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="dor_relatorios" name="dores" value="Falta de relatórios">
+                <label for="dor_relatorios">Falta de relatórios</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="dor_horario" name="dores" value="Atendimento fora do horário">
+                <label for="dor_horario">Atendimento fora do horário</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Objetivos principais</label>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <input type="checkbox" id="obj_tempo" name="objetivos" value="Reduzir tempo de resposta">
+                <label for="obj_tempo">Reduzir tempo de resposta</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="obj_conversao" name="objetivos" value="Aumentar conversão">
+                <label for="obj_conversao">Aumentar conversão</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="obj_experiencia" name="objetivos" value="Melhorar experiência do cliente">
+                <label for="obj_experiencia">Melhorar experiência do cliente</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="obj_custos" name="objetivos" value="Reduzir custos">
+                <label for="obj_custos">Reduzir custos</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="obj_escalar" name="objetivos" value="Escalar atendimento">
+                <label for="obj_escalar">Escalar atendimento</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="urgencia">Urgência do projeto</label>
+              <select id="urgencia" name="urgencia" class="form-select">
+                <option value="">Selecione...</option>
+                <option value="imediata">Imediata</option>
+                <option value="30dias">30 dias</option>
+                <option value="60dias">60 dias</option>
+                <option value="90dias">90+ dias</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="prazo_implementacao">Prazo estimado de implementação</label>
+              <select id="prazo_implementacao" name="prazo_implementacao" class="form-select">
+                <option value="15-30 dias">15-30 dias</option>
+                <option value="30-45 dias">30-45 dias</option>
+                <option value="45-60 dias">45-60 dias</option>
+                <option value="60-90 dias">60-90 dias</option>
+                <option value="Personalizado">Personalizado</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seção 4: Personalização dos Planos -->
+        <div class="section">
+          <h2 class="section-title">🎯 Personalização dos Planos de Automação</h2>
+          <p style="color: #666; margin-bottom: 30px;">Personalize os valores e recursos que serão incluídos em cada plano:</p>
+
+          <div class="plans-customization">
+            <!-- Plano Bronze -->
+            <div class="plan-customization-card">
+              <div class="plan-header">
+                <h3>🥉 BRONZE <span class="resource-count" id="bronze-counter">4</span></h3>
+                <div class="plan-subtitle">Ideal para projetos simples ou em fase inicial</div>
+
+                <!-- Campos de valores personalizados -->
+                <div class="form-row" style="margin-top: 15px;">
+                  <div class="form-group">
+                    <label for="bronze_implementacao">Valor Implementação (R$)</label>
+                    <input type="number" id="bronze_implementacao" name="bronze_implementacao" class="form-input" value="4900" min="0">
+                  </div>
+                  <div class="form-group">
+                    <label for="bronze_mensalidade">Mensalidade (R$)</label>
+                    <input type="number" id="bronze_mensalidade" name="bronze_mensalidade" class="form-input" value="490" min="0">
+                  </div>
+                </div>
+              </div>
+
+              <div class="resources-section">
+                <h4>💻 Softwares Utilizados</h4>
+                <div class="checkbox-group">
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="bronze_n8n" name="bronze_recursos" value="n8n">
+                    <label for="bronze_n8n">n8n</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="bronze_chatwoot" name="bronze_recursos" value="Chatwoot">
+                    <label for="bronze_chatwoot">Chatwoot</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="bronze_evolution" name="bronze_recursos" value="Evolution API" checked>
+                    <label for="bronze_evolution">Evolution API</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="bronze_whatsapp_oficial" name="bronze_recursos" value="API Oficial WhatsApp">
+                    <label for="bronze_whatsapp_oficial">API Oficial WhatsApp</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="bronze_supabase" name="bronze_recursos" value="Supabase">
+                    <label for="bronze_supabase">Supabase</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="bronze_google_sheets" name="bronze_recursos" value="Google Sheets">
+                    <label for="bronze_google_sheets">Google Sheets</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="bronze_google_drive" name="bronze_recursos" value="Google Drive">
+                    <label for="bronze_google_drive">Google Drive</label>
+                  </div>
+                </div>
+
+                <h4>🛠️ Automações Implementadas</h4>
+                <div class="checkbox-group">
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="bronze_assistente" name="bronze_recursos" value="Assistente de atendimento personalizada" checked>
+                    <label for="bronze_assistente">Assistente de atendimento personalizada</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="bronze_base_conhecimento" name="bronze_recursos" value="Base de conhecimento estática" checked>
+                    <label for="bronze_base_conhecimento">Base de conhecimento estática</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="bronze_base_dinamica" name="bronze_recursos" value="Base de conhecimento dinâmica">
+                    <label for="bronze_base_dinamica">Base de conhecimento dinâmica</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="bronze_resposta_24h" name="bronze_recursos" value="Resposta automática 24/7" checked>
+                    <label for="bronze_resposta_24h">Resposta automática 24/7</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="bronze_omnichannel_basico" name="bronze_recursos" value="Central Omnichannel básica">
+                    <label for="bronze_omnichannel_basico">Central Omnichannel básica</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="bronze_omnichannel_completa" name="bronze_recursos" value="Central Omnichannel completa">
+                    <label for="bronze_omnichannel_completa">Central Omnichannel completa</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="bronze_dashboard_basico" name="bronze_recursos" value="Dashboard básico de atendimento">
+                    <label for="bronze_dashboard_basico">Dashboard básico de atendimento</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="bronze_dashboard_avancado" name="bronze_recursos" value="Dashboard avançado customizado">
+                    <label for="bronze_dashboard_avancado">Dashboard avançado customizado</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="bronze_registro_contatos" name="bronze_recursos" value="Registro automático de contatos">
+                    <label for="bronze_registro_contatos">Registro automático de contatos</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="bronze_crm_leads" name="bronze_recursos" value="Gestão completa de CRM e leads">
+                    <label for="bronze_crm_leads">Gestão completa de CRM e leads</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="bronze_followup" name="bronze_recursos" value="Automação de follow-ups">
+                    <label for="bronze_followup">Automação de follow-ups</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="bronze_integracao_parcial" name="bronze_recursos" value="Integração parcial com sistemas">
+                    <label for="bronze_integracao_parcial">Integração parcial com sistemas</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="bronze_integracao_total" name="bronze_recursos" value="Integração total com sistemas">
+                    <label for="bronze_integracao_total">Integração total com sistemas</label>
+                  </div>
+                </div>
+
+                <h4>🔧 Infraestrutura VPS</h4>
+                <div class="vps-info">
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="bronze_vps_basica" name="bronze_recursos" value="VPS básica dedicada" checked>
+                    <label for="bronze_vps_basica">VPS básica: 2 vCPU, 8GB RAM, 100GB NVMe, 8TB bandwidth</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="bronze_vps_intermediaria" name="bronze_recursos" value="VPS intermediária dedicada">
+                    <label for="bronze_vps_intermediaria">VPS intermediária: 4 vCPU, 16GB RAM, 200GB NVMe, 16TB bandwidth</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="bronze_vps_premium" name="bronze_recursos" value="VPS premium dedicada">
+                    <label for="bronze_vps_premium">VPS premium: 8 vCPU, 32GB RAM, 400GB NVMe, 32TB bandwidth</label>
+                  </div>
+                </div>
+
+                <h4>🤝 Suporte</h4>
+                <div class="checkbox-group">
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="bronze_suporte_email" name="bronze_recursos" value="Suporte via email">
+                    <label for="bronze_suporte_email">Suporte via email</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="bronze_suporte_whatsapp" name="bronze_recursos" value="Suporte técnico via WhatsApp" checked>
+                    <label for="bronze_suporte_whatsapp">Suporte técnico via WhatsApp</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="bronze_suporte_prioritario" name="bronze_recursos" value="Suporte prioritário">
+                    <label for="bronze_suporte_prioritario">Suporte prioritário</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="bronze_suporte_dedicado" name="bronze_recursos" value="Suporte dedicado com horas técnicas">
+                    <label for="bronze_suporte_dedicado">Suportededicado com horas técnicas</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="bronze_treinamento" name="bronze_recursos" value="Treinamentos inclusos">
+                    <label for="bronze_treinamento">Treinamentos inclusos</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Plano Prata -->
+            <div class="plan-customization-card">
+              <div class="plan-header">
+                <h3>🥈 PRATA <span class="resource-count" id="prata-counter">6</span></h3>
+                <div class="plan-subtitle">Recomendado para projetos em crescimento</div>
+
+                <!-- Campos de valores personalizados -->
+                <div class="form-row" style="margin-top: 15px;">
+                  <div class="form-group">
+                    <label for="prata_implementacao">Valor Implementação (R$)</label>
+                    <input type="number" id="prata_implementacao" name="prata_implementacao" class="form-input" value="7900" min="0">
+                  </div>
+                  <div class="form-group">
+                    <label for="prata_mensalidade">Mensalidade (R$)</label>
+                    <input type="number" id="prata_mensalidade" name="prata_mensalidade" class="form-input" value="790" min="0">
+                  </div>
+                </div>
+              </div>
+
+              <div class="resources-section">
+                <h4>💻 Softwares Utilizados</h4>
+                <div class="checkbox-group">
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="prata_n8n" name="prata_recursos" value="n8n" checked>
+                    <label for="prata_n8n">n8n</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="prata_chatwoot" name="prata_recursos" value="Chatwoot" checked>
+                    <label for="prata_chatwoot">Chatwoot</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="prata_evolution" name="prata_recursos" value="Evolution API" checked>
+                    <label for="prata_evolution">Evolution API</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="prata_whatsapp_oficial" name="prata_recursos" value="API Oficial WhatsApp">
+                    <label for="prata_whatsapp_oficial">API Oficial WhatsApp</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="prata_supabase" name="prata_recursos" value="Supabase" checked>
+                    <label for="prata_supabase">Supabase</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="prata_google_sheets" name="prata_recursos" value="Google Sheets">
+                    <label for="prata_google_sheets">Google Sheets</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="prata_google_drive" name="prata_recursos" value="Google Drive">
+                    <label for="prata_google_drive">Google Drive</label>
+                  </div>
+                </div>
+
+                <h4>🛠️ Automações Implementadas</h4>
+                <div class="checkbox-group">
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="prata_assistente" name="prata_recursos" value="Assistente de atendimento personalizada">
+                    <label for="prata_assistente">Assistente de atendimento personalizada</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="prata_base_conhecimento_estatica" name="prata_recursos" value="Base de conhecimento estática">
+                    <label for="prata_base_conhecimento_estatica">Base de conhecimento estática</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="prata_base_conhecimento" name="prata_recursos" value="Base de conhecimento dinâmica (atualização semanal)" checked>
+                    <label for="prata_base_conhecimento">Base de conhecimento dinâmica (atualização semanal)</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="prata_resposta_24h" name="prata_recursos" value="Resposta automática 24/7" checked>
+                    <label for="prata_resposta_24h">Resposta automática 24/7</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="prata_omnichannel" name="prata_recursos" value="Central Omnichannel básica (Chatwoot)" checked>
+                    <label for="prata_omnichannel">Central Omnichannel básica (Chatwoot)</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="prata_omnichannel_completa" name="prata_recursos" value="Central Omnichannel completa">
+                    <label for="prata_omnichannel_completa">Central Omnichannel completa</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="prata_dashboard" name="prata_recursos" value="Dashboard básico de atendimento" checked>
+                    <label for="prata_dashboard">Dashboard básico de atendimento</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="prata_dashboard_avancado" name="prata_recursos" value="Dashboard avançado customizado">
+                    <label for="prata_dashboard_avancado">Dashboard avançado customizado</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="prata_registro" name="prata_recursos" value="Registro automático de contatos" checked>
+                    <label for="prata_registro">Registro automático de contatos</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="prata_crm_leads" name="prata_recursos" value="Gestão completa de CRM e leads">
+                    <label for="prata_crm_leads">Gestão completa de CRM e leads</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="prata_followup" name="prata_recursos" value="Automação de follow-ups">
+                    <label for="prata_followup">Automação de follow-ups</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="prata_integracao_parcial" name="prata_recursos" value="Integração parcial com sistemas" checked>
+                    <label for="prata_integracao_parcial">Integração parcial com sistemas</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="prata_integracao_total" name="prata_recursos" value="Integração total com sistemas">
+                    <label for="prata_integracao_total">Integração total com sistemas</label>
+                  </div>
+                </div>
+
+                <h4>🔧 Infraestrutura VPS</h4>
+                <div class="vps-info">
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="prata_vps_basica" name="prata_recursos" value="VPS básica dedicada">
+                    <label for="prata_vps_basica">VPS básica: 2 vCPU, 8GB RAM, 100GB NVMe, 8TB bandwidth</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="prata_vps_intermediaria" name="prata_recursos" value="VPS intermediária dedicada" checked>
+                    <label for="prata_vps_intermediaria">VPS intermediária: 4 vCPU, 16GB RAM, 200GB NVMe, 16TB bandwidth</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="prata_vps_premium" name="prata_recursos" value="VPS premium dedicada">
+                    <label for="prata_vps_premium">VPS premium: 8 vCPU, 32GB RAM, 400GB NVMe, 32TB bandwidth</label>
+                  </div>
+                </div>
+
+                <h4>🤝 Suporte</h4>
+                <div class="checkbox-group">
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="prata_suporte_email" name="prata_recursos" value="Suporte via email">
+                    <label for="prata_suporte_email">Suporte via email</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="prata_suporte_whatsapp" name="prata_recursos" value="Suporte técnico via WhatsApp">
+                    <label for="prata_suporte_whatsapp">Suporte técnico via WhatsApp</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="prata_suporte_prioritario" name="prata_recursos" value="Suporte prioritário" checked>
+                    <label for="prata_suporte_prioritario">Suporte prioritário</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="prata_suporte_dedicado" name="prata_recursos" value="Suporte dedicado com horas técnicas">
+                    <label for="prata_suporte_dedicado">Suporte dedicado com horas técnicas</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="prata_treinamento" name="prata_recursos" value="Treinamentos inclusos">
+                    <label for="prata_treinamento">Treinamentos inclusos</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Plano Ouro -->
+            <div class="plan-customization-card">
+              <div class="plan-header">
+                <h3>🥇 OURO <span class="resource-count" id="ouro-counter">9</span></h3>
+                <div class="plan-subtitle">Para projetos de alta complexidade e grande volume</div>
+
+                <!-- Campos de valores personalizados -->
+                <div class="form-row" style="margin-top: 15px;">
+                  <div class="form-group">
+                    <label for="ouro_implementacao">Valor Implementação (R$)</label>
+                    <input type="number" id="ouro_implementacao" name="ouro_implementacao" class="form-input" value="11900" min="0">
+                  </div>
+                  <div class="form-group">
+                    <label for="ouro_mensalidade">Mensalidade (R$)</label>
+                    <input type="number" id="ouro_mensalidade" name="ouro_mensalidade" class="form-input" value="990" min="0">
+                  </div>
+                </div>
+              </div>
+
+              <div class="resources-section">
+                <h4>💻 Softwares Utilizados</h4>
+                <div class="checkbox-group">
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="ouro_n8n" name="ouro_recursos" value="n8n" checked>
+                    <label for="ouro_n8n">n8n</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="ouro_chatwoot" name="ouro_recursos" value="Chatwoot" checked>
+                    <label for="ouro_chatwoot">Chatwoot</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="ouro_evolution" name="ouro_recursos" value="Evolution API">
+                    <label for="ouro_evolution">Evolution API</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="ouro_whatsapp_oficial" name="ouro_recursos" value="API Oficial WhatsApp" checked>
+                    <label for="ouro_whatsapp_oficial">API Oficial WhatsApp</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="ouro_supabase" name="ouro_recursos" value="Supabase" checked>
+                    <label for="ouro_supabase">Supabase</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="ouro_google_sheets" name="ouro_recursos" value="Google Sheets" checked>
+                    <label for="ouro_google_sheets">Google Sheets</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="ouro_google_drive" name="ouro_recursos" value="Google Drive" checked>
+                    <label for="ouro_google_drive">Google Drive</label>
+                  </div>
+                </div>
+
+                <h4>🛠️ Automações Implementadas</h4>
+                <div class="checkbox-group">
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="ouro_assistente" name="ouro_recursos" value="Assistente de atendimento personalizada">
+                    <label for="ouro_assistente">Assistente de atendimento personalizada</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="ouro_base_conhecimento_estatica" name="ouro_recursos" value="Base de conhecimento estática">
+                    <label for="ouro_base_conhecimento_estatica">Base de conhecimento estática</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="ouro_base_conhecimento_semanal" name="ouro_recursos" value="Base de conhecimento dinâmica (atualização semanal)">
+                    <label for="ouro_base_conhecimento_semanal">Base de conhecimento dinâmica (atualização semanal)</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="ouro_base_conhecimento" name="ouro_recursos" value="Base de conhecimento dinâmica (atualização diária)" checked>
+                    <label for="ouro_base_conhecimento">Base de conhecimento dinâmica (atualização diária)</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="ouro_resposta_24h" name="ouro_recursos" value="Resposta automática 24/7" checked>
+                    <label for="ouro_resposta_24h">Resposta automática 24/7</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="ouro_omnichannel_basico" name="ouro_recursos" value="Central Omnichannel básica">
+                    <label for="ouro_omnichannel_basico">Central Omnichannel básica</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="ouro_omnichannel" name="ouro_recursos" value="Central Omnichannel completa" checked>
+                    <label for="ouro_omnichannel">Central Omnichannel completa</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="ouro_dashboard_basico" name="ouro_recursos" value="Dashboard básico de atendimento">
+                    <label for="ouro_dashboard_basico">Dashboard básico de atendimento</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="ouro_dashboard" name="ouro_recursos" value="Dashboard avançado customizado" checked>
+                    <label for="ouro_dashboard">Dashboard avançado customizado</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="ouro_registro_contatos" name="ouro_recursos" value="Registro automático de contatos" checked>
+                    <label for="ouro_registro_contatos">Registro automático de contatos</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="ouro_crm" name="ouro_recursos" value="Gestão completa de CRM e leads" checked>
+                    <label for="ouro_crm">Gestão completa de CRM e leads</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="ouro_followup" name="ouro_recursos" value="Automação de follow-ups" checked>
+                    <label for="ouro_followup">Automação de follow-ups</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="ouro_integracao_parcial" name="ouro_recursos" value="Integração parcial com sistemas">
+                    <label for="ouro_integracao_parcial">Integração parcial com sistemas</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="ouro_integracao_total" name="ouro_recursos" value="Integração total com sistemas" checked>
+                    <label for="ouro_integracao_total">Integração total com sistemas</label>
+                  </div>
+                </div>
+
+                <h4>🔧 Infraestrutura VPS</h4>
+                <div class="vps-info">
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="ouro_vps_basica" name="ouro_recursos" value="VPS básica dedicada">
+                    <label for="ouro_vps_basica">VPS básica: 2 vCPU, 8GB RAM, 100GB NVMe, 8TB bandwidth</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="ouro_vps_intermediaria" name="ouro_recursos" value="VPS intermediária dedicada">
+                    <label for="ouro_vps_intermediaria">VPS intermediária: 4 vCPU, 16GB RAM, 200GB NVMe, 16TB bandwidth</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="ouro_vps_premium" name="ouro_recursos" value="VPS premium dedicada" checked>
+                    <label for="ouro_vps_premium">VPS premium: 8 vCPU, 32GB RAM, 400GB NVMe, 32TB bandwidth</label>
+                  </div>
+                </div>
+
+                <h4>🤝 Suporte</h4>
+                <div class="checkbox-group">
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="ouro_suporte_email" name="ouro_recursos" value="Suporte via email">
+                    <label for="ouro_suporte_email">Suporte via email</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="ouro_suporte_whatsapp" name="ouro_recursos" value="Suporte técnico via WhatsApp">
+                    <label for="ouro_suporte_whatsapp">Suporte técnico via WhatsApp</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="ouro_suporte_prioritario" name="ouro_recursos" value="Suporte prioritário">
+                    <label for="ouro_suporte_prioritario">Suporte prioritário</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="ouro_suporte_dedicado" name="ouro_recursos" value="Suporte dedicado com horas técnicas" checked>
+                    <label for="ouro_suporte_dedicado">Suporte dedicado com horas técnicas</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input type="checkbox" id="ouro_treinamento" name="ouro_recursos" value="Treinamentos inclusos" checked>
+                    <label for="ouro_treinamento">Treinamentos inclusos</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="customization-actions">
+            <button type="button" class="action-btn btn-secondary" onclick="marcarTodosRecursos()">✅ Marcar Todos</button>
+            <button type="button" class="action-btn btn-secondary" onclick="desmarcarTodosRecursos()">❌ Desmarcar Todos</button>
+            <button type="button" class="action-btn btn-primary" onclick="aplicarPersonalizacao()">🔄 Aplicar Personalização</button>
+          </div>
+        </div>
+
+        <!-- Seção 5: Observações Comerciais -->
+        <div class="section">
+          <h2 class="section-title">💼 Observações Comerciais</h2>
+          <div class="form-group">
+            <label for="observacoes_comerciais">Observações sobre negociação</label>
+            <textarea id="observacoes_comerciais" name="observacoes_comerciais" class="form-textarea" placeholder="Notas sobre desconto, condições especiais, prazo de pagamento, etc."></textarea>
+          </div>
+        </div>
+
+        <button type="button" class="generate-btn" onclick="gerarOrcamentos()">
+          🚀 Gerar Orçamentos Personalizados
+        </button>
+      </form>
+
+      <!-- Preview dos Planos -->
+      <div id="plans-preview" class="plans-preview">
+        <div class="plan-card" id="plan-bronze">
+          <h3 class="plan-title">BRONZE</h3>
+          <div class="plan-price">R$ 4.900 + R$ 490/mês</div>
+          <ul class="plan-features" id="features-bronze">
+            <li>Assistente de atendimento personalizada</li>
+            <li>Base de conhecimento estática</li>
+            <li>VPS básica (2 vCPU, 8GB RAM)</li>
+            <li>Suporte técnico via WhatsApp</li>
+          </ul>
+        </div>
+
+        <div class="plan-card recommended" id="plan-prata">
+          <h3 class="plan-title">PRATA</h3>
+          <div class="plan-price">R$ 7.900 + R$ 790/mês</div>
+          <ul class="plan-features" id="features-prata">
+            <li>Assistente com integração parcial</li>
+            <li>Base de conhecimento dinâmica (semanal)</li>
+            <li>Central Omnichannel básica</li>
+            <li>Dashboard básico de atendimento</li>
+            <li>VPS intermediária (4 vCPU, 16GB RAM)</li>
+          </ul>
+        </div>
+
+        <div class="plan-card" id="plan-ouro">
+          <h3 class="plan-title">OURO</h3>
+          <div class="plan-price">R$ 11.900 + R$ 990/mês</div>
+          <ul class="plan-features" id="features-ouro">
+            <li>Assistente com integração total</li>
+            <li>Base de conhecimento dinâmica (diária)</li>
+            <li>Central Omnichannel completa</li>
+            <li>Dashboard avançado customizado</li>
+            <li>Gestão completa de CRM e leads</li>
+            <li>VPS premium (8 vCPU, 32GB RAM)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="actions" id="actions" style="display: none;">
+        <button class="action-btn btn-primary" onclick="gerarProposta()">📄 Gerar Proposta PDF</button>
+        <button class="action-btn btn-success" onclick="enviarEmail()">📧 Enviar por Email</button>
+        <button class="action-btn btn-secondary" onclick="salvarHistorico()">💾 Salvar no Histórico</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Configuração dos planos base
+    const planosBase = {
+      bronze: {
+        nome: "BRONZE",
+        inicial: 4900,
+        mensal: 490,
+        recursos: [
+          "Assistente de atendimento personalizada",
+          "Base de conhecimento estática",
+          "VPS básica (2 vCPU, 8GB RAM, 100GB NVMe)",
+          "Suporte técnico via WhatsApp",
+          "Resposta automática 24/7",
+          "Fluxo de atendimento fixo"
+        ]
+      },
+      prata: {
+        nome: "PRATA",
+        inicial: 7900,
+        mensal: 790,
+        recursos: [
+          "Assistente com integração parcial",
+          "Base de conhecimento dinâmica (atualização semanal)",
+          "Central Omnichannel básica (Chatwoot)",
+          "Dashboard básico de atendimento",
+          "VPS intermediária (4 vCPU, 16GB RAM, 200GB NVMe)",
+          "Suporte prioritário",
+          "Registro automático de contatos",
+          "Histórico básico de conversas"
+        ]
+      },
+      ouro: {
+        nome: "OURO",
+        inicial: 11900,
+        mensal: 990,
+        recursos: [
+          "Assistente com integração total",
+          "Base de conhecimento dinâmica (atualização diária)",
+          "Central Omnichannel completa",
+          "Dashboard avançado customizado",
+          "Gestão completa de CRM e leads",
+          "VPS premium (8 vCPU, 32GB RAM, 400GB NVMe)",
+          "Suporte dedicado com horas técnicas",
+          "Integração com API WhatsApp Business",
+          "Automação de follow-ups"
+        ]
+      }
+    };
+
+    // Sugestão automática baseada no volume
+    document.getElementById('volume_atendimentos').addEventListener('input', function() {
+      const volume = parseInt(this.value);
+      const sugestaoDiv = document.getElementById('sugestao_volume');
+
+      if (volume > 0) {
+        let planoSugerido = 'Bronze';
+        if (volume > 200) {
+          planoSugerido = 'Ouro';
+        } else if (volume > 50) {
+          planoSugerido = 'Prata';
+        }
+
+        sugestaoDiv.innerHTML = `💡 <strong>Sugestão automática:</strong> Para ${volume} atendimentos/dia, recomendamos o plano <strong>${planoSugerido}</strong>`;
+        sugestaoDiv.style.display = 'block';
+      } else {
+        sugestaoDiv.style.display = 'none';
+      }
+    });
+
+    function gerarOrcamentos() {
+      // Coletar dados do formulário
+      const formData = new FormData(document.getElementById('orcamento-form'));
+      const dados = Object.fromEntries(formData.entries());
+
+      // Coletar checkboxes
+      dados.canais = Array.from(document.querySelectorAll('input[name="canais"]:checked')).map(cb => cb.value);
+      dados.dores = Array.from(document.querySelectorAll('input[name="dores"]:checked')).map(cb => cb.value);
+      dados.objetivos = Array.from(document.querySelectorAll('input[name="objetivos"]:checked')).map(cb => cb.value);
+
+      // Coletar recursos personalizados de cada plano
+      dados.recursos_bronze = Array.from(document.querySelectorAll('input[name="bronze_recursos"]:checked')).map(cb => cb.value);
+      dados.recursos_prata = Array.from(document.querySelectorAll('input[name="prata_recursos"]:checked')).map(cb => cb.value);
+      dados.recursos_ouro = Array.from(document.querySelectorAll('input[name="ouro_recursos"]:checked')).map(cb => cb.value);
+
+      // Validar campos obrigatórios
+      if (!dados.empresa || !dados.contato || !dados.telefone || !dados.email || !dados.cnpj_cpf || !dados.endereco || !dados.volume_atendimentos) {
+        alert('Por favor, preencha todos os campos obrigatórios marcados com *');
+        return;
+      }
+
+      // Calcular plano recomendado
+      const volume = parseInt(dados.volume_atendimentos);
+      const numCanais = dados.canais.length;
+      const equipe = parseInt(dados.equipe_quantidade || 1);
+
+      let planoRecomendado = 'bronze';
+      if (volume > 200 || numCanais > 4 || equipe > 5) {
+        planoRecomendado = 'ouro';
+      } else if (volume > 50 || numCanais > 2 || equipe > 2) {
+        planoRecomendado = 'prata';
+      }
+
+      // Personalizar recursos baseado nas necessidades
+      personalizarPlanos(dados, planoRecomendado);
+
+      // Mostrar preview dos planos
+      document.getElementById('plans-preview').style.display = 'grid';
+      document.getElementById('actions').style.display = 'grid';
+
+      // Destacar plano recomendado
+      document.querySelectorAll('.plan-card').forEach(card => {
+        card.classList.remove('recommended');
+      });
+      document.getElementById(`plan-${planoRecomendado}`).classList.add('recommended');
+
+      // Salvar dados para geração da proposta
+      window.dadosOrcamento = { ...dados, planoRecomendado };
+
+      // Scroll para os planos
+      document.getElementById('plans-preview').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function personalizarPlanos(dados, recomendado) {
+      // Coletar recursos selecionados para cada plano
+      const recursosSelecionados = {
+        bronze: Array.from(document.querySelectorAll('input[name="bronze_recursos"]:checked')).map(cb => cb.value),
+        prata: Array.from(document.querySelectorAll('input[name="prata_recursos"]:checked')).map(cb => cb.value),
+        ouro: Array.from(document.querySelectorAll('input[name="ouro_recursos"]:checked')).map(cb => cb.value)
+      };
+
+      // Obter valores personalizados dos planos
+      const valoresPersonalizados = {
+        bronze: {
+          implementacao: parseInt(document.getElementById('bronze_implementacao').value) || 4900,
+          mensalidade: parseInt(document.getElementById('bronze_mensalidade').value) || 490
+        },
+        prata: {
+          implementacao: parseInt(document.getElementById('prata_implementacao').value) || 7900,
+          mensalidade: parseInt(document.getElementById('prata_mensalidade').value) || 790
+        },
+        ouro: {
+          implementacao: parseInt(document.getElementById('ouro_implementacao').value) || 11900,
+          mensalidade: parseInt(document.getElementById('ouro_mensalidade').value) || 990
+        }
+      };
+
+      // Atualizar valores nos cards de preview
+      Object.keys(valoresPersonalizados).forEach(plano => {
+        const planCard = document.getElementById(`plan-${plano}`);
+        if (planCard) {
+          const priceElement = planCard.querySelector('.plan-price');
+          if (priceElement) {
+            const impl = valoresPersonalizados[plano].implementacao;
+            const mens = valoresPersonalizados[plano].mensalidade;
+            priceElement.textContent = `R$ ${impl.toLocaleString('pt-BR')} + R$ ${mens.toLocaleString('pt-BR')}/mês`;
+          }
+        }
+      });
+
+      // Adicionar recursos específicos baseado nas necessidades identificadas
+      Object.keys(recursosSelecionados).forEach(plano => {
+        let recursos = [...recursosSelecionados[plano]];
+
+        // Adicionar recursos automáticos baseado nas dores e objetivos
+        if (dados.dores.includes('Atendimento fora do horário') && !recursos.includes('Resposta automática 24/7')) {
+          recursos.push('Atendimento automatizado 24/7');
+        }
+
+        if (dados.objetivos.includes('Aumentar conversão') && plano !== 'bronze') {
+          recursos.push('Qualificação automática de leads');
+        }
+
+        if (dados.integracoes_necessarias && plano !== 'bronze') {
+          recursos.push(`Integração customizada: ${dados.integracoes_necessarias.substring(0, 30)}...`);
+        }
+
+        // Atualizar a visualização do preview
+        const featuresElement = document.getElementById(`features-${plano}`);
+        if (featuresElement) {
+          featuresElement.innerHTML = recursos.map(recurso => `<li>${recurso}</li>`).join('');
+        }
+
+        // Atualizar contadores de recursos
+        atualizarContadoresRecursos();
+      });
+
+      // Salvar recursos e valores personalizados globalmente
+      window.recursosPersonalizados = recursosSelecionados;
+      window.valoresPersonalizados = valoresPersonalizados;
+    }
+
+    function atualizarContadoresRecursos() {
+      ['bronze', 'prata', 'ouro'].forEach(plano => {
+        const recursos = document.querySelectorAll(`input[name="${plano}_recursos"]:checked`);
+        const counter = document.getElementById(`${plano}-counter`);
+        if (counter) {
+          counter.textContent = recursos.length;
+        }
+      });
+    }
+
+    function marcarTodosRecursos() {
+      document.querySelectorAll('.plans-customization input[type="checkbox"]').forEach(cb => {
+        cb.checked = true;
+      });
+      atualizarContadoresRecursos();
+    }
+
+    function desmarcarTodosRecursos() {
+      document.querySelectorAll('.plans-customization input[type="checkbox"]').forEach(cb => {
+        cb.checked = false;
+      });
+      atualizarContadoresRecursos();
+    }
+
+    function aplicarPersonalizacao() {
+      // Aplicar personalização em tempo real
+      if (window.dadosOrcamento) {
+        personalizarPlanos(window.dadosOrcamento, window.dadosOrcamento.planoRecomendado);
+        alert('✅ Personalização aplicada! Os recursos selecionados serão incluídos na proposta.');
+      } else {
+        alert('⚠️ Gere primeiro os orçamentos para aplicar a personalização.');
+      }
+    }
+
+    function gerarProposta() {
+      if (!window.dadosOrcamento) {
+        alert('Erro: Dados do orçamento não encontrados. Gere novamente os orçamentos.');
+        return;
+      }
+
+      // Obter valores personalizados dos planos
+      const valoresPersonalizados = {
+        bronze: {
+          implementacao: document.getElementById('bronze_implementacao').value,
+          mensalidade: document.getElementById('bronze_mensalidade').value
+        },
+        prata: {
+          implementacao: document.getElementById('prata_implementacao').value,
+          mensalidade: document.getElementById('prata_mensalidade').value
+        },
+        ouro: {
+          implementacao: document.getElementById('ouro_implementacao').value,
+mensalidade: document.getElementById('ouro_mensalidade').value
+        }
+      };
+
+      // Coletar recursos selecionados para cada plano
+      const recursosPersonalizados = {
+        bronze: Array.from(document.querySelectorAll('input[name="bronze_recursos"]:checked')).map(cb => cb.value),
+        prata: Array.from(document.querySelectorAll('input[name="prata_recursos"]:checked')).map(cb => cb.value),
+        ouro: Array.from(document.querySelectorAll('input[name="ouro_recursos"]:checked')).map(cb => cb.value)
+      };
+
+      // Criar URL da proposta com parâmetros
+      const params = new URLSearchParams({
+        empresa: window.dadosOrcamento.empresa,
+        contato: window.dadosOrcamento.contato,
+        telefone: window.dadosOrcamento.telefone,
+        email: window.dadosOrcamento.email || '',
+        volume: window.dadosOrcamento.volume_atendimentos,
+        plano_recomendado: window.dadosOrcamento.planoRecomendado,
+        canais: window.dadosOrcamento.canais.join(', '),
+        data_atendimento: window.dadosOrcamento.data_atendimento || new Date().toISOString().split('T')[0],
+        numero_proposta: `LA-${Date.now().toString().slice(-6)}`,
+        prazo_implementacao: window.dadosOrcamento.prazo_implementacao || '15-30 dias',
+        // Adicionar valores personalizados
+        bronze_implementacao: valoresPersonalizados.bronze.implementacao,
+        bronze_mensalidade: valoresPersonalizados.bronze.mensalidade,
+        prata_implementacao: valoresPersonalizados.prata.implementacao,
+        prata_mensalidade: valoresPersonalizados.prata.mensalidade,
+        ouro_implementacao: valoresPersonalizados.ouro.implementacao,
+        ouro_mensalidade: valoresPersonalizados.ouro.mensalidade,
+        // Adicionar recursos personalizados
+        recursos_bronze: JSON.stringify(recursosPersonalizados.bronze),
+        recursos_prata: JSON.stringify(recursosPersonalizados.prata),
+        recursos_ouro: JSON.stringify(recursosPersonalizados.ouro)
+      });
+
+      const propostaUrl = `proposta-personalizada.html?${params.toString()}`;
+      window.open(propostaUrl, '_blank');
+    }
+
+    function enviarEmail() {
+      const dados = window.dadosOrcamento;
+      if (!dados || !dados.email) {
+        alert('Email do cliente não informado. Adicione o email e gere novamente.');
+        return;
+      }
+
+      // Simular envio de email (integrar com seu sistema de email)
+      const assunto = `Proposta Comercial - ${dados.empresa}`;
+      const corpo = `Olá ${dados.contato},
+
+Conforme conversamos, segue nossa proposta comercial personalizada para ${dados.empresa}.
+
+Baseado no seu volume de ${dados.volume_atendimentos} atendimentos/dia, recomendamos o plano ${planosBase[dados.planoRecomendado].nome.toUpperCase()}.
+
+Estou à disposição para esclarecer qualquer dúvida.
+
+Atenciosamente,
+LARtech Automation`;
+
+      // Abrir cliente de email
+      window.location.href = `mailto:${dados.email}?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpo)}`;
+
+      alert('Email preparado! Complete o envio no seu cliente de email.');
+    }
+
+    function salvarHistorico() {
+      const dados = window.dadosOrcamento;
+      if (!dados) {
+        alert('Erro: Dados do orçamento não encontrados.');
+        return;
+      }
+
+      // Salvar no localStorage (em produção, usar banco de dados)
+      const historico = JSON.parse(localStorage.getItem('historico_orcamentos') || '[]');
+
+      const novoOrcamento = {
+        id: Date.now(),
+        data: new Date().toISOString(),
+        empresa: dados.empresa,
+        contato: dados.contato,
+        telefone: dados.telefone,
+        plano_recomendado: dados.planoRecomendado,
+        valor_inicial: planosBase[dados.planoRecomendado].inicial,
+        valor_mensal: planosBase[dados.planoRecomendado].mensal,
+        status: 'Enviado',
+        dados_completos: dados
+      };
+
+      historico.push(novoOrcamento);
+      localStorage.setItem('historico_orcamentos', JSON.stringify(historico));
+
+      alert('✅ Orçamento salvo no histórico com sucesso!');
+    }
+
+    // Auto-save durante preenchimento
+    setInterval(() => {
+      const formData = new FormData(document.getElementById('orcamento-form'));
+      const dados = Object.fromEntries(formData.entries());
+      localStorage.setItem('orcamento_rascunho', JSON.stringify(dados));
+    }, 30000); // Salva a cada 30 segundos
+
+    // Event listeners para atualização automática dos contadores e valores
+    document.addEventListener('change', function(e) {
+      if (e.target.type === 'checkbox' && e.target.name.includes('_recursos')) {
+        atualizarContadoresRecursos();
+      }
+    });
+
+    // Event listeners para atualização dos valores em tempo real
+    ['bronze', 'prata', 'ouro'].forEach(plano => {
+      const implInput = document.getElementById(`${plano}_implementacao`);
+      const mensInput = document.getElementById(`${plano}_mensalidade`);
+
+      if (implInput) {
+        implInput.addEventListener('input', function() {
+          atualizarValoresPreview();
+        });
+      }
+
+      if (mensInput) {
+        mensInput.addEventListener('input', function() {
+          atualizarValoresPreview();
+        });
+      }
+    });
+
+    function atualizarValoresPreview() {
+      ['bronze', 'prata', 'ouro'].forEach(plano => {
+        const impl = parseInt(document.getElementById(`${plano}_implementacao`).value) || 0;
+        const mens = parseInt(document.getElementById(`${plano}_mensalidade`).value) || 0;
+
+        const planCard = document.getElementById(`plan-${plano}`);
+        if (planCard) {
+          const priceElement = planCard.querySelector('.plan-price');
+          if (priceElement) {
+            priceElement.textContent = `R$ ${impl.toLocaleString('pt-BR')} + R$ ${mens.toLocaleString('pt-BR')}/mês`;
+          }
+        }
+      });
+    }
+
+    // Carregar rascunho ao abrir a página
+    window.addEventListener('load', () => {
+      const rascunho = localStorage.getItem('orcamento_rascunho');
+      if (rascunho) {
+        const dados = JSON.parse(rascunho);
+        Object.keys(dados).forEach(key => {
+          const element = document.getElementById(key);
+          if (element) {
+            element.value = dados[key];
+          }
+        });
+      }
+
+      // Definir data atual como padrão
+      if (!document.getElementById('data_atendimento').value) {
+        document.getElementById('data_atendimento').value = new Date().toISOString().split('T')[0];
+      }
+
+      // Inicializar contadores
+      atualizarContadoresRecursos();
+    });
+  </script>
+</body>
+</html>

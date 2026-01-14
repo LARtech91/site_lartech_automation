@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Diagnóstico de Automação - LARtech Automation</title>
+
+  <!-- Meta Tags SEO -->
+  <meta name="description" content="Solicite um diagnóstico personalizado de automação para sua empresa. Análise completa das suas necessidades de IA e automação.">
+  <meta name="keywords" content="diagnóstico automação, análise IA, consultoria automação, chatbot empresarial">
+  <meta name="author" content="LARtech Automation">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Diagnóstico de Automação - LARtech Automation">
+  <meta property="og:description" content="Obtenha uma análise personalizada das necessidades de automação da sua empresa">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lartechautomation.com/diagnostico">
+
+  <!-- Preload recursos críticos -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" as="style">
+  <link rel="preload" href="style.css" as="style">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/1%20-%20logotipo%203d/logotipo_vt_1200x1200.png">
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="script.js" defer></script>
+  <script src="advanced-features.js" defer></script>
+  <script src="supabase-integration.js" defer type="module"></script>
+
+  <style>
+    /* Estilos para o formulário multi-etapas */
+    .diagnostico-hero {
+      background: linear-gradient(135deg, var(--azul-primario) 0%, var(--azul-secundario) 100%);
+      color: white;
+      padding: 100px 0 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .diagnostico-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/4%20-%20padroes_elementos_graficos/padraoprincioal_1920x1080.png');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.1;
+      z-index: 1;
+    }
+
+    .diagnostico-hero .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .diagnostico-hero h1 {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .diagnostico-hero p {
+      font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+      margin-bottom: 2rem;
+      opacity: 0.95;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .diagnostico-form-section {
+      padding: 80px 0;
+      background-color: var(--branco-gelo);
+    }
+
+    .form-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(0, 166, 251, 0.1);
+      position: relative;
+    }
+
+    /* Barra de Progresso */
+    .progress-bar-container {
+      margin-bottom: 40px;
+      padding: 0 20px;
+    }
+
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .progress-text {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--azul-secundario);
+    }
+
+    .progress-percentage {
+      font-size: 14px;
+      color: var(--cinza-medio);
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background-color: #f0f0f0;
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--azul-primario), var(--azul-secundario));
+      border-radius: 4px;
+      transition: width 0.4s ease;
+      width: 0%;
+    }
+
+    /* Indicadores de Etapas */
+    .step-indicators {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 40px;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .step-indicator {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      opacity: 0.4;
+      transition: all 0.3s ease;
+      min-width: 80px;
+    }
+
+    .step-indicator.active {
+      opacity: 1;
+    }
+
+    .step-indicator.completed {
+      opacity: 1;
+    }
+
+    .step-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .step-indicator.active .step-circle {
+      background: var(--azul-primario);
+      color: white;
+      animation: pulse 2s infinite;
+    }
+
+    .step-indicator.completed .step-circle {
+      background: var(--laranja-accent);
+      color: white;
+    }
+
+    .step-indicator.completed .step-circle::after {
+      content: '✓';
+      position: absolute;
+      font-size: 16px;
+    }
+
+    .step-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--cinza-escuro);
+      max-width: 80px;
+      line-height: 1.2;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(0, 166, 251, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(0, 166, 251, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 166, 251, 0); }
+    }
+
+    /* Etapas do Formulário */
+    .form-step {
+      display: none;
+      opacity: 0;
+      transform: translateX(20px);
+      transition: all 0.4s ease;
+    }
+
+    .form-step.active {
+      display: block;
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .form-step.prev {
+      transform: translateX(-20px);
+    }
+
+    .step-header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid var(--branco-gelo);
+    }
+
+    .step-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--azul-secundario);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .step-icon {
+      width: 50px;
+      height: 50px;
+    }
+
+    .step-subtitle {
+      font-size: 16px;
+      color: var(--cinza-medio);
+      font-weight: 400;
+    }
+
+    /* Campos do formulário */
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+      margin-bottom: 25px;
+    }
+
+    .form-row.full-width {
+      grid-template-columns: 1fr;
+    }
+
+    .form-group {
+      position: relative;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      color: var(--cinza-escuro);
+      margin-bottom: 8px;
+      font-size: 1rem;
+      position: relative;
+    }
+
+    .form-group label.required::after {
+      content: ' *';
+      color: #e74c3c;
+      font-weight: bold;
+    }
+
+    .form-input,
+    .form-textarea,
+    .form-select {
+      width: 100%;
+      padding: 16px 20px;
+      border: 2px solid #e9ecef;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-family: 'Montserrat', sans-serif;
+      transition: all 0.3s ease;
+      background-color: #fafbfc;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus,
+    .form-select:focus {
+      outline: none;
+      border-color: var(--azul-primario);
+      background-color: white;
+      box-shadow: 0 0 0 3px rgba(0, 166, 251, 0.1);
+      transform: translateY(-1px);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+      background-position: right 12px center;
+      background-repeat: no-repeat;
+      background-size: 16px;
+      padding-right: 50px;
+    }
+
+    /* Opções de radio e checkbox melhoradas */
+    .radio-group, .checkbox-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .radio-option, .checkbox-option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      padding: 16px 20px;
+      border: 2px solid #e9ecef;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      background-color: #fafbfc;
+      position: relative;
+    }
+
+    .radio-option:hover, .checkbox-option:hover {
+      border-color: var(--azul-primario);
+      background-color: rgba(0, 166, 251, 0.05);
+      transform: translateY(-1px);
+    }
+
+    .radio-option input, .checkbox-option input {
+      margin: 0;
+      accent-color: var(--azul-primario);
+      transform: scale(1.2);
+    }
+
+    .radio-option:has(input:checked), .checkbox-option:has(input:checked) {
+      border-color: var(--azul-primario);
+      background-color: rgba(0, 166, 251, 0.1);
+      box-shadow: 0 4px 12px rgba(0, 166, 251, 0.15);
+    }
+
+    /* Navegação entre etapas */
+    .step-navigation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 40px;
+      padding-top: 30px;
+      border-top: 2px solid var(--branco-gelo);
+    }
+
+    .nav-button {
+      padding: 14px 28px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-height: 50px;
+      min-width: 120px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-prev {
+      background: transparent;
+      color: var(--cinza-medio);
+      border: 2px solid #e0e0e0;
+    }
+
+    .btn-prev:hover:not(:disabled) {
+      background: #f5f5f5;
+      border-color: var(--cinza-medio);
+      color: var(--cinza-escuro);
+    }
+
+    .btn-next, .btn-submit {
+      background: linear-gradient(135deg, var(--azul-primario), var(--azul-secundario));
+      color: white;
+      box-shadow: 0 4px 12px rgba(0, 166, 251, 0.3);
+    }
+
+    .btn-next:hover, .btn-submit:hover {
+      background: linear-gradient(135deg, var(--azul-secundario), var(--azul-primario));
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 166, 251, 0.4);
+    }
+
+    .nav-button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    .step-info {
+      text-align: center;
+      color: var(--cinza-medio);
+      font-size: 14px;
+    }
+
+    /* Campos condicionais */
+    .conditional-field {
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      margin-top: 0;
+    }
+
+    .conditional-field.show {
+      opacity: 1;
+      max-height: 1000px;
+      margin-top: 20px;
+    }
+
+    /* Mensagem de sucesso */
+    .form-success {
+      background: linear-gradient(145deg, #d4edda 0%, #ffffff 100%);
+      color: #155724;
+      padding: 30px;
+      border-radius: 16px;
+      margin-bottom: 30px;
+      border: 2px solid #c3e6cb;
+      display: none;
+      text-align: center;
+      font-weight: 600;
+      box-shadow: 0 8px 25px rgba(21, 87, 36, 0.1);
+    }
+
+    .form-success.show {
+      display: block;
+      animation: slideDown 0.5s ease;
+    }
+
+    .form-success h3 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: #155724;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .diagnostico-hero {
+        padding: 80px 0 60px;
+      }
+
+      .diagnostico-form-section {
+        padding: 60px 0;
+      }
+
+      .form-container {
+        margin: 0 15px;
+        padding: 25px 20px;
+        border-radius: 15px;
+      }
+
+      .step-indicators {
+        gap: 10px;
+        margin-bottom: 30px;
+      }
+
+      .step-indicator {
+        min-width: 60px;
+      }
+
+      .step-circle {
+        width: 35px;
+        height: 35px;
+        font-size: 12px;
+      }
+
+      .step-label {
+        font-size: 11px;
+        max-width: 60px;
+      }
+
+      .step-title {
+        font-size: 22px;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .step-icon {
+        width: 40px;
+        height: 40px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      .radio-group, .checkbox-group {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .step-navigation {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .nav-button {
+        width: 100%;
+        max-width: 250px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .form-container {
+        margin: 0 10px;
+        padding: 20px 15px;
+      }
+
+      .step-title {
+        font-size: 20px;
+      }
+
+      .radio-option, .checkbox-option {
+        padding: 12px 16px;
+        font-size: 14px;
+      }
+    }
+
+    /* Tooltips */
+    .tooltip-icon {
+      display: inline-block;
+      margin-left: 8px;
+      color: var(--azul-primario);
+      cursor: help;
+      font-size: 16px;
+      position: relative;
+      user-select: none;
+    }
+
+    .tooltip-icon::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--cinza-escuro);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 400;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 1000;
+      max-width: 300px;
+      white-space: normal;
+      width: max-content;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .tooltip-icon::before {
+      content: '';
+      position: absolute;
+      bottom: 115%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 5px solid transparent;
+      border-top-color: var(--cinza-escuro);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 1001;
+    }
+
+    @media (hover: hover) {
+      .tooltip-icon:hover::after,
+      .tooltip-icon:hover::before {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Skip Link para acessibilidade -->
+  <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
+
+  <header role="banner">
+    <div class="container">
+      <div class="logo">
+        <a href="index.html">
+          <img class="logo-large" src="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/1%20-%20logotipo%203d/logo_horizontal_1920x1080.png" alt="LARtech Automation">
+          <img class="logo-small" src="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/1%20-%20logotipo%203d/logotipo_vt_1200x1200.png" alt="LARtech Automation">
+        </a>
+      </div>
+      <button class="mobile-menu-button" aria-label="Menu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+      <nav>
+        <ul class="menu">
+          <li><a href="index.html#quem-somos">Quem Somos</a></li>
+          <li><a href="index.html#servicos">Serviços</a></li>
+          <li><a href="index.html#como-funciona">Como Funciona</a></li>
+          <li><a href="diagnostico.html" class="active">Diagnóstico</a></li>
+          <li><a href="index.html#blog">Blog</a></li>
+          <li><a href="index.html#contato">Contato</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" role="main">
+    <section class="diagnostico-hero">
+      <div class="container">
+        <h1>Diagnóstico de Automação</h1>
+        <p>Um processo simples e rápido para entender suas necessidades e criar a solução perfeita para sua empresa.</p>
+      </div>
+    </section>
+
+    <section class="diagnostico-form-section">
+      <div class="container">
+        <div class="form-container">
+          <!-- Mensagem de Sucesso -->
+          <div id="form-success" class="form-success">
+            <h3>✅ Diagnóstico enviado com sucesso!</h3>
+            <p>Recebemos suas informações e entraremos em contato em breve para apresentar nossa proposta personalizada.</p>
+          </div>
+
+          <!-- Barra de Progresso -->
+          <div class="progress-bar-container">
+            <div class="progress-info">
+              <div class="progress-text">Progresso do Diagnóstico</div>
+              <div class="progress-percentage">0%</div>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill"></div>
+            </div>
+          </div>
+
+          <!-- Indicadores de Etapas -->
+          <div class="step-indicators">
+            <div class="step-indicator active" data-step="1">
+              <div class="step-circle">1</div>
+              <div class="step-label">Informações Básicas</div>
+            </div>
+            <div class="step-indicator" data-step="2">
+              <div class="step-circle">2</div>
+              <div class="step-label">Atendimento</div>
+            </div>
+            <div class="step-indicator" data-step="3">
+              <div class="step-circle">3</div>
+              <div class="step-label">Automação</div>
+            </div>
+            <div class="step-indicator" data-step="4">
+              <div class="step-circle">4</div>
+              <div class="step-label">Tecnologia</div>
+            </div>
+            <div class="step-indicator" data-step="5">
+              <div class="step-circle">5</div>
+              <div class="step-label">Dados</div>
+            </div>
+            <div class="step-indicator" data-step="6">
+              <div class="step-circle">6</div>
+              <div class="step-label">Finalização</div>
+            </div>
+          </div>
+
+          <form id="diagnostico-form" class="diagnostico-form">
+            <!-- ETAPA 1: Informações Básicas -->
+            <div class="form-step active" data-step="1">
+              <div class="step-header">
+                <div class="step-title">
+                  <picture class="step-icon">
+                    <source media="(max-width: 576px)" 
+                            srcset="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/5%20-%20icones_3d/assistente_virtual_pequeno.png">
+                    <source media="(max-width: 992px)" 
+                            srcset="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/5%20-%20icones_3d/assistente_virtual_medio.png">
+                    <img src="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/5%20-%20icones_3d/assistente_virtual_grande.png" 
+                         alt="Informações Básicas">
+                  </picture>
+                  Informações Básicas
+                </div>
+                <div class="step-subtitle">Vamos começar conhecendo você e sua empresa</div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="nome" class="required">Nome Completo</label>
+                  <input type="text" id="nome" name="nome" class="form-input" required>
+                </div>
+                <div class="form-group">
+                  <label for="email" class="required">E-mail</label>
+                  <input type="email" id="email" name="email" class="form-input" required>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="whatsapp" class="required">WhatsApp (com DDD)</label>
+                  <input type="tel" id="whatsapp" name="whatsapp" class="form-input" placeholder="(11) 99999-9999" required>
+                </div>
+                <div class="form-group">
+                  <label for="empresa" class="required">Nome da Empresa</label>
+                  <input type="text" id="empresa" name="empresa" class="form-input" required>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="cidade_estado" class="required">Cidade/Estado</label>
+                  <input type="text" id="cidade_estado" name="cidade_estado" class="form-input" placeholder="São Paulo/SP" required>
+                </div>
+                <div class="form-group">
+                  <label for="website">Website ou Redes Sociais</label>
+                  <input type="url" id="website" name="website" class="form-input" placeholder="https://exemplo.com.br">
+                </div>
+              </div>
+            </div>
+
+            <!-- ETAPA 2: Informações de Atendimento -->
+            <div class="form-step" data-step="2">
+              <div class="step-header">
+                <div class="step-title">
+                  <picture class="step-icon">
+                    <source media="(max-width: 576px)" 
+                            srcset="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/5%20-%20icones_3d/suporte_pequeno.png">
+                    <source media="(max-width: 992px)" 
+                            srcset="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/5%20-%20icones_3d/suporte_medio.png">
+                    <img src="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/5%20-%20icones_3d/suporte_grande.png" 
+                         alt="Informações de Atendimento">
+                  </picture>
+                  Informações de Atendimento
+                </div>
+                <div class="step-subtitle">Entenda como funciona seu atendimento atual</div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="mensagens_dia" class="required">Mensagens recebidas por dia no WhatsApp</label>
+                  <select id="mensagens_dia" name="mensagens_dia" class="form-select" required>
+                    <option value="">Selecione uma opção</option>
+                    <option value="1-50">1 a 50 mensagens</option>
+                    <option value="51-100">51 a 100 mensagens</option>
+                    <option value="101-300">101 a 300 mensagens</option>
+                    <option value="301-500">301 a 500 mensagens</option>
+                    <option value="500+">Mais de 500 mensagens</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="num_atendentes" class="required">Número de atendentes</label>
+                  <select id="num_atendentes" name="num_atendentes" class="form-select" required>
+                    <option value="">Selecione uma opção</option>
+                    <option value="1">1 pessoa</option>
+                    <option value="2-3">2 a 3 pessoas</option>
+                    <option value="4-5">4 a 5 pessoas</option>
+                    <option value="6-10">6 a 10 pessoas</option>
+                    <option value="10+">Mais de 10 pessoas</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row full-width">
+                <div class="form-group">
+                  <label for="horario_funcionamento" class="required">Horário de funcionamento da empresa</label>
+                  <input type="text" id="horario_funcionamento" name="horario_funcionamento" class="form-input" placeholder="Ex: Segunda a Sexta, 8h às 18h" required>
+                </div>
+              </div>
+            </div>
+
+            <!-- ETAPA 3: Tipo de Automação -->
+            <div class="form-step" data-step="3">
+              <div class="step-header">
+                <div class="step-title">
+                  <picture class="step-icon">
+                    <source media="(max-width: 576px)" 
+                            srcset="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/5%20-%20icones_3d/integracaosistema_pequeno.png">
+                    <source media="(max-width: 992px)" 
+                            srcset="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/5%20-%20icones_3d/integracaosistema_pequeno.png">
+                    <img src="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/5%20-%20icones_3d/integracaosistema_pequeno.png" 
+                         alt="Tipo de Automação">
+                  </picture>
+                  Tipo de Automação
+                </div>
+                <div class="step-subtitle">Selecione os tipos de automação que interessam para sua empresa</div>
+              </div>
+
+              <div class="form-group">
+                <label>Quais tipos de automação você gostaria de implementar?</label>
+                <div class="checkbox-group">
+                  <div class="checkbox-option">
+                    <input type="checkbox" id="categoria_atendimento" name="categorias_automacao" value="Atendimento ao Cliente com IA" class="categoria-checkbox">
+                    <label for="categoria_atendimento">Atendimento ao Cliente com IA</label>
+                    <span class="tooltip-icon" data-tooltip="Chatbots inteligentes que atendem clientes automaticamente">💬</span>
+                  </div>
+
+                  <div class="checkbox-option">
+                    <input type="checkbox" id="categoria_processos" name="categorias_automacao" value="Automação de Processos" class="categoria-checkbox">
+                    <label for="categoria_processos">Automação de Processos</label>
+                    <span class="tooltip-icon" data-tooltip="Automatizar tarefas repetitivas do dia a dia da empresa">⚙️</span>
+                  </div>
+
+                  <div class="checkbox-option">
+                    <input type="checkbox" id="categoria_analise" name="categorias_automacao" value="Análise de Dados" class="categoria-checkbox">
+                    <label for="categoria_analise">Análise de Dados</label>
+                    <span class="tooltip-icon" data-tooltip="Relatórios automáticos e análises inteligentes dos seus dados">📊</span>
+                  </div>
+
+                  <div class="checkbox-option">
+                    <input type="checkbox" id="categoria_leads" name="categorias_automacao" value="Captura de Leads" class="categoria-checkbox">
+                    <label for="categoria_leads">Captura de Leads</label>
+                    <span class="tooltip-icon" data-tooltip="Sistemas para capturar e qualificar clientes potenciais automaticamente">🎯</span>
+                  </div>
+
+                  <div class="checkbox-option">
+                    <input type="checkbox" id="categoria_conteudo" name="categorias_automacao" value="Geração Automática de Conteúdo" class="categoria-checkbox">
+                    <label for="categoria_conteudo">Geração de Conteúdo com IA</label>
+                    <span class="tooltip-icon" data-tooltip="IA que cria textos, imagens e conteúdo para suas redes sociais">✨</span>
+                  </div>
+
+                  <div class="checkbox-option">
+                    <input type="checkbox" id="categoria_integracoes" name="categorias_automacao" value="Integração de Sistemas" class="categoria-checkbox">
+                    <label for="categoria_integracoes">Integração de Sistemas</label>
+                    <span class="tooltip-icon" data-tooltip="Conectar diferentes sistemas e ferramentas da sua empresa">🔗</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row full-width">
+                <div class="form-group">
+                  <label for="automacao_detalhes">Descreva com mais detalhes suas necessidades de automação</label>
+                  <textarea id="automacao_detalhes" name="automacao_detalhes" class="form-textarea" placeholder="Conte-nos sobre os principais desafios do seu negócio e como você imagina que a automação poderia ajudar..."></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- ETAPA 4: Tecnologia Atual -->
+            <div class="form-step" data-step="4">
+              <div class="step-header">
+                <div class="step-title">
+                  <picture class="step-icon">
+                    <source media="(max-width: 576px)" 
+                            srcset="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/5%20-%20icones_3d/engrenagem_pequena.png">
+                    <source media="(max-width: 992px)" 
+                            srcset="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/5%20-%20icones_3d/engrenagem_media.png">
+                    <img src="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/5%20-%20icones_3d/engrenagem_grande.png" 
+                         alt="Tecnologia Atual">
+                  </picture>
+                  Tecnologia Atual
+                </div>
+                <div class="step-subtitle">Entenda o que você já utiliza atualmente</div>
+              </div>
+
+              <div class="form-group">
+                <label class="required">Já utiliza alguma automação atualmente?</label>
+                <div class="radio-group">
+                  <div class="radio-option">
+                    <input type="radio" id="automacao_sim" name="ja_utiliza_automacao" value="sim" required>
+                    <label for="automacao_sim">Sim, já utilizo</label>
+                  </div>
+                  <div class="radio-option">
+                    <input type="radio" id="automacao_nao" name="ja_utiliza_automacao" value="nao" required>
+                    <label for="automacao_nao">Não, seria a primeira</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="conditional-field" id="automacao-descricao-group">
+                <div class="form-group">
+                  <label for="automacao_descricao" class="required">Descreva a automação que você já utiliza:</label>
+                  <textarea id="automacao_descricao" name="automacao_descricao" class="form-textarea" placeholder="Conte-nos sobre as ferramentas de automação que sua empresa já usa..."></textarea>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="required">Que tipo de WhatsApp sua empresa utiliza?</label>
+                <div class="radio-group">
+                  <div class="radio-option">
+                    <input type="radio" id="whatsapp_business" name="tipo_whatsapp" value="business" required>
+                    <label for="whatsapp_business">WhatsApp Business</label>
+                  </div>
+                  <div class="radio-option">
+                    <input type="radio" id="whatsapp_api" name="tipo_whatsapp" value="api" required>
+                    <label for="whatsapp_api">API Oficial do WhatsApp</label>
+                  </div>
+                  <div class="radio-option">
+                    <input type="radio" id="whatsapp_comum" name="tipo_whatsapp" value="comum" required>
+                    <label for="whatsapp_comum">WhatsApp Comum</label>
+                  </div>
+                  <div class="radio-option">
+                    <input type="radio" id="whatsapp_nao_sei" name="tipo_whatsapp" value="nao_sei" required>
+                    <label for="whatsapp_nao_sei">Não sei dizer</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ETAPA 5: Base de Dados -->
+            <div class="form-step" data-step="5">
+              <div class="step-header">
+                <div class="step-title">
+                  <picture class="step-icon">
+                    <source media="(max-width: 576px)" 
+                            srcset="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/5%20-%20icones_3d/analisedados_pequeno.png">
+                    <source media="(max-width: 992px)" 
+                            srcset="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/5%20-%20icones_3d/analisedados_medio.png">
+                    <img src="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/5%20-%20icones_3d/analisedados_grande.png" 
+                         alt="Base de Dados">
+                  </picture>
+                  Gestão de Dados
+                </div>
+                <div class="step-subtitle">Como você organiza e gerencia os dados da sua empresa</div>
+              </div>
+
+              <div class="form-group">
+                <label class="required">Você possui alguma base de dados estruturada?</label>
+                <div class="radio-group">
+                  <div class="radio-option">
+                    <input type="radio" id="base_dados_sim" name="possui_base_dados" value="sim" required>
+                    <label for="base_dados_sim">Sim, tenho sistema organizado</label>
+                  </div>
+                  <div class="radio-option">
+                    <input type="radio" id="base_dados_nao" name="possui_base_dados" value="nao" required>
+                    <label for="base_dados_nao">Não, preciso estruturar</label>
+                  </div>
+                  <div class="radio-option">
+                    <input type="radio" id="base_dados_parte" name="possui_base_dados" value="em_parte" required>
+                    <label for="base_dados_parte">Uso planilhas simples</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="required">Que tipos de dados você gostaria de gerenciar melhor?</label>
+                <div class="checkbox-group">
+                  <div class="checkbox-option">
+                    <input type="checkbox" id="dados_contatos" name="tipos_dados" value="Contatos e leads" class="dados-checkbox">
+                    <label for="dados_contatos">Contatos e leads</label>
+                  </div>
+                  <div class="checkbox-option">
+                    <input type="checkbox" id="dados_historico" name="tipos_dados" value="Histórico de atendimentos" class="dados-checkbox">
+                    <label for="dados_historico">Histórico de atendimentos</label>
+                  </div>
+                  <div class="checkbox-option">
+                    <input type="checkbox" id="dados_produtos" name="tipos_dados" value="Produtos e serviços" class="dados-checkbox">
+                    <label for="dados_produtos">Produtos e serviços</label>
+                  </div>
+                  <div class="checkbox-option">
+                    <input type="checkbox" id="dados_crm_erp" name="tipos_dados" value="Integrações com CRM/ERP" class="dados-checkbox">
+                    <label for="dados_crm_erp">Integrações com sistemas</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="required">Que tipo de relatórios você gostaria de ter?</label>
+                <div class="radio-group">
+                  <div class="radio-option">
+                    <input type="radio" id="relatorios_dashboards" name="tipo_relatorios" value="dashboards" required>
+                    <label for="relatorios_dashboards">Dashboards visuais (gráficos)</label>
+                  </div>
+                  <div class="radio-option">
+                    <input type="radio" id="relatorios_basicos" name="tipo_relatorios" value="basicos" required>
+                    <label for="relatorios_basicos">Relatórios básicos (Excel/PDF)</label>
+                  </div>
+                  <div class="radio-option">
+                    <input type="radio" id="relatorios_nenhum" name="tipo_relatorios" value="nenhum" required>
+                    <label for="relatorios_nenhum">Só armazenamento, sem relatórios</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ETAPA 6: Finalização -->
+            <div class="form-step" data-step="6">
+              <div class="step-header">
+                <div class="step-title">
+                  <picture class="step-icon">
+                    <source media="(max-width: 576px)" 
+                            srcset="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/5%20-%20icones_3d/analisedados_pequeno.png">
+                    <source media="(max-width: 992px)" 
+                            srcset="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/5%20-%20icones_3d/analisedados_medio.png">
+                    <img src="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/5%20-%20icones_3d/analisedados_grande.png" 
+                         alt="Finalização">
+                  </picture>
+                  Quase pronto!
+                </div>
+                <div class="step-subtitle">Últimas informações para personalizar sua proposta</div>
+              </div>
+
+              <div class="form-row full-width">
+                <div class="form-group">
+                  <label for="observacoes">Há algo específico que gostaria de nos contar?</label>
+                  <textarea id="observacoes" name="observacoes" class="form-textarea" placeholder="Compartilhe qualquer informação adicional, desafio específico ou expectativa que não foi contemplada nas etapas anteriores..."></textarea>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="urgencia" class="required">Qual a urgência para implementar a automação?</label>
+                  <select id="urgencia" name="urgencia" class="form-select" required>
+                    <option value="">Selecione uma opção</option>
+                    <option value="imediata">Imediata (até 15 dias)</option>
+                    <option value="rapida">Rápida (até 30 dias)</option>
+                    <option value="normal">Normal (até 60 dias)</option>
+                    <option value="planejada">Planejada (após 60 dias)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="investimento" class="required">Qual faixa de investimento você tem em mente?</label>
+                  <select id="investimento" name="investimento" class="form-select" required>
+                    <option value="">Selecione uma opção</option>
+                    <option value="ate-2k">Até R$ 2.000/mês</option>
+                    <option value="2k-5k">R$ 2.000 a R$ 5.000/mês</option>
+                    <option value="5k-10k">R$ 5.000 a R$ 10.000/mês</option>
+                    <option value="10k+">Acima de R$ 10.000/mês</option>
+                    <option value="avaliar">Preciso avaliar a proposta</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Navegação entre etapas -->
+            <div class="step-navigation">
+              <button type="button" class="nav-button btn-prev" id="prev-btn" disabled>
+                ← Anterior
+              </button>
+              <div class="step-info">
+                <span id="current-step">1</span> de 6 etapas
+              </div>
+              <button type="button" class="nav-button btn-next" id="next-btn">
+                Próximo →
+              </button>
+              <button type="submit" class="nav-button btn-submit" id="submit-btn" style="display: none;">
+                Enviar Diagnóstico ✓
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <picture>
+            <source media="(max-width: 576px)" 
+                    srcset="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/1%20-%20logotipo%203d/logo_icone_512x512.png">
+            <source media="(min-width: 992px)" 
+                    srcset="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/1%20-%20logotipo%203d/logo_horizontal_1920x1080.png">
+            <img src="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/1%20-%20logotipo%203d/logotipo_vt_1200x1200.png" 
+                 alt="LARtech Automation Logo">
+          </picture>
+          <p class="footer-description">Automação inteligente para impulsionar sua empresa</p>
+        </div>
+        <div class="footer-links">
+          <h4>Links Rápidos</h4>
+          <ul>
+            <li><a href="index.html#quem-somos">Quem Somos</a></li>
+            <li><a href="index.html#servicos">Serviços</a></li>
+            <li><a href="index.html#como-funciona">Como Funciona</a></li>
+            <li><a href="diagnostico.html">Diagnóstico</a></li>
+            <li><a href="index.html#blog">Blog</a></li>
+            <li><a href="index.html#contato">Contato</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Contato</h4>
+          <div class="contact-info">
+            <p><i class="icon-email"></i>lucas.ribeiro@lartechautomation.com</p>
+            <p><i class="icon-phone"></i>(11) 99902-7653</p>
+          </div>
+          <div class="social-media">
+            <h5>Siga-nos</h5>
+            <div class="social-links">
+              <a href="https://youtube.com/@lartechautomation?si=MikQVRz4AS0RF1pW" target="_blank" rel="noopener noreferrer" class="social-link youtube">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+              </a>
+              <a href="#" target="_blank" rel="noopener noreferrer" class="social-link instagram">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 LARtech Automation. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/5511999027653" 
+     class="whatsapp-float" 
+     target="_blank" 
+     rel="noopener noreferrer" 
+     aria-label="Atendimento via WhatsApp">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.488"/>
+    </svg>
+  </a>
+
+  <script>
+    // Script para o formulário multi-etapas
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('diagnostico-form');
+      const steps = document.querySelectorAll('.form-step');
+      const stepIndicators = document.querySelectorAll('.step-indicator');
+      const prevBtn = document.getElementById('prev-btn');
+      const nextBtn = document.getElementById('next-btn');
+      const submitBtn = document.getElementById('submit-btn');
+      const progressFill = document.querySelector('.progress-fill');
+      const progressText = document.querySelector('.progress-percentage');
+      const currentStepSpan = document.getElementById('current-step');
+      const successMessage = document.getElementById('form-success');
+
+      let currentStep = 1;
+      const totalSteps = steps.length;
+
+      // Formatação do telefone
+      const phoneInput = document.getElementById('whatsapp');
+      phoneInput.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length <= 11) {
+          if (value.length <= 2) {
+            value = value.replace(/(\d{2})/, '($1)');
+          } else if (value.length <= 7) {
+            value = value.replace(/(\d{2})(\d{4,5})/, '($1) $2');
+          } else {
+            value = value.replace(/(\d{2})(\d{4,5})(\d{4})/, '($1) $2-$3');
+          }
+        }
+        e.target.value = value;
+      });
+
+      // Controlar campo de automação atual
+      const automacaoRadios = document.querySelectorAll('input[name="ja_utiliza_automacao"]');
+      const automacaoDescricaoGroup = document.getElementById('automacao-descricao-group');
+      const automacaoDescricaoInput = document.getElementById('automacao_descricao');
+
+      automacaoRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+          if (this.value === 'sim') {
+            automacaoDescricaoGroup.classList.add('show');
+            automacaoDescricaoInput.setAttribute('required', 'required');
+          } else {
+            automacaoDescricaoGroup.classList.remove('show');
+            automacaoDescricaoInput.removeAttribute('required');
+            automacaoDescricaoInput.value = '';
+          }
+        });
+      });
+
+      function updateProgress() {
+        const progress = (currentStep / totalSteps) * 100;
+        progressFill.style.width = progress + '%';
+        progressText.textContent = Math.round(progress) + '%';
+        currentStepSpan.textContent = currentStep;
+      }
+
+      function updateStepIndicators() {
+        stepIndicators.forEach((indicator, index) => {
+          const stepNumber = index + 1;
+          indicator.classList.remove('active', 'completed');
+
+          if (stepNumber < currentStep) {
+            indicator.classList.add('completed');
+          } else if (stepNumber === currentStep) {
+            indicator.classList.add('active');
+          }
+        });
+      }
+
+      function showStep(stepNumber) {
+        steps.forEach((step, index) => {
+          step.classList.remove('active', 'prev');
+          if (index + 1 === stepNumber) {
+            setTimeout(() => step.classList.add('active'), 50);
+          } else if (index + 1 < stepNumber) {
+            step.classList.add('prev');
+          }
+        });
+
+        // Atualizar botões
+        prevBtn.disabled = stepNumber === 1;
+
+        if (stepNumber === totalSteps) {
+          nextBtn.style.display = 'none';
+          submitBtn.style.display = 'flex';
+        } else {
+          nextBtn.style.display = 'flex';
+          submitBtn.style.display = 'none';
+        }
+
+        updateProgress();
+        updateStepIndicators();
+
+        // Scroll suave para o topo do formulário
+        document.querySelector('.form-container').scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start' 
+        });
+      }
+
+      function validateCurrentStep() {
+        const currentStepElement = document.querySelector(`.form-step[data-step="${currentStep}"]`);
+        const requiredFields = currentStepElement.querySelectorAll('[required]');
+        let isValid = true;
+
+        requiredFields.forEach(field => {
+          if (field.type === 'radio') {
+            const radioGroup = currentStepElement.querySelectorAll(`input[name="${field.name}"]`);
+            const isRadioGroupValid = Array.from(radioGroup).some(radio => radio.checked);
+            if (!isRadioGroupValid) {
+              isValid = false;
+              // Destacar grupo de radio
+              radioGroup.forEach(radio => {
+                                radio.closest('.radio-option').style.borderColor = '#e74c3c';
+              });
+            }
+          } else if (field.type === 'checkbox') {
+            // Para checkboxes, verificar se pelo menos um está marcado (se necessário)
+            // Implementar lógica específica se necessário
+          } else {
+            if (!field.value.trim()) {
+              isValid = false;
+              field.style.borderColor = '#e74c3c';
+              field.addEventListener('input', function() {
+                this.style.borderColor = '#e9ecef';
+              }, { once: true });
+            }
+          }
+        });
+
+        return isValid;
+      }
+
+      nextBtn.addEventListener('click', function() {
+        if (validateCurrentStep()) {
+          if (currentStep < totalSteps) {
+            currentStep++;
+            showStep(currentStep);
+          }
+        } else {
+          // Mostrar mensagem de erro
+          const currentStepElement = document.querySelector(`.form-step[data-step="${currentStep}"]`);
+          const errorMessage = document.createElement('div');
+          errorMessage.className = 'validation-error';
+          errorMessage.style.cssText = `
+            background: #fee;
+            color: #c33;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-weight: 600;
+            text-align: center;
+            animation: shake 0.5s ease-in-out;
+          `;
+          errorMessage.textContent = 'Por favor, preencha todos os campos obrigatórios antes de continuar.';
+
+          // Remover mensagem anterior se existir
+          const existingError = currentStepElement.querySelector('.validation-error');
+          if (existingError) existingError.remove();
+
+          currentStepElement.insertBefore(errorMessage, currentStepElement.firstChild);
+
+          // Remover mensagem após 5 segundos
+          setTimeout(() => {
+            if (errorMessage.parentNode) {
+              errorMessage.remove();
+            }
+          }, 5000);
+        }
+      });
+
+      prevBtn.addEventListener('click', function() {
+        if (currentStep > 1) {
+          currentStep--;
+          showStep(currentStep);
+        }
+      });
+
+      // Envio do formulário
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        if (!validateCurrentStep()) return;
+
+        // Desabilitar botão e mostrar loading
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span style="margin-right: 10px;">🔄</span> Enviando...';
+
+        // Coletar dados do formulário
+        const formData = new FormData(form);
+        const data = {};
+
+        // Processar campos básicos
+        for (let [key, value] of formData.entries()) {
+          if (key === 'categorias_automacao' || key === 'tipos_dados') {
+            if (!data[key]) data[key] = [];
+            data[key].push(value);
+          } else {
+            data[key] = value;
+          }
+        }
+
+        // Converter arrays em strings
+        ['categorias_automacao', 'tipos_dados'].forEach(field => {
+          if (data[field] && Array.isArray(data[field])) {
+            data[field] = data[field].join(', ');
+          }
+        });
+
+        // Adicionar timestamp
+        data.timestamp = new Date().toISOString();
+        data.origem = 'Formulário de Diagnóstico Multi-etapas - Site LARtech';
+        data.etapas_completadas = currentStep;
+
+        try {
+          const response = await fetch('https://n8n.lartechautomation.com/webhook/dados_leads_proposta_comercial', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+          });
+
+          if (response.ok) {
+            // Sucesso
+            successMessage.classList.add('show');
+            form.style.display = 'none';
+            document.querySelector('.step-indicators').style.display = 'none';
+            document.querySelector('.progress-bar-container').style.display = 'none';
+
+            // Scroll para o sucesso
+            successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            // Confetti effect (opcional)
+            if (typeof confetti !== 'undefined') {
+              confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+              });
+            }
+
+          } else {
+            throw new Error('Erro no envio');
+          }
+        } catch (error) {
+          alert('Erro ao enviar diagnóstico. Tente novamente ou entre em contato via WhatsApp.');
+          console.error('Erro:', error);
+        } finally {
+          // Restaurar botão
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = 'Enviar Diagnóstico ✓';
+        }
+      });
+
+      // Inicializar
+      showStep(1);
+
+      // Adicionar animação de shake para erros
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes shake {
+          0%, 100% { transform: translateX(0); }
+          10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+          20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+      `;
+      document.head.appendChild(style);
+
+      // Permitir navegação por indicadores (opcional)
+      stepIndicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', function() {
+          const targetStep = index + 1;
+          if (targetStep <= currentStep || targetStep === currentStep + 1) {
+            currentStep = targetStep;
+            showStep(currentStep);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
