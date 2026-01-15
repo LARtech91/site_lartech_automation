@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Política de Privacidade - LARtech Automation</title>
+
+  <!-- Meta Tags SEO -->
+  <meta name="description" content="Política de Privacidade da LARtech Automation. Saiba como coletamos, usamos e protegemos seus dados pessoais.">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Política de Privacidade - LARtech Automation">
+  <meta property="og:description" content="Política de Privacidade da LARtech Automation. Saiba como protegemos seus dados.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lartechautomation.com/politica-de-privacidade.html">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/1%20-%20logotipo%203d/logotipo_vt_1200x1200.png">
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Estilos específicos para a página de Política de Privacidade */
+    .privacy-hero {
+      background: linear-gradient(135deg, var(--azul-primario) 0%, var(--azul-secundario) 100%);
+      color: white;
+      padding: var(--space-4xl) 0 var(--space-3xl);
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .privacy-hero h1 {
+      font-size: var(--font-size-4xl);
+      font-weight: var(--font-weight-bold);
+      margin-bottom: var(--space-md);
+      color: white;
+    }
+
+    .privacy-hero .last-update {
+      font-size: var(--font-size-sm);
+      opacity: 0.9;
+    }
+
+    .privacy-content {
+      background: white;
+      padding: var(--space-3xl) 0;
+    }
+
+    .privacy-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 var(--space-lg);
+    }
+
+    .privacy-section {
+      margin-bottom: var(--space-2xl);
+      padding-bottom: var(--space-xl);
+      border-bottom: 1px solid var(--cinza-claro);
+    }
+
+    .privacy-section:last-child {
+      border-bottom: none;
+    }
+
+    .privacy-section h2 {
+      color: var(--azul-secundario);
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-semibold);
+      margin-bottom: var(--space-lg);
+      text-align: left;
+      padding-bottom: var(--space-sm);
+      border-bottom: 2px solid var(--azul-primario);
+      display: inline-block;
+    }
+
+    .privacy-section h3 {
+      color: var(--cinza-escuro);
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-medium);
+      margin: var(--space-lg) 0 var(--space-md);
+    }
+
+    .privacy-section p {
+      color: var(--cinza-escuro);
+      line-height: var(--line-height-relaxed);
+      margin-bottom: var(--space-md);
+      font-size: var(--font-size-base);
+    }
+
+    .privacy-section ul {
+      margin: var(--space-md) 0 var(--space-lg) var(--space-lg);
+    }
+
+    .privacy-section li {
+      color: var(--cinza-escuro);
+      line-height: var(--line-height-relaxed);
+      margin-bottom: var(--space-sm);
+      position: relative;
+      padding-left: var(--space-lg);
+    }
+
+    .privacy-section li::before {
+      content: "•";
+      color: var(--azul-primario);
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+
+    .privacy-highlight {
+      background: var(--azul-claro);
+      border-left: 4px solid var(--azul-primario);
+      padding: var(--space-lg);
+      margin: var(--space-lg) 0;
+      border-radius: var(--border-radius-md);
+    }
+
+    .privacy-highlight p {
+      margin-bottom: 0;
+    }
+
+    .contact-box {
+      background: linear-gradient(135deg, var(--branco-gelo) 0%, white 100%);
+      border: 1px solid var(--cinza-claro);
+      border-radius: var(--border-radius-lg);
+      padding: var(--space-xl);
+      margin-top: var(--space-xl);
+    }
+
+    .contact-box h3 {
+      color: var(--azul-secundario);
+      margin-bottom: var(--space-md);
+    }
+
+    .contact-box p {
+      margin-bottom: var(--space-sm);
+    }
+
+    .contact-box a {
+      color: var(--azul-primario);
+      text-decoration: underline;
+      transition: color var(--transition-fast);
+    }
+
+    .contact-box a:hover {
+      color: var(--azul-secundario);
+    }
+
+    .table-of-contents {
+      background: var(--branco-gelo);
+      border-radius: var(--border-radius-lg);
+      padding: var(--space-xl);
+      margin-bottom: var(--space-2xl);
+    }
+
+    .table-of-contents h3 {
+      color: var(--azul-secundario);
+      margin-bottom: var(--space-md);
+      font-size: var(--font-size-lg);
+    }
+
+    .table-of-contents ol {
+      counter-reset: toc-counter;
+      margin-left: var(--space-md);
+    }
+
+    .table-of-contents li {
+      counter-increment: toc-counter;
+      margin-bottom: var(--space-sm);
+      padding-left: 0;
+    }
+
+    .table-of-contents li::before {
+      content: counter(toc-counter) ". ";
+      color: var(--azul-primario);
+      font-weight: var(--font-weight-semibold);
+      position: static;
+    }
+
+    .table-of-contents a {
+      color: var(--cinza-escuro);
+      transition: color var(--transition-fast);
+    }
+
+    .table-of-contents a:hover {
+      color: var(--azul-primario);
+    }
+
+    .back-to-home {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      color: var(--azul-primario);
+      font-weight: var(--font-weight-medium);
+      margin-top: var(--space-xl);
+      transition: all var(--transition-fast);
+    }
+
+    .back-to-home:hover {
+      color: var(--azul-secundario);
+      transform: translateX(-4px);
+    }
+
+    .back-to-home svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .privacy-hero {
+        padding: var(--space-3xl) 0 var(--space-2xl);
+      }
+
+      .privacy-hero h1 {
+        font-size: var(--font-size-3xl);
+      }
+
+      .privacy-section h2 {
+        font-size: var(--font-size-xl);
+      }
+
+      .privacy-container {
+        padding: 0 var(--space-md);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Skip Link para acessibilidade -->
+  <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
+
+  <header role="banner">
+    <div class="container">
+      <div class="logo">
+        <a href="index.html">
+          <img class="logo-large" src="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/1%20-%20logotipo%203d/logo_horizontal_1920x1080.png" alt="LARtech Automation">
+          <img class="logo-small" src="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/1%20-%20logotipo%203d/logotipo_vt_1200x1200.png" alt="LARtech Automation">
+        </a>
+      </div>
+      <button class="mobile-menu-button" aria-label="Menu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+      <nav>
+        <ul class="menu">
+          <li><a href="index.html#quem-somos">Quem Somos</a></li>
+          <li><a href="index.html#servicos">Serviços</a></li>
+          <li><a href="index.html#como-funciona">Como Funciona</a></li>
+          <li><a href="diagnostico.html">Diagnóstico</a></li>
+          <li><a href="index.html#contato">Contato</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" role="main">
+    <!-- Hero Section -->
+    <section class="privacy-hero">
+      <div class="container">
+        <h1>Política de Privacidade</h1>
+        <p class="last-update">Última atualização: Janeiro de 2025</p>
+      </div>
+    </section>
+
+    <!-- Conteúdo da Política -->
+    <section class="privacy-content">
+      <div class="privacy-container">
+
+        <!-- Índice -->
+        <div class="table-of-contents">
+          <h3>Índice</h3>
+          <ol>
+            <li><a href="#introducao">Introdução</a></li>
+            <li><a href="#dados-coletados">Dados que Coletamos</a></li>
+            <li><a href="#uso-dados">Como Utilizamos seus Dados</a></li>
+            <li><a href="#compartilhamento">Compartilhamento de Informações</a></li>
+            <li><a href="#cookies">Cookies e Tecnologias Similares</a></li>
+            <li><a href="#seguranca">Segurança dos Dados</a></li>
+            <li><a href="#seus-direitos">Seus Direitos</a></li>
+            <li><a href="#retencao">Retenção de Dados</a></li>
+            <li><a href="#menores">Menores de Idade</a></li>
+            <li><a href="#alteracoes">Alterações nesta Política</a></li>
+            <li><a href="#contato-dpo">Contato e Encarregado de Dados</a></li>
+          </ol>
+        </div>
+
+        <!-- 1. Introdução -->
+        <div class="privacy-section" id="introducao">
+          <h2>1. Introdução</h2>
+          <p>A <strong>LUCAS DO AMARAL RIBEIRO SERVICOS DE INFORMATICA LTDA</strong>, nome fantasia <strong>LARtech Automation</strong>, inscrita no CNPJ sob o nº 59.632.001/0001-00, com sede na R Jose Alves de Almeida, 130, Conj 51 - Torre 1, Jardim Celeste, São Paulo - SP, CEP 05527-080, está comprometida em proteger a privacidade e os dados pessoais de seus usuários, clientes e visitantes.</p>
+          <p>Esta Política de Privacidade descreve como coletamos, utilizamos, armazenamos, compartilhamos e protegemos suas informações pessoais quando você utiliza nosso site, serviços, aplicativos e ferramentas de diagnóstico.</p>
+
+          <div class="privacy-highlight">
+            <p><strong>Importante:</strong> Ao utilizar nossos serviços e fornecer seus dados pessoais, você declara estar ciente e de acordo com as disposições desta Política de Privacidade, em conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018 - LGPD).</p>
+          </div>
+        </div>
+
+        <!-- 2. Dados Coletados -->
+        <div class="privacy-section" id="dados-coletados">
+          <h2>2. Dados que Coletamos</h2>
+
+          <h3>2.1 Dados Fornecidos por Você</h3>
+          <p>Coletamos informações que você nos fornece diretamente, incluindo:</p>
+          <ul>
+            <li><strong>Dados de identificação:</strong> nome completo, CPF/CNPJ, e-mail, telefone</li>
+            <li><strong>Dados empresariais:</strong> nome da empresa, cargo, setor de atuação, número de funcionários</li>
+            <li><strong>Dados do diagnóstico:</strong> informações sobre processos, necessidades de automação e desafios operacionais da sua empresa</li>
+            <li><strong>Dados de comunicação:</strong> mensagens enviadas através de formulários de contato, e-mail ou WhatsApp</li>
+          </ul>
+
+          <h3>2.2 Dados Coletados Automaticamente</h3>
+          <p>Quando você acessa nosso site, coletamos automaticamente:</p>
+          <ul>
+            <li><strong>Dados de navegação:</strong> páginas visitadas, tempo de permanência, cliques realizados</li>
+            <li><strong>Dados técnicos:</strong> endereço IP, tipo de navegador, sistema operacional, dispositivo utilizado</li>
+            <li><strong>Dados de localização:</strong> cidade e país (aproximados, baseados no IP)</li>
+            <li><strong>Cookies e identificadores:</strong> conforme descrito na seção de Cookies</li>
+          </ul>
+
+          <h3>2.3 Dados de Terceiros</h3>
+          <p>Podemos receber informações sobre você de outras fontes, como:</p>
+          <ul>
+            <li>Plataformas de redes sociais, quando você interage conosco por esses canais</li>
+            <li>Parceiros comerciais, para fins de ofertas e promoções conjuntas</li>
+            <li>Fontes públicas, como bases de dados empresariais</li>
+          </ul>
+        </div>
+
+        <!-- 3. Uso dos Dados -->
+        <div class="privacy-section" id="uso-dados">
+          <h2>3. Como Utilizamos seus Dados</h2>
+          <p>Utilizamos seus dados pessoais para as seguintes finalidades:</p>
+
+          <h3>3.1 Prestação de Serviços</h3>
+          <ul>
+            <li>Realizar diagnósticos e análises personalizadas para sua empresa</li>
+            <li>Desenvolver e implementar soluções de automação com IA</li>
+            <li>Elaborar propostas comerciais e orçamentos</li>
+            <li>Prestar suporte técnico e atendimento ao cliente</li>
+          </ul>
+
+          <h3>3.2 Comunicação</h3>
+          <ul>
+            <li>Responder suas solicitações e dúvidas</li>
+            <li>Enviar informações sobre nossos serviços e novidades</li>
+            <li>Comunicar alterações em nossos termos e políticas</li>
+            <li>Enviar newsletters e materiais informativos (mediante consentimento)</li>
+          </ul>
+
+          <h3>3.3 Melhoria dos Serviços</h3>
+          <ul>
+            <li>Analisar o uso do site para melhorar a experiência do usuário</li>
+            <li>Desenvolver novos produtos e funcionalidades</li>
+            <li>Realizar pesquisas de satisfação</li>
+            <li>Personalizar conteúdos e recomendações</li>
+          </ul>
+
+          <h3>3.4 Obrigações Legais</h3>
+          <ul>
+            <li>Cumprir obrigações fiscais e contábeis</li>
+            <li>Atender requisições de autoridades competentes</li>
+            <li>Exercer ou defender direitos em processos judiciais ou administrativos</li>
+          </ul>
+        </div>
+
+        <!-- 4. Compartilhamento -->
+        <div class="privacy-section" id="compartilhamento">
+          <h2>4. Compartilhamento de Informações</h2>
+          <p>A LARtech Automation não vende, aluga ou comercializa seus dados pessoais. Podemos compartilhar suas informações apenas nas seguintes situações:</p>
+
+          <h3>4.1 Parceiros e Prestadores de Serviço</h3>
+          <p>Compartilhamos dados com empresas que nos auxiliam na operação, como:</p>
+          <ul>
+            <li>Provedores de hospedagem e infraestrutura em nuvem</li>
+            <li>Ferramentas de análise e marketing digital</li>
+            <li>Sistemas de gestão empresarial e CRM</li>
+            <li>Processadores de pagamento</li>
+          </ul>
+          <p>Todos os parceiros estão obrigados a manter a confidencialidade e segurança dos dados.</p>
+
+          <h3>4.2 Obrigações Legais</h3>
+          <p>Podemos divulgar informações quando exigido por lei, ordem judicial ou solicitação de autoridades governamentais.</p>
+
+          <h3>4.3 Proteção de Direitos</h3>
+          <p>Podemos compartilhar dados quando necessário para proteger nossos direitos, segurança ou propriedade, ou de nossos usuários e terceiros.</p>
+        </div>
+
+        <!-- 5. Cookies -->
+        <div class="privacy-section" id="cookies">
+          <h2>5. Cookies e Tecnologias Similares</h2>
+          <p>Utilizamos cookies e tecnologias similares para melhorar sua experiência em nosso site.</p>
+
+          <h3>5.1 O que são Cookies?</h3>
+          <p>Cookies são pequenos arquivos de texto armazenados em seu dispositivo que nos permitem reconhecer seu navegador e lembrar suas preferências.</p>
+
+          <h3>5.2 Tipos de Cookies que Utilizamos</h3>
+          <ul>
+            <li><strong>Cookies essenciais:</strong> necessários para o funcionamento básico do site</li>
+            <li><strong>Cookies de desempenho:</strong> coletam informações sobre como você usa o site</li>
+            <li><strong>Cookies de funcionalidade:</strong> lembram suas preferências e personalizações</li>
+            <li><strong>Cookies de marketing:</strong> utilizados para exibir anúncios relevantes (mediante consentimento)</li>
+          </ul>
+
+          <h3>5.3 Gerenciamento de Cookies</h3>
+          <p>Você pode gerenciar suas preferências de cookies através das configurações do seu navegador. Note que desabilitar certos cookies pode afetar a funcionalidade do site.</p>
+        </div>
+
+        <!-- 6. Segurança -->
+        <div class="privacy-section" id="seguranca">
+          <h2>6. Segurança dos Dados</h2>
+          <p>Implementamos medidas técnicas e organizacionais adequadas para proteger seus dados pessoais contra acesso não autorizado, alteração, divulgação ou destruição. Nossas medidas incluem:</p>
+          <ul>
+            <li>Criptografia de dados em trânsito (SSL/TLS)</li>
+            <li>Controle de acesso baseado em funções</li>
+            <li>Monitoramento contínuo de segurança</li>
+            <li>Backups regulares e redundância de dados</li>
+            <li>Treinamento de equipe em práticas de segurança</li>
+            <li>Avaliações periódicas de vulnerabilidades</li>
+          </ul>
+
+          <div class="privacy-highlight">
+            <p><strong>Compromisso:</strong> Em caso de incidente de segurança que possa representar risco aos titulares de dados, comunicaremos a Autoridade Nacional de Proteção de Dados (ANPD) e os titulares afetados, conforme exigido pela LGPD.</p>
+          </div>
+        </div>
+
+        <!-- 7. Seus Direitos -->
+        <div class="privacy-section" id="seus-direitos">
+          <h2>7. Seus Direitos</h2>
+          <p>De acordo com a LGPD, você possui os seguintes direitos em relação aos seus dados pessoais:</p>
+          <ul>
+            <li><strong>Confirmação e acesso:</strong> confirmar a existência de tratamento e acessar seus dados</li>
+            <li><strong>Correção:</strong> solicitar a correção de dados incompletos, inexatos ou desatualizados</li>
+            <li><strong>Anonimização, bloqueio ou eliminação:</strong> solicitar quando os dados forem desnecessários, excessivos ou tratados em desconformidade</li>
+            <li><strong>Portabilidade:</strong> solicitar a transferência dos dados a outro fornecedor de serviço</li>
+            <li><strong>Eliminação:</strong> solicitar a eliminação dos dados tratados com base no consentimento</li>
+            <li><strong>Informação sobre compartilhamento:</strong> saber com quais entidades públicas e privadas compartilhamos seus dados</li>
+            <li><strong>Revogação do consentimento:</strong> revogar o consentimento a qualquer momento</li>
+            <li><strong>Oposição:</strong> opor-se ao tratamento realizado em desconformidade com a LGPD</li>
+          </ul>
+          <p>Para exercer seus direitos, entre em contato conosco através dos canais indicados ao final desta política. Responderemos sua solicitação no prazo legal de 15 dias.</p>
+        </div>
+
+        <!-- 8. Retenção -->
+        <div class="privacy-section" id="retencao">
+          <h2>8. Retenção de Dados</h2>
+          <p>Mantemos seus dados pessoais pelo tempo necessário para:</p>
+          <ul>
+            <li>Cumprir as finalidades para as quais foram coletados</li>
+            <li>Cumprir obrigações legais, fiscais e regulatórias</li>
+            <li>Exercer direitos em processos judiciais ou administrativos</li>
+            <li>Manter registros para fins de auditoria e compliance</li>
+          </ul>
+          <p>Após o término do período de retenção, os dados serão eliminados ou anonimizados de forma segura.</p>
+        </div>
+
+        <!-- 9. Menores -->
+        <div class="privacy-section" id="menores">
+          <h2>9. Menores de Idade</h2>
+          <p>Nossos serviços são direcionados a empresas e profissionais. Não coletamos intencionalmente dados de menores de 18 anos. Caso identifiquemos que coletamos dados de um menor sem o consentimento dos responsáveis, tomaremos medidas para eliminar essas informações.</p>
+        </div>
+
+        <!-- 10. Alterações -->
+        <div class="privacy-section" id="alteracoes">
+          <h2>10. Alterações nesta Política</h2>
+          <p>Esta Política de Privacidade pode ser atualizada periodicamente para refletir mudanças em nossas práticas ou na legislação aplicável. Recomendamos que você revise esta página regularmente.</p>
+          <p>Alterações significativas serão comunicadas através de nosso site ou por e-mail, quando aplicável. A data da última atualização será sempre indicada no início deste documento.</p>
+        </div>
+
+        <!-- 11. Contato -->
+        <div class="privacy-section" id="contato-dpo">
+          <h2>11. Contato e Encarregado de Dados</h2>
+          <p>Para questões relacionadas a esta Política de Privacidade, ao tratamento de seus dados pessoais ou para exercer seus direitos, entre em contato conosco:</p>
+
+          <div class="contact-box">
+            <h3>Encarregado de Proteção de Dados (DPO)</h3>
+            <p><strong>Nome:</strong> Lucas do Amaral Ribeiro</p>
+            <p><strong>E-mail:</strong> <a href="mailto:lucas.ribeiro@lartechautomation.com">lucas.ribeiro@lartechautomation.com</a></p>
+            <p><strong>Telefone:</strong> <a href="tel:+5511999027653">(11) 99902-7653</a></p>
+            <p><strong>Endereço:</strong> R Jose Alves de Almeida, 130, Conj 51 - Torre 1, Jardim Celeste, São Paulo - SP, CEP 05527-080</p>
+          </div>
+
+          <p style="margin-top: var(--space-lg);">Você também pode registrar reclamações junto à Autoridade Nacional de Proteção de Dados (ANPD) através do site <a href="https://www.gov.br/anpd" target="_blank" rel="noopener noreferrer" style="color: var(--azul-primario);">www.gov.br/anpd</a>.</p>
+        </div>
+
+        <!-- Link voltar -->
+        <a href="index.html" class="back-to-home">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          Voltar para a página inicial
+        </a>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <picture>
+            <source media="(max-width: 576px)"
+                    srcset="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/1%20-%20logotipo%203d/logo_icone_512x512.png">
+            <source media="(min-width: 992px)"
+                    srcset="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/1%20-%20logotipo%203d/logo_horizontal_1920x1080.png">
+            <img src="https://ynembjipjkdycjacjudz.supabase.co/storage/v1/object/public/site/1%20-%20logotipo%203d/logotipo_vt_1200x1200.png"
+                 alt="LARtech Automation Logo">
+          </picture>
+          <p class="footer-description">Automação inteligente para impulsionar sua empresa</p>
+        </div>
+        <div class="footer-links">
+          <h4>Links Rápidos</h4>
+          <ul>
+            <li><a href="index.html#quem-somos">Quem Somos</a></li>
+            <li><a href="index.html#servicos">Serviços</a></li>
+            <li><a href="index.html#como-funciona">Como Funciona</a></li>
+            <li><a href="diagnostico.html">Diagnóstico</a></li>
+            <li><a href="index.html#contato">Contato</a></li>
+            <li><a href="politica-de-privacidade.html">Política de Privacidade</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Contato</h4>
+          <div class="contact-info">
+            <p><i class="icon-email"></i>lucas.ribeiro@lartechautomation.com</p>
+            <p><i class="icon-phone"></i>(11) 99902-7653</p>
+          </div>
+          <div class="social-media">
+            <h5>Siga-nos</h5>
+            <div class="social-links">
+              <a href="https://youtube.com/@lartechautomation?si=MikQVRz4AS0RF1pW" target="_blank" rel="noopener noreferrer" class="social-link youtube">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+              </a>
+              <a href="#" target="_blank" rel="noopener noreferrer" class="social-link instagram">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-legal">
+        <div class="company-info">
+          <p class="company-name"><strong>LUCAS DO AMARAL RIBEIRO SERVICOS DE INFORMATICA LTDA</strong></p>
+          <p class="company-details">CNPJ: 59.632.001/0001-00 | R Jose Alves de Almeida, 130, Conj 51 - Torre 1 | Jardim Celeste, São Paulo - SP | CEP: 05527-080</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 LARtech Automation. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/5511999027653"
+     class="whatsapp-float"
+     target="_blank"
+     rel="noopener noreferrer"
+     aria-label="Atendimento via WhatsApp">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.488"/>
+    </svg>
+  </a>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
