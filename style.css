@@ -1764,9 +1764,35 @@ footer::before {
   transform: scale(1.1);
 }
 
+/* Seção de informações legais da empresa */
+.footer-legal {
+  text-align: center;
+  padding: 20px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 30px;
+}
+
+.footer-legal .company-info {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.footer-legal .company-name {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 14px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.footer-legal .company-details {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
 .footer-bottom {
   text-align: center;
-  padding-top: 30px;
+  padding-top: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.7);
   font-size: 14px;
